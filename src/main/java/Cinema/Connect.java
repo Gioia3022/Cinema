@@ -1,5 +1,6 @@
 package Cinema;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,19 +11,6 @@ public class Connect {
     private ResultSetMetaData rsMeta;
     Statement stmt = null;
     PreparedStatement pstmt = null;
-
-    /**
-     * ArrayList public pour les tables
-     */
-    public ArrayList<String> tables = new ArrayList<>();
-    /**
-     * ArrayList public pour les requêtes de sélection
-     */
-    public ArrayList<String> requetes = new ArrayList<>();
-    /**
-     * ArrayList public pour les requêtes de MAJ
-     */
-    public ArrayList<String> requetesMaj = new ArrayList<>();
 
     public Connect(String url) throws SQLException {
         this.url=url;
@@ -38,9 +26,9 @@ public class Connect {
         this.stmt = conn.createStatement();
     }
 
-    //Gives all student names from database
-    public ArrayList<String> SQLQueryFilm() throws SQLException {
-        ArrayList<String> admin = new ArrayList<>();
+    //Gives all film names from database
+    public ArrayList<String> SQLQueryFilmName() throws SQLException {
+        ArrayList<String> film = new ArrayList<>();
         // language=<SQL>
         String sql = "Select FilmName from film";
 
@@ -48,8 +36,24 @@ public class Connect {
 
         while (rs != null && rs.next()) {
             String name = rs.getString(1);
-            admin.add(name);
+            film.add(name);
         }
-        return admin;
+        return film;
+    }
+    //Checks validity of mail
+    public void SQLQueryAdmin(String user, String pass ) throws SQLException {
+        user = user.toLowerCase();
+        pass = pass.toLowerCase();
+        String sql = "Select * from tbl_User Where LOWER(username)='" + user + "' and LOWER(password)='"+pass+"'";
+        rs = stmt.executeQuery(sql);
+        if(rs.next())
+        {
+            JOptionPane.showMessageDialog(null,"Login Successfully");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Incorrect Login");
+
+        }
     }
 }
