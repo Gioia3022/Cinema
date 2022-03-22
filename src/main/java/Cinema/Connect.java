@@ -41,19 +41,25 @@ public class Connect {
         return film;
     }
     //Checks validity of mail
-    public void SQLQueryAdmin(String user, String pass ) throws SQLException {
-        user = user.toLowerCase();
-        pass = pass.toLowerCase();
-        String sql = "Select * from tbl_User Where LOWER(username)='" + user + "' and LOWER(password)='"+pass+"'";
-        rs = stmt.executeQuery(sql);
-        if(rs.next())
-        {
-            JOptionPane.showMessageDialog(null,"Login Successfully");
+    public boolean SQLQueryAdmin(String user, String pass ) throws SQLException {
+        boolean check=true;
+        // language=<SQL>
+        String sql;
+        // language=<SQL>
+        sql= "SELECT AdminMail from admin WHERE AdminMail ='" + user + "';";
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
+        if(!rs.wasNull()){
+            check=true;
+            String p= rs.getString(3);
+            if(pass==p){
+                check =true;
+            }
+            else
+                check=false;
         }
         else
-        {
-            JOptionPane.showMessageDialog(null,"Incorrect Login");
-
-        }
+            check=false;
+        return check;
     }
 }

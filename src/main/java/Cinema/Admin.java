@@ -8,8 +8,17 @@ import java.sql.SQLException;
 
 public class Admin extends JPanel {
     String mail, password;
+    String url= "jdbc:mysql://localhost:3306/cineme?autoReconnect=true&useSSL=false";
+
+    /*
+    String url =  "jdbc:mysql://localhost:3306/cineme?useUnicode=true\n" +
+            "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&\n" +
+            "serverTimezone=UTC&\n"
+            +"autoReconnect=true&useSSL=false";
+    */
 
     public Admin(JFrame frame) {
+
         //Fonts
         Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
         Font f2= new Font(Font.SERIF, Font.PLAIN,  20);
@@ -97,6 +106,17 @@ public class Admin extends JPanel {
             this.mail=email.getText();
             this.password=psw.getText();
             System.out.println(mail + password);
+
+            try {
+                Connect c = new Connect(url);
+                c.connectData();
+                c.createStatement();
+                c.SQLQueryAdmin(mail,password);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
         });
         close.addActionListener(e1 -> {
             Menu b1 = new Menu(frame);

@@ -4,10 +4,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.SQLException;
 
 public class Guest extends JPanel {
-    public Guest(JFrame frame) {
+    public Guest(JFrame frame){
         //Fonts
         Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
         Font f3= new Font(Font.SERIF, Font.PLAIN,  40);
