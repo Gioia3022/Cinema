@@ -8,14 +8,14 @@ import java.sql.SQLException;
 
 public class Admin extends JPanel {
     String mail, password;
-    String url= "jdbc:mysql://localhost:3306/cineme?autoReconnect=true&useSSL=false";
+    //String url= "jdbc:mysql://localhost:3306/cineme?autoReconnect=true&useSSL=false";
 
-    /*
     String url =  "jdbc:mysql://localhost:3306/cineme?useUnicode=true\n" +
-            "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&\n" +
-            "serverTimezone=UTC&\n"
+            "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&\n"
+            + "wait_timeout=2147483\n"
+            //+            "serverTimezone=UTC&\n"
             +"autoReconnect=true&useSSL=false";
-    */
+
 
     public Admin(JFrame frame) {
 

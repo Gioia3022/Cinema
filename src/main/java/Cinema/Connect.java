@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class Connect {
     String url;
     Connection conn = null;
@@ -11,6 +12,7 @@ public class Connect {
     private ResultSetMetaData rsMeta;
     Statement stmt = null;
     PreparedStatement pstmt = null;
+
 
     public Connect(String url) throws SQLException {
         this.url=url;
