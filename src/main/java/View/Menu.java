@@ -1,16 +1,24 @@
 
-package Cinema;
+package View;
+
+import Controller.Admin;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 
 public class Menu extends JPanel implements ActionListener {
-    public Menu(JFrame frame){
+    private Controller.Menu menu;
+    private Controller.Admin admin_controller;
+    private Controller.Guest guest_controller;
+    JFrame frame;
+    public Menu(Controller.Menu menu, JFrame frame){
+        this.menu=menu;
+        this.frame=frame;
+        //We call the menu
         //Fonts
         Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
         Font f3= new Font(Font.SERIF, Font.PLAIN,  35);
@@ -73,19 +81,18 @@ public class Menu extends JPanel implements ActionListener {
 
         //Add actionListener for each button
         access_as_guest.addActionListener(e1 -> {
-                Guest g= new Guest(frame);
-                frame.getContentPane().add(g);
-                setVisible(false);
-                g.setVisible(true);
+            menu.guest();
+            menu.setVisible(false);
+            guest_controller.setVisible(true);
         });
 
         access_as_admin.addActionListener(e2 -> {
-            frame.getContentPane().add(new Admin(frame));
-            setVisible(false);
-            new Admin(frame).setVisible(true);
+            menu.admin();
+            menu.setVisible(false);
+            admin_controller.setVisible(true);
         });
 
-        exit.addActionListener(e3 -> System.exit(0));
+        exit.addActionListener(e3 -> menu.exit());
 
         JPanel buttons = new JPanel(gbl);
 
@@ -104,9 +111,16 @@ public class Menu extends JPanel implements ActionListener {
         line1.setFont(f1);
         add(line1,gbc);
 
-
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
     }
 }
