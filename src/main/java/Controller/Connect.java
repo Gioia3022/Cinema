@@ -16,9 +16,9 @@ public class Connect {
         this.conn=c;
         this.stmt=s;
         // language=<SQL>
-        rs=stmt.executeQuery("SELECT * FROM guest");
+        rs=stmt.executeQuery("SELECT * FROM admin");
         while (rs.next()){
-            System.out.println(rs.getString("GuestMP"));
+            System.out.println(rs.getString("AdminMP"));
         }
     }
 
@@ -62,8 +62,22 @@ public class Connect {
             check = false;
         return check;
     }
+
+    public void SQLQueryAdminNewMP(String name, String mail, String MP) throws SQLException{
+        // language=<SQL>
+        String sql;
+        // language=<SQL>
+        sql= "UPDATE admin SET AdminMP=? WHERE AdminMail =? AND AdminName=?;";
+        pstmt = conn.prepareStatement(sql);
+
+        pstmt.setString(1,MP);
+        pstmt.setString(2,mail);
+        pstmt.setString(3,name);
+        pstmt.executeUpdate();
+    }
+
     public boolean SQLQueryGuest(String user, String pass ) throws SQLException {
-        boolean check=true;
+        boolean check;
         // language=<SQL>
         String sql;
         // language=<SQL>
@@ -78,6 +92,21 @@ public class Connect {
             check = false;
         return check;
     }
+    public void SQLQueryGuestNewMP(String name, String mail, String MP,int tel) throws SQLException{
+        // language=<SQL>
+        String sql;
+        // language=<SQL>
+        sql= "UPDATE guest SET GuestMP=? WHERE GuestMail =? AND GuestName=? AND GuestTel=?;";
+        pstmt = conn.prepareStatement(sql);
+        System.out.println(1);
+
+        pstmt.setString(1,MP);
+        pstmt.setString(2,mail);
+        pstmt.setString(3,name);
+        pstmt.setInt(4,tel);
+        pstmt.executeUpdate();
+    }
+
     public void SQLQueryNewGuest(String name, String mail,String psw, int tel, int age, int benef)throws SQLException{
         // language=<SQL>
         String sql;

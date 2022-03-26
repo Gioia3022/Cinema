@@ -2,7 +2,7 @@ package Cinema;
 
 public class Admin{
     private Controller.Admin ca;
-    String mail, password;
+    String name,mail, password;
 
     public String getMail() {
         return mail;
@@ -18,5 +18,13 @@ public class Admin{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
