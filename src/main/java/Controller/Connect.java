@@ -16,9 +16,9 @@ public class Connect {
         this.conn=c;
         this.stmt=s;
         // language=<SQL>
-        rs=stmt.executeQuery("SELECT * FROM Admin");
+        rs=stmt.executeQuery("SELECT * FROM guest");
         while (rs.next()){
-            System.out.println(rs.getString(4));
+            System.out.println(rs.getString("GuestMP"));
         }
     }
 
@@ -76,41 +76,22 @@ public class Connect {
             check = true;
         }else
             check = false;
-        conn.close();
         return check;
     }
-    public void SQLQueryNewGuest(String name, String mail,String psw)throws SQLException{
+    public void SQLQueryNewGuest(String name, String mail,String psw, int tel, int age, int benef)throws SQLException{
         // language=<SQL>
         String sql;
         // language=<SQL>
-        sql= "INSERT INTO guest (GuestName, GuestMP, GuestMail) VALUES (?, ?, ?)";
-/*
+        sql= "INSERT INTO guest (GuestName,GuestMP, GuestMail,GuestBenefice, GuestAge,GuestTel) VALUES (?,?,?,?,?,?)";
+        pstmt = conn.prepareStatement(sql);
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,name);
         pstmt.setString(2,psw);
         pstmt.setString(3,mail);
-        pstmt.executeUpdate();*/
-
-        stmt.executeUpdate(sql);
-        this.conn.close();
-    }
-/*
-    public void SQLQueryAddInfo(String benef, int age, int tel)throws SQLException{
-        // language=<SQL>
-        String sql;
-        // language=<SQL>
-        sql= "INSERT INTO guest (GuestBenefice, GuestAge, GuestTel)" +
-                "VALUES (?, ?, ?)";
-        //this.stmt.executeUpdate(sql);
-
-        pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1,benef);
-        pstmt.setString(2,String.valueOf(age));
-        pstmt.setString(3,String.valueOf(tel));
+        pstmt.setInt(4,benef);
+        pstmt.setInt(5,age);
+        pstmt.setInt(6,tel);
         pstmt.executeUpdate();
-
-        this.conn.close();
     }
 
- */
 }
