@@ -1,8 +1,8 @@
 package Cinema;
 
 public class Guest {
-    String name, mail, psw, benef;
-    int tel, age;
+    String name, mail, psw;
+    int tel, age, benef;
     private Controller.Admin ca;
 
     public String getName() {
@@ -29,11 +29,11 @@ public class Guest {
         this.psw = psw;
     }
 
-    public String getBenef() {
+    public int getBenef() {
         return benef;
     }
 
-    public void setBenef(String benef) {
+    public void setBenef(int benef) {
         this.benef = benef;
     }
 

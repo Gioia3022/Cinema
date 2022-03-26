@@ -4,9 +4,12 @@ package View;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.*;
+
 
 public class Register extends JPanel{
     private Controller.Register register;
+    String selectedItem;
     JFrame frame;
     public Register(Controller.Register ca, JFrame f) {
         this.register=ca;
@@ -32,6 +35,19 @@ public class Register extends JPanel{
         JTextField psw= new JTextField("enter your password", 30);
         psw.setForeground(new Color(59,47,47));
         psw.setFont(f2);
+
+        JTextField number= new JTextField("enter your number", 30);
+        number.setForeground(new Color(59,47,47));
+        number.setFont(f2);
+
+        JTextField age= new JTextField("enter your age", 30);
+        age.setForeground(new Color(59,47,47));
+        age.setFont(f2);
+
+        JLabel l_b= new JLabel("Select reduction: ");
+        l_b.setFont(f2);
+        String benef[]={"Student", "Elder", "Big Family", "Cinema Card", "Under 14", "Under 5"};
+        JList list= new JList(benef);
 
         JButton access = new JButton("Access");
         access.setBackground(new Color(59,47,47));
@@ -73,9 +89,9 @@ public class Register extends JPanel{
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //Add actionListener for each button
-        //login(log,email,psw,c,s);
+
         access.addActionListener(e0->{
-            this.register.register1(name.getText(),email.getText(),psw.getText());
+            this.register.register1(name.getText(),email.getText(),psw.getText(),Integer.parseInt(number.getText()),Integer.parseInt(age.getText()),list.getSelectedIndex());
             this.register.getGuest().getMenu().exit();
         });
 
@@ -97,6 +113,10 @@ public class Register extends JPanel{
         buttons.add(name, gbc);
         buttons.add(email, gbc);
         buttons.add(psw, gbc);
+        buttons.add(number,gbc);
+        buttons.add(age,gbc);
+        buttons.add(l_b,gbc);
+        buttons.add(list,gbc);
         buttons.add(access,gbc);
         buttons.add(close, gbc);
         buttons.add(exit, gbc);

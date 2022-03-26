@@ -21,15 +21,15 @@ public class Log {
         g.setPsw(psw);
         System.out.println(g.getMail() + g.getPsw());
         try {
-            this.bigController.getC().SQLQueryAdmin(g.getMail(), g.getPsw());
-            if (this.bigController.getC().SQLQueryAdmin(g.getMail(), g.getPsw()) == true) {
+            this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw());
+            if (this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw())) {
                 log.mes1();
                 System.out.println("Vous etes con!");
                 System.exit(0);
             } else {
                 log.mes2();
                 System.out.println("pas bon retray");
-                login( email, psw);
+                setVisible(true);
             }
         } catch (
                 SQLException e) {
@@ -42,7 +42,7 @@ public class Log {
     }
 
     public void setVisible(boolean visible){
-        guest.setVisible(visible);
+        log.setVisible(visible);
     }
 
     public Guest getGuest() {

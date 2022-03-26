@@ -14,15 +14,19 @@ public class Register {
         register= new View.Register(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(register);
     }
-    public void register1(String name, String mail, String psw){
+    public void register1(String name, String mail, String psw, int number, int age,int benef){
         g.setName(name);
         g.setMail(mail);
         g.setPsw(psw);
+        g.setTel(number);
+        g.setAge(age);
+        g.setBenef(benef);
 
         System.out.println(g.getName() + g.getMail() + g.getPsw());
 
         try {
-            this.bigController.getC().SQLQueryNewGuest(g.getName(),g.getMail(),g.getPsw());
+            this.bigController.getC().SQLQueryNewGuest(g.getName(),g.getMail(),g.getPsw(), g.getTel(), g.getAge(),g.getBenef());
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
