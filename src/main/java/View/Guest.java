@@ -8,9 +8,6 @@ import java.awt.*;
 
 public class Guest extends JPanel {
     private Controller.Guest guest;
-    private Controller.Menu menu;
-    private Controller.Log log;
-    private Controller.Register register;
     JFrame frame;
 
     public Guest(Controller.Guest ca, JFrame f){
@@ -77,15 +74,15 @@ public class Guest extends JPanel {
         //Add actionListener for each button
 
         login.addActionListener(e1 -> {
-            guest.log();
-            guest.setVisible(false);
-            log.setVisible(true);
+            this.guest.log();
+            this.guest.setVisible(false);
+            this.guest.getLog().setVisible(true);
         });
 
         register.addActionListener(e2 -> {
             this.guest.register();
             this.guest.setVisible(false);
-            this.register.setVisible(true);
+            this.guest.getRegister().setVisible(true);
         });
 /*
         anonyme.addActionListener(e3 -> {
@@ -98,12 +95,12 @@ public class Guest extends JPanel {
  */
 
         close.addActionListener(e1 -> {
-            guest.menu();
-            guest.setVisible(false);
-            menu.setVisible(true);
+            this.guest.menu();
+            this.guest.setVisible(false);
+            this.guest.getMenu().setVisible(true);
         });
 
-        exit.addActionListener(e4 -> menu.exit());
+        exit.addActionListener(e4 -> this.guest.getMenu().exit());
 
         JPanel buttons = new JPanel(gbl);
 

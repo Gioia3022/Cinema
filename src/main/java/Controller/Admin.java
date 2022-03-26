@@ -12,6 +12,7 @@ public class Admin {
         this.bigController=co;
         a= new Cinema.Admin();
         admin= new View.Admin(this,this.bigController.getFrame());
+        this.bigController.getFrame().getContentPane().add(admin);
     }
 
     public void login(String email, String psw) {
@@ -21,7 +22,7 @@ public class Admin {
 
         try {
             this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword());
-            if (this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword()) == true) {
+            if (this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword())) {
                 admin.mes1();
                 System.out.println("Vous etes con!");
                 System.exit(0);
@@ -36,9 +37,17 @@ public class Admin {
         }
     }
     public void menu() {
-        this.bigController.getFrame().getContentPane().add(new View.Menu(menu,this.bigController.getFrame()));
+        setMenu(new Menu(this.bigController));
     }
     public void setVisible(boolean visible){
         admin.setVisible(visible);
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

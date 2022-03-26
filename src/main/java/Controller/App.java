@@ -6,9 +6,7 @@ public class App {
     public static void main(String[] args)  {
         try {
             BigController bc= new BigController();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         //JXDatePicker d= new JXDatePicker();

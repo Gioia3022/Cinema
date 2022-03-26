@@ -8,7 +8,6 @@ import java.awt.*;
 
 public class Log extends JPanel {
     private Controller.Log log_c;
-    private Guest guest;
     JFrame frame;
     public Log(Controller.Log ca, JFrame f) {
         this.log_c=ca;
@@ -76,12 +75,12 @@ public class Log extends JPanel {
         });
 
         close.addActionListener(e1 -> {
-            log_c.guest();
-            guest.setVisible(false);
-            log_c.setVisible(true);
+            this.log_c.guest();
+            this.log_c.getGuest().setVisible(false);
+            this.log_c.setVisible(true);
         });
 
-        exit.addActionListener(e4 -> log_c.exit());
+        exit.addActionListener(e4 -> this.log_c.getGuest().getMenu().exit());
 
         JPanel buttons = new JPanel(gbl);
 

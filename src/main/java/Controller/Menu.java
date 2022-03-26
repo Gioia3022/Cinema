@@ -10,21 +10,39 @@ public class Menu {
 
     public Menu(BigController bigController) {
         this.bigController=bigController;
-        this.bigController.getFrame().getContentPane().add(new View.Menu(this,this.bigController.getFrame()));
+        this.menu= new View.Menu(this,this.bigController.getFrame());
+        this.bigController.getFrame().getContentPane().add(this.menu);
         this.bigController.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.bigController.getFrame().setVisible(true);
-        menu= new View.Menu(this,this.bigController.getFrame());
+
     }
     public void guest() {
-        this.bigController.getFrame().getContentPane().add(new View.Guest(guest_controller, this.bigController.getFrame()));
+        setGuest_controller(new Guest(this.bigController));
     }
     public void admin() {
-        this.bigController.getFrame().getContentPane().add(new View.Admin(admin_controller,this.bigController.getFrame()));
+        setAdmin_controller(new Admin(this.bigController));
     }
     public void setVisible(boolean visible){
         menu.setVisible(visible);
     }
+
     public void exit(){
         System.exit(0);
+    }
+
+    public Guest getGuest_controller() {
+        return guest_controller;
+    }
+
+    public void setGuest_controller(Guest guest_controller) {
+        this.guest_controller = guest_controller;
+    }
+
+    public Admin getAdmin_controller() {
+        return admin_controller;
+    }
+
+    public void setAdmin_controller(Admin admin_controller) {
+        this.admin_controller = admin_controller;
     }
 }

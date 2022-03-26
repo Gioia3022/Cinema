@@ -6,7 +6,6 @@ import java.awt.*;
 
 public class Admin extends JPanel  {
     private Controller.Admin admin;
-    private Controller.Menu menu;
     JFrame frame;
     public Admin(Controller.Admin ca, JFrame f) {
         this.admin=ca;
@@ -78,10 +77,10 @@ public class Admin extends JPanel  {
         close.addActionListener(e1 -> {
             this.admin.menu();
             this.admin.setVisible(false);
-            menu.setVisible(true);
+            this.admin.getMenu().setVisible(true);
         });
 
-        exit.addActionListener(e2 -> menu.exit());
+        exit.addActionListener(e2 -> this.admin.getMenu().exit());
 
 
         buttons.setBackground(new Color(239,223,187));

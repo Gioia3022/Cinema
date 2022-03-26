@@ -2,6 +2,7 @@
 package View;
 
 import Controller.Admin;
+import Controller.Guest;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,10 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+
 public class Menu extends JPanel implements ActionListener {
     private Controller.Menu menu;
-    private Controller.Admin admin_controller;
-    private Controller.Guest guest_controller;
     JFrame frame;
     public Menu(Controller.Menu menu, JFrame frame){
         this.menu=menu;
@@ -81,18 +81,18 @@ public class Menu extends JPanel implements ActionListener {
 
         //Add actionListener for each button
         access_as_guest.addActionListener(e1 -> {
-            menu.guest();
-            menu.setVisible(false);
-            guest_controller.setVisible(true);
+            this.menu.guest();
+            this.menu.setVisible(false);
+            this.menu.getGuest_controller().setVisible(true);
         });
 
         access_as_admin.addActionListener(e2 -> {
-            menu.admin();
-            menu.setVisible(false);
-            admin_controller.setVisible(true);
+            this.menu.admin();
+            this.menu.setVisible(false);
+            this.menu.getAdmin_controller().setVisible(true);
         });
 
-        exit.addActionListener(e3 -> menu.exit());
+        exit.addActionListener(e3 -> this.menu.exit());
 
         JPanel buttons = new JPanel(gbl);
 
@@ -117,7 +117,7 @@ public class Menu extends JPanel implements ActionListener {
     }
 
     public JFrame getFrame() {
-        return frame;
+        return this.frame;
     }
 
     public void setFrame(JFrame frame) {

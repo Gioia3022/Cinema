@@ -1,13 +1,12 @@
 package Controller;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
 
 public class Connect {
     Connection conn;
-    ResultSet rs = null;
+    ResultSet rs;
     private ResultSetMetaData rsMeta;
     Statement stmt;
     PreparedStatement pstmt = null;
@@ -16,6 +15,7 @@ public class Connect {
     public Connect(Connection c, Statement s) throws SQLException {
         this.conn=c;
         this.stmt=s;
+        // language=<SQL>
         rs=stmt.executeQuery("SELECT * FROM Admin");
         while (rs.next()){
             System.out.println(rs.getString(4));

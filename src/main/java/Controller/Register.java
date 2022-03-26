@@ -6,34 +6,39 @@ public class Register {
     private BigController bigController;
     private Guest guest;
     private View.Register register;
-    Cinema.Guest a= new Cinema.Guest();
-    View.Register register_view;
+    private Cinema.Guest g;
 
     public Register(BigController co){
-        a= new Cinema.Guest();
+        g= new Cinema.Guest();
         this.bigController=co;
-        register_view= new View.Register(this,this.bigController.getFrame());
+        register= new View.Register(this,this.bigController.getFrame());
+        this.bigController.getFrame().getContentPane().add(register);
     }
     public void register1(String name, String mail, String psw){
-        a.setName(name);
-        a.setMail(mail);
-        a.setPsw(psw);
+        g.setName(name);
+        g.setMail(mail);
+        g.setPsw(psw);
 
-        System.out.println(a.getName() + a.getMail() + a.getPsw());
+        System.out.println(g.getName() + g.getMail() + g.getPsw());
 
         try {
-            this.bigController.getC().SQLQueryNewGuest(a.getName(),a.getMail(),a.getPsw());
+            this.bigController.getC().SQLQueryNewGuest(g.getName(),g.getMail(),g.getPsw());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     public void guest() {
-        this.bigController.getFrame().getContentPane().add(new View.Guest(guest,this.bigController.getFrame()));
+        setGuest(new Guest(this.bigController));
     }
     public void setVisible(boolean visible){
         register.setVisible(visible);
     }
-    public void exit(){
-        System.exit(0);
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 }

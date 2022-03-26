@@ -1,17 +1,12 @@
 package View;
 
-import Controller.Connect;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Register extends JPanel{
     private Controller.Register register;
-    private Controller.Guest guest;
     JFrame frame;
     public Register(Controller.Register ca, JFrame f) {
         this.register=ca;
@@ -81,16 +76,16 @@ public class Register extends JPanel{
         //login(log,email,psw,c,s);
         access.addActionListener(e0->{
             this.register.register1(name.getText(),email.getText(),psw.getText());
-            this.register.exit();
+            this.register.getGuest().getMenu().exit();
         });
 
         close.addActionListener(e1 -> {
             this.register.guest();
             this.register.setVisible(false);
-            guest.setVisible(true);
+            this.register.getGuest().setVisible(true);
         });
 
-        exit.addActionListener(e4 -> this.register.exit());
+        exit.addActionListener(e4 -> this.register.getGuest().getMenu().exit());
 
         JPanel buttons = new JPanel(gbl);
 
