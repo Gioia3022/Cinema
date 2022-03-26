@@ -47,7 +47,9 @@ public class Register extends JPanel{
         JLabel l_b= new JLabel("Select reduction: ");
         l_b.setFont(f2);
         String benef[]={"Student", "Elder", "Big Family", "Cinema Card", "Under 14", "Under 5"};
-        JList list= new JList(benef);
+        JComboBox list= new JComboBox(benef);
+        list.setBounds(50, 50,90,20);
+        list.setFont(f2);
 
         JButton access = new JButton("Access");
         access.setBackground(new Color(59,47,47));
@@ -91,7 +93,7 @@ public class Register extends JPanel{
         //Add actionListener for each button
 
         access.addActionListener(e0->{
-            this.register.register1(name.getText(),email.getText(),psw.getText(),Integer.parseInt(number.getText()),Integer.parseInt(age.getText()),list.getSelectedIndex());
+            this.register.register1(name.getText(),email.getText(),psw.getText(),Integer.parseInt(number.getText()),Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
             System.exit(0);
         });
 

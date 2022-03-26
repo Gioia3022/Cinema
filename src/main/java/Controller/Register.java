@@ -14,7 +14,7 @@ public class Register {
         register= new View.Register(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(register);
     }
-    public void register1(String name, String mail, String psw, int number, int age,int benef){
+    public void register1(String name, String mail, String psw, int number, int age,String benef){
         g.setName(name);
         g.setMail(mail);
         g.setPsw(psw);

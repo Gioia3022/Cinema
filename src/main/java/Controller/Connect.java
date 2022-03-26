@@ -107,7 +107,7 @@ public class Connect {
         pstmt.executeUpdate();
     }
 
-    public void SQLQueryNewGuest(String name, String mail,String psw, int tel, int age, int benef)throws SQLException{
+    public void SQLQueryNewGuest(String name, String mail,String psw, int tel, int age, String benef)throws SQLException{
         // language=<SQL>
         String sql;
         // language=<SQL>
@@ -117,10 +117,25 @@ public class Connect {
         pstmt.setString(1,name);
         pstmt.setString(2,psw);
         pstmt.setString(3,mail);
-        pstmt.setInt(4,benef);
+        pstmt.setString(4,benef);
         pstmt.setInt(5,age);
         pstmt.setInt(6,tel);
         pstmt.executeUpdate();
+    }
+
+    //Gives all courses names
+    public ArrayList<String> SQLQueryCourseNames() throws SQLException {
+        ArrayList<String> course = new ArrayList<>();
+        // language=<SQL>
+        String sql = "Select CourseName from Course";
+
+        rs = stmt.executeQuery(sql);
+
+        while (rs != null && rs.next()) {
+            String name = rs.getString(1);
+            course.add(name);
+        }
+        return course;
     }
 
 }
