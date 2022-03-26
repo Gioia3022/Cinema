@@ -19,7 +19,7 @@ public class Film {
     }
 
     public void setFilmGenre(String filmGenre) {
-        FilmGenre = filmGenre;
+        this.FilmGenre = filmGenre;
     }
 
     public String getDirector() {
@@ -27,7 +27,7 @@ public class Film {
     }
 
     public void setDirector(String director) {
-        Director = director;
+        this.Director = director;
     }
 
     public Date getFilmRelease() {
@@ -35,7 +35,7 @@ public class Film {
     }
 
     public void setFilmRelease(Date filmRelease) {
-        FilmRelease = filmRelease;
+        this.FilmRelease = filmRelease;
     }
 
     public int getFilmLenght() {
@@ -43,6 +43,6 @@ public class Film {
     }
 
     public void setFilmLenght(int filmLenght) {
-        FilmLenght = filmLenght;
+        this.FilmLenght = filmLenght;
     }
 }
