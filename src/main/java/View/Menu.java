@@ -92,7 +92,7 @@ public class Menu extends JPanel implements ActionListener {
             this.menu.getAdmin_controller().setVisible(true);
         });
 
-        exit.addActionListener(e3 -> this.menu.exit());
+        exit.addActionListener(e3 -> System.exit(0));
 
         JPanel buttons = new JPanel(gbl);
 

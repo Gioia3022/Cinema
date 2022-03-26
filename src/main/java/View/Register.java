@@ -92,7 +92,7 @@ public class Register extends JPanel{
 
         access.addActionListener(e0->{
             this.register.register1(name.getText(),email.getText(),psw.getText(),Integer.parseInt(number.getText()),Integer.parseInt(age.getText()),list.getSelectedIndex());
-            this.register.getGuest().getMenu().exit();
+            System.exit(0);
         });
 
         close.addActionListener(e1 -> {
@@ -101,7 +101,7 @@ public class Register extends JPanel{
             this.register.getGuest().setVisible(true);
         });
 
-        exit.addActionListener(e4 -> this.register.getGuest().getMenu().exit());
+        exit.addActionListener(e4 -> System.exit(0));
 
         JPanel buttons = new JPanel(gbl);
 

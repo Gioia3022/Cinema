@@ -26,10 +26,6 @@ public class Menu {
         menu.setVisible(visible);
     }
 
-    public void exit(){
-        System.exit(0);
-    }
-
     public Guest getGuest_controller() {
         return guest_controller;
     }

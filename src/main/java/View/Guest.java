@@ -84,15 +84,11 @@ public class Guest extends JPanel {
             this.guest.setVisible(false);
             this.guest.getRegister().setVisible(true);
         });
-/*
+
         anonyme.addActionListener(e3 -> {
-            Cinema.Admin b2 = new Admin(frame,c,s);
-            m.getFrame().getContentPane().add(new View.Admin(this.ca));
-            setVisible(false);
-            b2.setVisible(true);
+            this.guest.anonyme();
         });
 
- */
 
         close.addActionListener(e1 -> {
             this.guest.menu();
@@ -100,7 +96,7 @@ public class Guest extends JPanel {
             this.guest.getMenu().setVisible(true);
         });
 
-        exit.addActionListener(e4 -> this.guest.getMenu().exit());
+        exit.addActionListener(e4 -> System.exit(0));
 
         JPanel buttons = new JPanel(gbl);
 

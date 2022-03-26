@@ -1,16 +1,16 @@
 package Controller;
 
-import View.Log;
-
 public class Guest {
     private BigController bigController;
     private Menu menu;
     private View.Guest guest;
     private Controller.Log log;
     private Controller.Register register;
+    private Cinema.Guest g;
 
 
     public Guest(BigController bigController) {
+        g= new Cinema.Guest();
         this.bigController=bigController;
         guest= new View.Guest(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(guest);
@@ -25,6 +25,10 @@ public class Guest {
     }
     public void log(){
         setLog(new Controller.Log(this.bigController));
+    }
+
+    public void anonyme(){
+        g.setName("");
     }
     public void setVisible(boolean visible){
         guest.setVisible(visible);

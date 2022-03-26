@@ -80,7 +80,7 @@ public class Log extends JPanel {
             this.log_c.setVisible(true);
         });
 
-        exit.addActionListener(e4 -> this.log_c.getGuest().getMenu().exit());
+        exit.addActionListener(e4 -> System.exit(0));
 
         JPanel buttons = new JPanel(gbl);
 

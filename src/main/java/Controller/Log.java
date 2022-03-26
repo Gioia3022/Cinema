@@ -7,7 +7,7 @@ public class Log {
     private BigController bigController;
     private Guest guest;
     private View.Log log;
-    Cinema.Guest g;
+    private Cinema.Guest g;
 
     public Log(BigController co){
         g= new Cinema.Guest();
