@@ -5,6 +5,7 @@ import java.sql.SQLException;
 public class Register {
     private BigController bigController;
     private Guest guest;
+    private Film film;
     private View.Register register;
     private Cinema.Guest g;
 
@@ -31,9 +32,13 @@ public class Register {
             e.printStackTrace();
         }
     }
+
+    public void film(){setFilm(new Film(this.bigController));}
+
     public void guest() {
         setGuest(new Guest(this.bigController));
     }
+
     public void setVisible(boolean visible){
         register.setVisible(visible);
     }
@@ -45,4 +50,10 @@ public class Register {
     public void setGuest(Guest guest) {
         this.guest = guest;
     }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film){ this.film=film;}
 }

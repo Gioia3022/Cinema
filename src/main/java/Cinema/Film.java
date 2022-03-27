@@ -1,48 +1,49 @@
 package Cinema;
+
 import java.util.*;
 
 public class Film {
-    String FilmName, FilmGenre, Director;
-    Date FilmRelease;
-    int FilmLenght;
+    String filmName, filmGenre, director;
+    Date filmRelease;
+    int duration;
 
     public String getFilmName() {
-        return FilmName;
+        return filmName;
     }
 
     public void setFilmName(String filmName) {
-        this.FilmName = filmName;
+        this.filmName = filmName;
     }
 
     public String getFilmGenre() {
-        return FilmGenre;
+        return filmGenre;
     }
 
     public void setFilmGenre(String filmGenre) {
-        this.FilmGenre = filmGenre;
+        this.filmGenre = filmGenre;
     }
 
     public String getDirector() {
-        return Director;
+        return director;
     }
 
     public void setDirector(String director) {
-        this.Director = director;
+        this.director = director;
     }
 
     public Date getFilmRelease() {
-        return FilmRelease;
+        return filmRelease;
     }
 
     public void setFilmRelease(Date filmRelease) {
-        this.FilmRelease = filmRelease;
+        this.filmRelease = filmRelease;
     }
 
-    public int getFilmLenght() {
-        return FilmLenght;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setFilmLenght(int filmLenght) {
-        this.FilmLenght = filmLenght;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

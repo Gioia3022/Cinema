@@ -1,7 +1,5 @@
 package View;
 
-import Controller.Guest;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -100,6 +98,9 @@ public class Log extends JPanel {
         //Add actionListener for each button
         log.addActionListener(e0->{
             this.log_c.login(email.getText(),psw.getText());
+            this.log_c.film();
+            this.log_c.getFilm().setVisible(true);
+            this.log_c.setVisible(false);
         });
 
         mp.addActionListener(e1 -> {
@@ -109,15 +110,17 @@ public class Log extends JPanel {
 
         close.addActionListener(e2 -> {
             this.log_c.guest();
-            this.log_c.getGuest().setVisible(false);
-            this.log_c.setVisible(true);
+            this.log_c.getGuest().setVisible(true);
+            this.log_c.setVisible(false);
         });
 
         log_oub.addActionListener(e4->{
             System.out.println(name);
             this.log_c.mp_oub(name.getText(),email.getText(),psw_oublie.getText(),Integer.parseInt(tel.getText()));
             System.out.println(name);
-            System.exit(0);
+            this.log_c.film();
+            this.log_c.getFilm().setVisible(true);
+            this.log_c.setVisible(false);
         });
 
         exit.addActionListener(e3 -> System.exit(0));

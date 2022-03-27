@@ -4,7 +4,6 @@ package View;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.*;
 
 
 public class Register extends JPanel{
@@ -94,7 +93,9 @@ public class Register extends JPanel{
 
         access.addActionListener(e0->{
             this.register.register1(name.getText(),email.getText(),psw.getText(),Integer.parseInt(number.getText()),Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
-            System.exit(0);
+            this.register.film();
+            this.register.getFilm().setVisible(true);
+            this.register.setVisible(false);
         });
 
         close.addActionListener(e1 -> {

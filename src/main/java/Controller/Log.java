@@ -6,6 +6,7 @@ public class Log {
 
     private BigController bigController;
     private Guest guest;
+    private Film film;
     private View.Log log;
     private boolean mp_oublie;
     private Cinema.Guest g;
@@ -33,8 +34,6 @@ public class Log {
             this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw());
             if (this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw())) {
                 log.mes1();
-                System.out.println("Vous etes con!");
-                System.exit(0);
             } else {
                 log.mes2();
                 System.out.println("pas bon retray");
@@ -68,6 +67,8 @@ public class Log {
         setGuest(new Guest(this.bigController));
     }
 
+    public void film(){setFilm(new Film(this.bigController));}
+
     public void setVisible(boolean visible){
         log.setVisible(visible);
     }
@@ -79,6 +80,12 @@ public class Log {
     public void setGuest(Guest guest) {
         this.guest = guest;
     }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film){ this.film=film;}
 
     public boolean getMp() {
         return mp_oublie;

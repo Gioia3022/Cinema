@@ -31,20 +31,7 @@ public class Connect {
     }
 
 
-    //Gives all film names from database
-    public ArrayList<String> SQLQueryFilmName() throws SQLException {
-        ArrayList<String> film = new ArrayList<>();
-        // language=<SQL>
-        String sql = "Select FilmName from film";
 
-        rs = stmt.executeQuery(sql);
-
-        while (rs != null && rs.next()) {
-            String name = rs.getString(1);
-            film.add(name);
-        }
-        return film;
-    }
     //Checks validity of mail
     public boolean SQLQueryAdmin(String user, String pass ) throws SQLException {
         boolean check=true;
@@ -123,19 +110,39 @@ public class Connect {
         pstmt.executeUpdate();
     }
 
-    //Gives all courses names
-    public ArrayList<String> SQLQueryCourseNames() throws SQLException {
-        ArrayList<String> course = new ArrayList<>();
+    //Gives all films
+    public ArrayList<Cinema.Film> SQLQueryFilm(Cinema.Film film_model) throws SQLException {
+        ArrayList<Cinema.Film> film = new ArrayList<>();
         // language=<SQL>
-        String sql = "Select CourseName from Course";
+        String sql = "Select * from film";
+
+        rs = stmt.executeQuery(sql);
+
+        while (rs != null && rs.next()) {
+            film_model=new Cinema.Film();
+            film_model.setFilmName(rs.getString("FilmName"));
+            film_model.setDuration(rs.getInt("FilmLength"));
+            film_model.setFilmGenre(rs.getString("FilmGenre"));
+            film_model.setFilmRelease(rs.getDate("FilmRelease"));
+            film_model.setDirector(rs.getString("Director"));
+            film.add(film_model);
+        }
+        return film;
+    }
+
+    //Gives all film names from database
+    public ArrayList<String> SQLQueryFilmName() throws SQLException {
+        ArrayList<String> film = new ArrayList<>();
+        // language=<SQL>
+        String sql = "Select FilmName from film";
 
         rs = stmt.executeQuery(sql);
 
         while (rs != null && rs.next()) {
             String name = rs.getString(1);
-            course.add(name);
+            film.add(name);
         }
-        return course;
+        return film;
     }
 
 }
