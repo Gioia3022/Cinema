@@ -1,7 +1,6 @@
 package Cinema;
 
 public class Admin{
-    private Controller.Admin ca;
     String name,mail, password;
 
     public String getMail() {

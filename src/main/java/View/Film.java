@@ -7,11 +7,12 @@ import java.awt.*;
 public class Film extends JPanel{
     private Controller.Film film;
     private JFrame frame;
+   
     public Film(Controller.Film ca, JFrame f){
         this.film=ca;
         this.frame=f;
         //Fonts
-        Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
+        Font f1= new Font(Font.SERIF,  Font.BOLD, 40);
         Font f2= new Font(Font.SERIF, Font.PLAIN,  20);
         Font f3= new Font(Font.SERIF, Font.PLAIN,  30);
 
@@ -23,7 +24,7 @@ public class Film extends JPanel{
         //Set layout for the content pane
         setLayout(new GridBagLayout());
 
-        setBorder(new EmptyBorder(200, 10, 10, 10));
+        setBorder(new EmptyBorder(50, 10, 10, 10));
 
         //Set color of background
         this.setBackground(new Color(239,223,187));
@@ -34,25 +35,25 @@ public class Film extends JPanel{
 
         gbc.weightx = 0;
         gbc.weighty = 1;
-        gbc.insets = new Insets(5, 0, 5, 0);
+        gbc.insets = new Insets(0, 0, 5, 0);
 
         gbc.anchor = GridBagConstraints.NORTHEAST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        Label a= new Label("   Film selection");
+        Label a= new Label("      Film selection");
         a.setFont(f1);
         Label b= new Label("__________________");
         b.setFont(f1);
 
         JLabel l_b= new JLabel("Select film: ");
         l_b.setFont(f2);
-        String[] fil= new String[film.getNames().size()];
 
-        for(int i = 0; i<film.getNames().size(); i++){
-            fil[i]=film.getNames().get(i);
-            System.out.println(film.getNames().get(i));
+        String[] fil= new String[film.getFilm().getNames().size()];
+
+        for(int i = 0; i<fil.length; i++){
+            fil[i]= film.getFilm().getNames().get(i);
         }
-        //.toArray(new Cinema.Film[0])
+
         JComboBox list= new JComboBox(fil);
         list.setBounds(50, 50,90,20);
         list.setFont(f2);
@@ -67,11 +68,29 @@ public class Film extends JPanel{
         exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
 
-
         info.addActionListener(e0->{
+            this.film.get_info((String) list.getItemAt(list.getSelectedIndex()));
+            System.out.println(this.film.getFilm().getFilmGenre());
+            this.film.filmPage();
+            this.film.setVisible(false);
+            this.film.getFilmPage().setVisible(true);
         });
 
+        /*
+        Image image = null;
+        try {
+            String s=this.film.getFilm().getImage();
+            System.out.println(s);
+            URL url=new URL(s);
+            image = ImageIO.read(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JLabel lblimage= new JLabel(new ImageIcon(image));
+*/
         exit.addActionListener(e4 -> System.exit(0));
+
+
 
         buttons.setBackground(new Color(239, 223, 187));
 

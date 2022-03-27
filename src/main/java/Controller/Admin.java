@@ -1,7 +1,6 @@
 package Controller;
 
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class Admin {
     private BigController bigController;

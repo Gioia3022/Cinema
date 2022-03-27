@@ -36,7 +36,7 @@ public class Log {
                 log.mes1();
             } else {
                 log.mes2();
-                System.out.println("pas bon retray");
+                System.out.println("pas bon retry");
                 setVisible(true);
             }
         } catch (

@@ -118,8 +118,8 @@ public class Log extends JPanel {
             System.out.println(name);
             this.log_c.mp_oub(name.getText(),email.getText(),psw_oublie.getText(),Integer.parseInt(tel.getText()));
             System.out.println(name);
-            this.log_c.film();
-            this.log_c.getFilm().setVisible(true);
+            this.log_c.guest();
+            this.log_c.getGuest().setVisible(true);
             this.log_c.setVisible(false);
         });
 
@@ -158,5 +158,5 @@ public class Log extends JPanel {
         JOptionPane.showMessageDialog(this, "Login reussi");
     }
     public void mes2(){
-        JOptionPane.showMessageDialog(this, "Erreur de saisie\nMot de passe ou mail incorect");
+        JOptionPane.showMessageDialog(this, "Erreur de saisie\nMot de passe ou mail incorrect");
     }}

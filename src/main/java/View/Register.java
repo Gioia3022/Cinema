@@ -45,7 +45,7 @@ public class Register extends JPanel{
 
         JLabel l_b= new JLabel("Select reduction: ");
         l_b.setFont(f2);
-        String benef[]={"Student", "Elder", "Big Family", "Cinema Card", "Under 14", "Under 5"};
+        String[] benef ={"Student", "Elder", "Big Family", "Cinema Card", "Under 14", "Under 5"};
         JComboBox list= new JComboBox(benef);
         list.setBounds(50, 50,90,20);
         list.setFont(f2);

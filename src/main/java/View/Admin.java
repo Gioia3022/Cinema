@@ -96,9 +96,7 @@ public class Admin extends JPanel {
         gbc.anchor = GridBagConstraints.NORTHEAST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        log.addActionListener(e0 -> {
-            this.admin.login(email.getText(), psw.getText());
-        });
+        log.addActionListener(e0 -> this.admin.login(email.getText(), psw.getText()));
 
         mp.addActionListener(e1 -> {
             this.admin.setMp_oublie(true);
@@ -114,10 +112,10 @@ public class Admin extends JPanel {
         exit.addActionListener(e3 -> System.exit(0));
 
         log_oublie.addActionListener(e4->{
-            System.out.println(name);
             this.admin.mp_oublie(name.getText(),email.getText(),psw_oublie.getText());
-            System.out.println(name);
-            System.exit(0);
+            this.admin.menu();
+            this.admin.setVisible(false);
+            this.admin.getMenu().setVisible(true);
         });
 
         buttons.setBackground(new Color(239, 223, 187));

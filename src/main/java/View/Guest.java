@@ -1,7 +1,5 @@
 package View;
 
-import Cinema.Admin;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -87,6 +85,8 @@ public class Guest extends JPanel {
 
         anonyme.addActionListener(e3 -> {
             this.guest.anonyme();
+            this.guest.setVisible(false);
+            this.guest.getFilm().setVisible(true);
         });
 
 

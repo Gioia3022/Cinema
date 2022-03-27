@@ -3,7 +3,6 @@ package Cinema;
 public class Guest {
     String name, mail, psw, benef;
     int tel, age;
-    private Controller.Admin ca;
 
     public String getName() {
         return name;

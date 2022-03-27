@@ -18,14 +18,10 @@ public class Connect {
         // language=<SQL>
         rs=stmt.executeQuery("SELECT * FROM admin");
         while (rs.next()){
-            System.out.println(rs.getString("AdminMP"));
+            System.out.println(rs.getString("AdminName"));
         }
     }
 
-    /*
-    public void connectData() throws SQLException {
-        conn = DriverManager.getConnection();
-    }*/
     public void closeCourseDataConnection() throws SQLException {
         conn.close();
     }
@@ -34,11 +30,9 @@ public class Connect {
 
     //Checks validity of mail
     public boolean SQLQueryAdmin(String user, String pass ) throws SQLException {
-        boolean check=true;
+        boolean check;
         // language=<SQL>
-        String sql;
-        // language=<SQL>
-        sql= "SELECT AdminMail from admin WHERE AdminMail =? AND AdminMP= ? ;";
+        String sql= "SELECT AdminMail from admin WHERE AdminMail =? AND AdminMP= ? ;";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,String.valueOf(user));
         pstmt.setString(2,String.valueOf(pass));
@@ -52,9 +46,7 @@ public class Connect {
 
     public void SQLQueryAdminNewMP(String name, String mail, String MP) throws SQLException{
         // language=<SQL>
-        String sql;
-        // language=<SQL>
-        sql= "UPDATE admin SET AdminMP=? WHERE AdminMail =? AND AdminName=?;";
+        String sql= "UPDATE admin SET AdminMP=? WHERE AdminMail =? AND AdminName=?;";
         pstmt = conn.prepareStatement(sql);
 
         pstmt.setString(1,MP);
@@ -66,9 +58,7 @@ public class Connect {
     public boolean SQLQueryGuest(String user, String pass ) throws SQLException {
         boolean check;
         // language=<SQL>
-        String sql;
-        // language=<SQL>
-        sql= "SELECT GuestMail from guest WHERE GuestMail =? AND GuestMP= ? ;";
+        String sql= "SELECT GuestMail from guest WHERE GuestMail =? AND GuestMP= ? ;";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,String.valueOf(user));
         pstmt.setString(2,String.valueOf(pass));
@@ -81,9 +71,7 @@ public class Connect {
     }
     public void SQLQueryGuestNewMP(String name, String mail, String MP,int tel) throws SQLException{
         // language=<SQL>
-        String sql;
-        // language=<SQL>
-        sql= "UPDATE guest SET GuestMP=? WHERE GuestMail =? AND GuestName=? AND GuestTel=?;";
+        String sql= "UPDATE guest SET GuestMP=? WHERE GuestMail =? AND GuestName=? AND GuestTel=?;";
         pstmt = conn.prepareStatement(sql);
         System.out.println(1);
 
@@ -96,10 +84,7 @@ public class Connect {
 
     public void SQLQueryNewGuest(String name, String mail,String psw, int tel, int age, String benef)throws SQLException{
         // language=<SQL>
-        String sql;
-        // language=<SQL>
-        sql= "INSERT INTO guest (GuestName,GuestMP, GuestMail,GuestBenefice, GuestAge,GuestTel) VALUES (?,?,?,?,?,?)";
-        pstmt = conn.prepareStatement(sql);
+        String sql= "INSERT INTO guest (GuestName,GuestMP, GuestMail,GuestBenefice, GuestAge,GuestTel) VALUES (?,?,?,?,?,?)";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,name);
         pstmt.setString(2,psw);
@@ -110,29 +95,9 @@ public class Connect {
         pstmt.executeUpdate();
     }
 
-    //Gives all films
-    public ArrayList<Cinema.Film> SQLQueryFilm(Cinema.Film film_model) throws SQLException {
-        ArrayList<Cinema.Film> film = new ArrayList<>();
-        // language=<SQL>
-        String sql = "Select * from film";
-
-        rs = stmt.executeQuery(sql);
-
-        while (rs != null && rs.next()) {
-            film_model=new Cinema.Film();
-            film_model.setFilmName(rs.getString("FilmName"));
-            film_model.setDuration(rs.getInt("FilmLength"));
-            film_model.setFilmGenre(rs.getString("FilmGenre"));
-            film_model.setFilmRelease(rs.getDate("FilmRelease"));
-            film_model.setDirector(rs.getString("Director"));
-            film.add(film_model);
-        }
-        return film;
-    }
-
     //Gives all film names from database
-    public ArrayList<String> SQLQueryFilmName() throws SQLException {
-        ArrayList<String> film = new ArrayList<>();
+    public ArrayList<String> SQLQueryFilmName(Cinema.Film film_model) throws SQLException {
+        film_model.setNames(new ArrayList<>());
         // language=<SQL>
         String sql = "Select FilmName from film";
 
@@ -140,9 +105,24 @@ public class Connect {
 
         while (rs != null && rs.next()) {
             String name = rs.getString(1);
-            film.add(name);
+            film_model.getNames().add(name);
         }
-        return film;
+        return film_model.getNames();
+    }
+    public void SQLQueryInfoFilm(String name, Cinema.Film film_model)throws SQLException{
+        // language=<SQL>
+        String sql = "Select * from film where FilmName= '"+ name+ "';";
+        pstmt = conn.prepareStatement(sql);
+        rs = stmt.executeQuery(sql);
+
+        while (rs != null && rs.next()) {
+            film_model.setFilmName(rs.getString("FilmName"));
+            film_model.setFilmGenre(rs.getString("FilmGenre"));
+            film_model.setDuration(rs.getInt("FilmLength"));
+            film_model.setFilmRelease(rs.getDate("FilmRelease"));
+            film_model.setDirector(rs.getString("Director"));
+            film_model.setImage(rs.getString("FilmImage"));
+        }
     }
 
 }

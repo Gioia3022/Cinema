@@ -1,39 +1,48 @@
 package Controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Film {
     private BigController bigController;
     private Menu menu;
     private View.Film film_view;
-    Cinema.Film film;
-    ArrayList<Cinema.Film> filmArrayList;
-    ArrayList<String> names;
+    private Cinema.Film film;
+    private FilmPage filmPage;
+
     public Film(BigController co){
         this.bigController=co;
         this.film= new Cinema.Film();
         try {
-            setFilmArrayList(this.bigController.getC().SQLQueryFilm(film));
-            setNamesArrayList(this.bigController.getC().SQLQueryFilmName());
+            this.film.setNames(this.bigController.getC().SQLQueryFilmName(this.film));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         film_view= new View.Film(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(film_view);
     }
 
-    public void setNamesArrayList(ArrayList<String> namesArrayList) {
-        this.names = namesArrayList;
+    public void get_info(String name){
+        try {
+            this.bigController.getC().SQLQueryInfoFilm(name,film);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void filmPage(){
+        setFilmPage(new FilmPage(this.bigController,film));
     }
 
-    public void setFilmArrayList(ArrayList<Cinema.Film> filmArrayList) {
-        this.filmArrayList = filmArrayList;
+    public Cinema.Film getFilm() {
+        return film;
     }
 
-    public ArrayList<String> getNames() {
-        return names;
+    public FilmPage getFilmPage() {
+        return filmPage;
+    }
+
+    public void setFilmPage(FilmPage filmPage) {
+        this.filmPage = filmPage;
     }
 
     public void setVisible(boolean visible){

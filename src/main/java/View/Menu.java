@@ -1,9 +1,6 @@
 
 package View;
 
-import Controller.Admin;
-import Controller.Guest;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -114,13 +111,5 @@ public class Menu extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-    }
-
-    public JFrame getFrame() {
-        return this.frame;
-    }
-
-    public void setFrame(JFrame frame) {
-        this.frame = frame;
     }
 }

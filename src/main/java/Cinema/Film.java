@@ -1,11 +1,23 @@
 package Cinema;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Film {
     String filmName, filmGenre, director;
     Date filmRelease;
     int duration;
+    String image;
+    ArrayList<Film> film;
+    ArrayList<String> names;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getFilmName() {
         return filmName;
@@ -45,5 +57,21 @@ public class Film {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public ArrayList<String> getNames() {
+        return names;
+    }
+
+    public ArrayList<Film> getFilm() {
+        return film;
+    }
+
+    public void setFilm(ArrayList<Film> film) {
+        this.film = film;
+    }
+
+    public void setNames(ArrayList<String> names) {
+        this.names = names;
     }
 }

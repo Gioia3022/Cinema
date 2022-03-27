@@ -3,6 +3,7 @@ package Controller;
 public class Guest {
     private BigController bigController;
     private Menu menu;
+    private Film film;
     private View.Guest guest;
     private Controller.Log log;
     private Controller.Register register;
@@ -26,10 +27,11 @@ public class Guest {
     public void log(){
         setLog(new Controller.Log(this.bigController));
     }
-
     public void anonyme(){
         g.setName("");
+        setFilm(new Film(this.bigController));
     }
+
     public void setVisible(boolean visible){
         guest.setVisible(visible);
     }
@@ -56,5 +58,13 @@ public class Guest {
 
     public void setRegister(Register register) {
         this.register = register;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
     }
 }
