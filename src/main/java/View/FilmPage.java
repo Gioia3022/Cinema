@@ -39,7 +39,48 @@ public class FilmPage extends JPanel {
         gbc.anchor = GridBagConstraints.NORTHEAST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        System.out.println(this.filmPage.getFilm().getFilmName());
-        Label filmName= new Label(this.filmPage.getFilm().getFilmName());
+        JLabel filmName= new JLabel("Nom du film: "+this.filmPage.getFilm().getFilmName());
+        JLabel filmGenre= new JLabel("Genre: "+this.filmPage.getFilm().getFilmGenre());
+        JLabel filmLength= new JLabel("Duree: "+ this.filmPage.getFilm().getDuration());
+        JLabel filmRelease= new JLabel("Annee de sortie: "+ this.filmPage.getFilm().getFilmRelease());
+        JLabel filmDirector= new JLabel("Realisateur: "+this.filmPage.getFilm().getDirector());
+
+        JButton ticket = new JButton("Get ticket");
+        ticket.setBackground(new Color(59,47,47));
+        ticket.setForeground(new Color(239,223,187));
+        ticket.setFont(f3);
+
+        JButton close = new JButton("Selection de films");
+        close.setBackground(new Color(59, 47, 47));
+        close.setForeground(new Color(239, 223, 187));
+        close.setFont(f3);
+
+        JButton exit = new JButton("Exit");
+        exit.setBackground(new Color(59, 47, 47));
+        exit.setForeground(new Color(239, 223, 187));
+        exit.setFont(f3);
+
+        ticket.addActionListener(e0->{
+        });
+        close.addActionListener(e2 -> {
+            this.filmPage.film();
+            this.filmPage.setVisible(false);
+            this.filmPage.getFilm_c().setVisible(true);
+        });
+        exit.addActionListener(e3 -> System.exit(0));
+
+        buttons.setBackground(new Color(239, 223, 187));
+
+        //Add buttons to JPanel
+        buttons.add(filmName, gbc);
+        buttons.add(filmGenre, gbc);
+        buttons.add(filmLength,gbc);
+        buttons.add(filmRelease,gbc);
+        buttons.add(filmDirector,gbc);
+        buttons.add(ticket,gbc);
+        buttons.add(close,gbc);
+        buttons.add(exit, gbc);
+
+        this.add(buttons,gbc);
     }
 }
