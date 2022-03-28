@@ -98,9 +98,6 @@ public class Log extends JPanel {
         //Add actionListener for each button
         log.addActionListener(e0->{
             this.log_c.login(email.getText(),psw.getText());
-            this.log_c.film();
-            this.log_c.getFilm().setVisible(true);
-            this.log_c.setVisible(false);
         });
 
         mp.addActionListener(e1 -> {

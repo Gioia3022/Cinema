@@ -12,7 +12,7 @@ public class BigController {
         frame= new JFrame();
         frame.setSize(1000,1000);
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String url= "jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC";
+        String url= "jdbc:mysql://localhost:3306/cineme?useSSL=false&serverTimezone=UTC";
         Connection conn = DriverManager.getConnection(url, "root", "");
         Statement stmt = conn.createStatement();
         c=new Connect(conn, stmt);

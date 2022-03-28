@@ -1,5 +1,7 @@
 package Controller;
 
+import Cinema.Session;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -55,6 +57,20 @@ public class Connect {
         pstmt.setString(2,mail);
         pstmt.setString(3,name);
         pstmt.executeUpdate();
+    }
+
+    public boolean SQLQueryCheckGuest(String mail) throws SQLException {
+        boolean exists;
+        // language=<SQL>
+        String sql= "SELECT GuestMail AND GuestName AND GuestTel from guest WHERE GUESTMail =?;";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,String.valueOf(mail));
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            exists = true;
+        }else
+            exists = false;
+        return exists;
     }
 
     // verification que le guest exciste ou pas
@@ -131,6 +147,32 @@ public class Connect {
             film_model.setFilmRelease(rs.getDate("FilmRelease"));
             film_model.setDirector(rs.getString("Director"));
             film_model.setImage(rs.getString("FilmImage"));
+        }
+    }
+    public void SQLSessionsDispo(String nameFilm, Session s) throws SQLException {
+        int IDFilm=0;
+
+        // language=<SQL>
+        String sql ="Select FilmID from film where FilmName= '"+nameFilm+"';";
+        pstmt = conn.prepareStatement(sql);
+        rs = stmt.executeQuery(sql);
+        while (rs != null && rs.next()) {
+            IDFilm=rs.getInt("FilmID");
+        }
+        // language=<SQL>
+        String sql_1 ="Select FilmTime from session where FilmID= "+ IDFilm+";";
+        pstmt = conn.prepareStatement(sql_1);
+        rs = stmt.executeQuery(sql_1);
+        while (rs != null && rs.next()) {
+            s.setFilmTime(rs.getTime("FilmTime").toLocalTime().minusHours(1));
+        }
+
+        // language=<SQL>
+        String sql_2 ="Select SessionDate from session where FilmID= "+ IDFilm+";";
+        pstmt = conn.prepareStatement(sql_2);
+        rs = stmt.executeQuery(sql_2);
+        while (rs != null && rs.next()) {
+            s.setSessionDate(rs.getDate("SessionDate"));
         }
     }
 

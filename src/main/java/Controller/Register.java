@@ -32,11 +32,18 @@ public class Register {
         g.setAge(age);
         g.setBenef(benef);
 
-        System.out.println(g.getName() + g.getMail() + g.getPsw());
-
         try {
-            this.bigController.getC().SQLQueryNewGuest(g.getName(),g.getMail(),g.getPsw(), g.getTel(), g.getAge(),g.getBenef());
-
+            if(!this.bigController.getC().SQLQueryCheckGuest(g.getMail())) {
+                this.bigController.getC().SQLQueryNewGuest(g.getName(), g.getMail(), g.getPsw(), g.getTel(), g.getAge(), g.getBenef());
+                register.mes1();
+                film();
+                getFilm().setVisible(true);
+                setVisible(false);
+            }
+            else {
+                setVisible(true);
+                register.mes2();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

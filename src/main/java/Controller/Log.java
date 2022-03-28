@@ -39,9 +39,11 @@ public class Log {
             this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw());
             if (this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw())) {
                 log.mes1();
+                film();
+                getFilm().setVisible(true);
+                setVisible(false);
             } else {
                 log.mes2();
-                System.out.println("pas bon retry");
                 setVisible(true);
             }
         } catch (

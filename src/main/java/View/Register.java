@@ -93,9 +93,6 @@ public class Register extends JPanel{
 
         access.addActionListener(e0->{
             this.register.register1(name.getText(),email.getText(),psw.getText(),Integer.parseInt(number.getText()),Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
-            this.register.film();
-            this.register.getFilm().setVisible(true);
-            this.register.setVisible(false);
         });
 
         close.addActionListener(e1 -> {
@@ -126,5 +123,10 @@ public class Register extends JPanel{
 
         this.add(buttons,gbc);
     }
-
+    public void mes1(){
+        JOptionPane.showMessageDialog(this, "Login reussi");
+    }
+    public void mes2(){
+        JOptionPane.showMessageDialog(this, "L'utilisateur existe deja");
+    }
 }

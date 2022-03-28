@@ -14,35 +14,34 @@ public class FilmPage extends JPanel {
         this.filmPage=ca;
         this.frame=f;
 
-        Font f1= new Font(Font.SERIF,  Font.BOLD, 40);
+        Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
         Font f2= new Font(Font.SERIF, Font.PLAIN,  20);
         Font f3= new Font(Font.SERIF, Font.PLAIN,  30);
 
         GridBagLayout gbl= new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
-
-        GridBagLayout gbl_1= new GridBagLayout();
         GridBagConstraints gbc_1 = new GridBagConstraints();
+        GridBagConstraints gbc_2 = new GridBagConstraints();
+        GridBagConstraints gbc_3 = new GridBagConstraints();
 
         JPanel title= new JPanel(gbl);
-        JPanel imageP= new JPanel(gbl_1);
-        JPanel buttons = new JPanel(gbl_1);
-        JPanel info= new JPanel(gbl_1);
+        JPanel imageP= new JPanel(gbl);
+        JPanel buttons = new JPanel(gbl);
+        JPanel info= new JPanel(gbl);
 
         //Set layout for the content pane
         setLayout(new GridBagLayout());
 
-        setBorder(new EmptyBorder(50, 10, 10, 10));
+        setBorder(new EmptyBorder(150, 10, 10, 10));
 
         //Set color of background
         this.setBackground(new Color(239,223,187));
 
         //Where the text is to be shown
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.CENTER;
-
         gbc_1.gridwidth = GridBagConstraints.WEST;
-        gbc_1.anchor = GridBagConstraints.WEST;
+        gbc_2.gridwidth = GridBagConstraints.SOUTHEAST;
+        gbc_3.gridwidth = GridBagConstraints.SOUTHEAST;
 
         gbc.weightx = 0;
         gbc.weighty = 1;
@@ -53,10 +52,24 @@ public class FilmPage extends JPanel {
 
         gbc_1.weightx = 0;
         gbc_1.weighty = 1;
-        gbc_1.insets = new Insets(0, 10, 5, 0);
+        gbc_1.insets = new Insets(0, 50, 5, 0);
 
         gbc_1.anchor = GridBagConstraints.WEST;
         gbc_1.fill = GridBagConstraints.WEST;
+
+        gbc_2.weightx = 0;
+        gbc_2.weighty = 1;
+        gbc_2.insets = new Insets(0, 0, 50, 0);
+
+        gbc_2.anchor = GridBagConstraints.SOUTH;
+        gbc_2.fill = GridBagConstraints.HORIZONTAL;
+
+        gbc_3.weightx = 0;
+        gbc_3.weighty = 1;
+        gbc_3.insets = new Insets(0, 10, 10, 0);
+
+        gbc_3.anchor = GridBagConstraints.SOUTH;
+        gbc_3.fill = GridBagConstraints.HORIZONTAL;
 
         JLabel filmName= new JLabel(this.filmPage.getFilm().getFilmName());
         filmName.setFont(f1);
@@ -67,13 +80,18 @@ public class FilmPage extends JPanel {
             image= ImageIO.read(url);
         } catch (IOException e) {
         }
-        int newWidth=220, newHeight=300;
-        JLabel filmImage= new JLabel(new ImageIcon(image.getScaledInstance(newWidth, newHeight, Image.SCALE_FAST)));
-        JLabel filmGenre= new JLabel("Genre: "+this.filmPage.getFilm().getFilmGenre());
-        JLabel filmLength= new JLabel("Duree: "+ this.filmPage.getFilm().getDuration());
-        JLabel filmRelease= new JLabel("Annee de sortie: "+ this.filmPage.getFilm().getFilmRelease());
-        JLabel filmDirector= new JLabel("Realisateur: "+this.filmPage.getFilm().getDirector());
+        int newWidth=440, newHeight=600;
 
+        JLabel filmImage= new JLabel(new ImageIcon(image.getScaledInstance(newWidth, newHeight, Image.SCALE_FAST)));
+        filmImage.setFont(f3);
+        JLabel filmGenre= new JLabel("Genre: "+this.filmPage.getFilm().getFilmGenre());
+        filmGenre.setFont(f3);
+        JLabel filmLength= new JLabel("Duree: "+ this.filmPage.getFilm().getDuration());
+        filmLength.setFont(f3);
+        JLabel filmRelease= new JLabel("Annee de sortie: "+ this.filmPage.getFilm().getFilmRelease());
+        filmRelease.setFont(f3);
+        JLabel filmDirector= new JLabel("Realisateur: "+this.filmPage.getFilm().getDirector());
+        filmDirector.setFont(f3);
 
         JButton ticket = new JButton("Get ticket");
         ticket.setBackground(new Color(59,47,47));
@@ -106,18 +124,18 @@ public class FilmPage extends JPanel {
 
         //Add buttons to JPanel
         title.add(filmName, gbc);
-        info.add(filmImage, gbc_1);
-        info.add(filmGenre, gbc_1);
-        info.add(filmLength,gbc_1);
-        info.add(filmRelease,gbc_1);
-        info.add(filmDirector,gbc_1);
-        buttons.add(ticket,gbc_1);
-        buttons.add(close,gbc_1);
-        buttons.add(exit, gbc_1);
+        info.add(filmGenre, gbc);
+        info.add(filmLength,gbc);
+        info.add(filmRelease,gbc);
+        info.add(filmDirector,gbc);
+        imageP.add(filmImage, gbc_1);
+        buttons.add(ticket,gbc_3);
+        buttons.add(close,gbc_3);
+        buttons.add(exit, gbc_3);
 
         this.add(title,gbc);
-        this.add(imageP,gbc);
-        this.add(info,gbc);
-        this.add(buttons,gbc);
+        this.add(imageP,gbc_1);
+        this.add(info,gbc_1);
+        this.add(buttons,gbc_2);
     }
 }

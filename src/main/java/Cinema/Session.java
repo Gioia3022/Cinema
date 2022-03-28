@@ -1,10 +1,12 @@
 package Cinema;
-import java.util.*;
-import java.sql.Time;
+
+import java.time.LocalTime;
+import java.util.Date;
 
 public class Session {
     private Date SessionDate;
-    private Time FilmTime;
+    LocalTime FilmTime;
+    //ArrayList<Date>
 
     //Getter & setters attributs de la table MySql Session
     public Date getSessionDate() {
@@ -15,11 +17,11 @@ public class Session {
         this.SessionDate = sessionDate;
     }
 
-    public Time getFilmTime() {
+    public LocalTime getFilmTime() {
         return FilmTime;
     }
 
-    public void setFilmTime(Time filmTime) {
+    public void setFilmTime(LocalTime filmTime) {
         this.FilmTime = filmTime;
     }
 
