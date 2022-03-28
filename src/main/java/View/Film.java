@@ -12,9 +12,10 @@ public class Film extends JPanel{
         this.film=ca;
         this.frame=f;
         //Fonts
-        Font f1= new Font(Font.SERIF,  Font.BOLD, 40);
+        Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
         Font f2= new Font(Font.SERIF, Font.PLAIN,  20);
         Font f3= new Font(Font.SERIF, Font.PLAIN,  30);
+        Font f4= new Font(Font.SERIF, Font.BOLD, 30);
 
         GridBagLayout gbl= new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
@@ -24,7 +25,7 @@ public class Film extends JPanel{
         //Set layout for the content pane
         setLayout(new GridBagLayout());
 
-        setBorder(new EmptyBorder(50, 10, 10, 10));
+        setBorder(new EmptyBorder(170, 10, 10, 10));
 
         //Set color of background
         this.setBackground(new Color(239,223,187));
@@ -35,7 +36,7 @@ public class Film extends JPanel{
 
         gbc.weightx = 0;
         gbc.weighty = 1;
-        gbc.insets = new Insets(0, 0, 5, 0);
+        gbc.insets = new Insets(5, 0, 5, 0);
 
         gbc.anchor = GridBagConstraints.NORTHEAST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -44,9 +45,11 @@ public class Film extends JPanel{
         a.setFont(f1);
         Label b= new Label("__________________");
         b.setFont(f1);
+        Label c= new Label("");
+        c.setFont(f2);
 
         JLabel l_b= new JLabel("Select film: ");
-        l_b.setFont(f2);
+        l_b.setFont(f4);
 
         String[] fil= new String[film.getFilm().getNames().size()];
 
@@ -63,6 +66,11 @@ public class Film extends JPanel{
         info.setForeground(new Color(239,223,187));
         info.setFont(f3);
 
+        JButton close = new JButton("Menu Principal");
+        close.setBackground(new Color(59, 47, 47));
+        close.setForeground(new Color(239, 223, 187));
+        close.setFont(f3);
+
         JButton exit = new JButton("Exit");
         exit.setBackground(new Color(59, 47, 47));
         exit.setForeground(new Color(239, 223, 187));
@@ -70,27 +78,19 @@ public class Film extends JPanel{
 
         info.addActionListener(e0->{
             this.film.get_info((String) list.getItemAt(list.getSelectedIndex()));
-            System.out.println(this.film.getFilm().getFilmGenre());
             this.film.filmPage();
             this.film.setVisible(false);
             this.film.getFilmPage().setVisible(true);
         });
 
-        /*
-        Image image = null;
-        try {
-            String s=this.film.getFilm().getImage();
-            System.out.println(s);
-            URL url=new URL(s);
-            image = ImageIO.read(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JLabel lblimage= new JLabel(new ImageIcon(image));
-*/
+
+        close.addActionListener(e2 -> {
+            this.film.menu();
+            this.film.setVisible(false);
+            this.film.getMenu().setVisible(true);
+        });
+
         exit.addActionListener(e4 -> System.exit(0));
-
-
 
         buttons.setBackground(new Color(239, 223, 187));
 
@@ -100,6 +100,10 @@ public class Film extends JPanel{
         buttons.add(l_b,gbc);
         buttons.add(list,gbc);
         buttons.add(info,gbc);
+        buttons.add(c, gbc);
+        buttons.add(b, gbc);
+        buttons.add(c, gbc);
+        buttons.add(close, gbc);
         buttons.add(exit, gbc);
 
         this.add(buttons,gbc);

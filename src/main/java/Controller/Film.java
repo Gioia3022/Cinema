@@ -45,6 +45,17 @@ public class Film {
         this.filmPage = filmPage;
     }
 
+
+    public void menu() {
+        setMenu(new Menu(this.bigController));
+    }
+    public Menu getMenu() {
+        return menu;
+    }
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
     public void setVisible(boolean visible){
         film_view.setVisible(visible);
     }
