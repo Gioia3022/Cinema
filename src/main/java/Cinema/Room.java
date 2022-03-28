@@ -3,7 +3,7 @@ package Cinema;
 public class Room {
 
     //Getter & setters attributs de la table MySql Room
-    int roomNbrSeats;
+    private int roomNbrSeats;
 
     public int getRoomNbrSeats() {
         return roomNbrSeats;

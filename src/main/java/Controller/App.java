@@ -3,9 +3,9 @@ import java.sql.*;
 
 public class App {
     //private static ResultSet rs;
-    public static void main(String[] args)  {
+    public static void main(String[] args)  { //MAIN : LANCE L'AFFICHAGE DU MENU
         try {
-            BigController bc= new BigController();
+            BigController bc= new BigController(); //création attribut controller
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

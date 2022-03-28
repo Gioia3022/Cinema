@@ -2,8 +2,8 @@ package Cinema;
 import java.util.*;
 
 public class Ticket {
-    int Price, NbrPlace;
-    Date DateAchat;
+    private int Price, NbrPlace;
+    private Date DateAchat;
 
     //Getter & setters attributs de la table MySql Ticket
     public Date getDateAchat() {

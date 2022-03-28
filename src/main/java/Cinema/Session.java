@@ -3,8 +3,8 @@ import java.util.*;
 import java.sql.Time;
 
 public class Session {
-    Date SessionDate;
-    Time FilmTime;
+    private Date SessionDate;
+    private Time FilmTime;
 
     //Getter & setters attributs de la table MySql Session
     public Date getSessionDate() {

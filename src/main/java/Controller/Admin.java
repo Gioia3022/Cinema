@@ -68,10 +68,12 @@ public class Admin {
 
     public void menu() {
         setMenu(new Menu(this.bigController));
-    }
+    } //retour affichage menu (back)
+
+    //getter setters attribut
     public void setVisible(boolean visible){
         admin.setVisible(visible);
-    }
+    } //affichage admin
     public Menu getMenu() {
         return menu;
     }

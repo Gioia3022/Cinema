@@ -3,6 +3,8 @@ package Controller;
 import java.sql.SQLException;
 
 public class Log {
+    //attributs
+    //
 
     private BigController bigController;
     private Guest guest;
@@ -11,6 +13,7 @@ public class Log {
     private boolean mp_oublie;
     private Cinema.Guest g;
 
+    //Constructeur 1
     public Log(BigController co){
         this.setMp(false);
         g= new Cinema.Guest();
@@ -18,6 +21,7 @@ public class Log {
         log= new View.Log(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(log);
     }
+    //Constructeur 2 - Mot de passe oublié -> affichage frame mp oublié pour guest
     public Log(BigController co, boolean mp){
         this.setMp(mp);
         g= new Cinema.Guest();
@@ -26,6 +30,7 @@ public class Log {
         this.bigController.getFrame().getContentPane().add(log);
     }
 
+    //Verif si les infos sont propres à un attribut de la classe Guest (QUERY)
     public void login(String email, String psw) {
         g.setMail(email);
         g.setPsw(psw);
@@ -45,10 +50,13 @@ public class Log {
         }
     }
 
+    //appel constructeur 2 pour le mot de passe oublié
     public void oublie(){
         setVisible(false);
         new Log(this.bigController, true);
     }
+
+    //Query mot de passe oublié : appel query Update si email, name et mdp correspondent à un attribut sinon pas d'update
     public void mp_oub(String name, String email, String psw, int tel){
         System.out.println(name);
         g.setMail(email);
@@ -68,6 +76,9 @@ public class Log {
     }
 
     public void film(){setFilm(new Film(this.bigController));}
+
+    //getters & setter
+    //
 
     public void setVisible(boolean visible){
         log.setVisible(visible);

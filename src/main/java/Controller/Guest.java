@@ -1,6 +1,9 @@
 package Controller;
 
 public class Guest {
+
+    //attributs
+    //
     private BigController bigController;
     private Menu menu;
     private Film film;
@@ -9,7 +12,7 @@ public class Guest {
     private Controller.Register register;
     private Cinema.Guest g;
 
-
+    //Constructeur
     public Guest(BigController bigController) {
         g= new Cinema.Guest();
         this.bigController=bigController;
@@ -18,6 +21,10 @@ public class Guest {
 
     }
 
+    //méthodes
+    //
+
+    //Créer classe register controler
     public void register(){
         setRegister(new Register(this.bigController));
     }

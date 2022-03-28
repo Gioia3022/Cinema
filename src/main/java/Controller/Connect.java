@@ -3,7 +3,8 @@ package Controller;
 import java.sql.*;
 import java.util.ArrayList;
 
-
+// CLASSE PERMETTANT LA CREATION DE TOUTES LES QUERY EVOQUE DANS LES AUTRES CLASSES
+//
 public class Connect {
     Connection conn;
     ResultSet rs;
@@ -11,7 +12,7 @@ public class Connect {
     Statement stmt;
     PreparedStatement pstmt = null;
 
-
+//test connection bdd
     public Connect(Connection c, Statement s) throws SQLException {
         this.conn=c;
         this.stmt=s;
@@ -21,14 +22,14 @@ public class Connect {
             System.out.println(rs.getString("AdminName"));
         }
     }
-
+//methode close connection avec la bdd
     public void closeCourseDataConnection() throws SQLException {
         conn.close();
     }
 
 
 
-    //Checks validity of mail
+    //connexion admin : si le mail et le mp n'est pas trouvé sur un même attribut -> check = false -> msg d'erreur
     public boolean SQLQueryAdmin(String user, String pass ) throws SQLException {
         boolean check;
         // language=<SQL>
@@ -44,6 +45,7 @@ public class Connect {
         return check;
     }
 
+    //Creation d'un attribut de la table admin dans la bdd avec le nom d'utilisateur, l'email, et le mdp
     public void SQLQueryAdminNewMP(String name, String mail, String MP) throws SQLException{
         // language=<SQL>
         String sql= "UPDATE admin SET AdminMP=? WHERE AdminMail =? AND AdminName=?;";
@@ -55,6 +57,7 @@ public class Connect {
         pstmt.executeUpdate();
     }
 
+    // verification que le guest exciste ou pas
     public boolean SQLQueryGuest(String user, String pass ) throws SQLException {
         boolean check;
         // language=<SQL>
@@ -69,6 +72,9 @@ public class Connect {
             check = false;
         return check;
     }
+
+    // modification du mot passe de l'utilisateur lorsqu'il a choisi de le modifier
+    //Update le mot de passe pour l'attribut de la table guest comportant le name, mail et tel inscrit envoyé en paramètre
     public void SQLQueryGuestNewMP(String name, String mail, String MP,int tel) throws SQLException{
         // language=<SQL>
         String sql= "UPDATE guest SET GuestMP=? WHERE GuestMail =? AND GuestName=? AND GuestTel=?;";
@@ -82,6 +88,7 @@ public class Connect {
         pstmt.executeUpdate();
     }
 
+    //Création d'un nouvel attribut dans la table Guest avec les valeurs inscrites en paramètre
     public void SQLQueryNewGuest(String name, String mail,String psw, int tel, int age, String benef)throws SQLException{
         // language=<SQL>
         String sql= "INSERT INTO guest (GuestName,GuestMP, GuestMail,GuestBenefice, GuestAge,GuestTel) VALUES (?,?,?,?,?,?)";
@@ -95,7 +102,7 @@ public class Connect {
         pstmt.executeUpdate();
     }
 
-    //Gives all film names from database
+    //Donne toutes la valeur FilmName de la table Film dans la bdd
     public ArrayList<String> SQLQueryFilmName(Cinema.Film film_model) throws SQLException {
         film_model.setNames(new ArrayList<>());
         // language=<SQL>
@@ -109,6 +116,8 @@ public class Connect {
         }
         return film_model.getNames();
     }
+
+    // A partir des FilmName, on donne les valeur associé
     public void SQLQueryInfoFilm(String name, Cinema.Film film_model)throws SQLException{
         // language=<SQL>
         String sql = "Select * from film where FilmName= '"+ name+ "';";

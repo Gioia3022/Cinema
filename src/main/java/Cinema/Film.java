@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Film {
-    String filmName, filmGenre, director;
-    Date filmRelease;
-    int duration;
-    String image;
-    ArrayList<Film> film;
-    ArrayList<String> names;
+    private String filmName, filmGenre, director;
+    private Date filmRelease;
+    private int duration;
+    private String image;
+    private ArrayList<Film> film;
+    private ArrayList<String> names;
 
     //Getter & setters attributs de la table MySql Film
     public String getImage() {

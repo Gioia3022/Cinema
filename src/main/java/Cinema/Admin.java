@@ -1,7 +1,7 @@
 package Cinema;
 
 public class Admin{
-    String name,mail, password;
+    private String name,mail, password;
 
 //Getter & setters attributs de la table MySql Admin
     public String getMail() {

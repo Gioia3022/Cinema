@@ -3,11 +3,15 @@ package Controller;
 import javax.swing.*;
 
 public class Menu {
+    //attributs
+    //
+
     private Controller.BigController bigController;
     private Controller.Guest guest_controller;
     private Admin admin_controller;
     private View.Menu menu;
 
+    //Constructeur
     public Menu(BigController bigController) {
         this.bigController=bigController;
         this.menu= new View.Menu(this,this.bigController.getFrame());
@@ -16,6 +20,8 @@ public class Menu {
         this.bigController.getFrame().setVisible(true);
 
     }
+
+
     public void guest() {
         setGuest_controller(new Guest(this.bigController));
     }
@@ -26,6 +32,7 @@ public class Menu {
         menu.setVisible(visible);
     }
 
+    //getters & setters
     public Guest getGuest_controller() {
         return guest_controller;
     }
