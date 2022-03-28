@@ -6,6 +6,7 @@ public class Session {
     Date SessionDate;
     Time FilmTime;
 
+    //Getter & setters attributs de la table MySql Session
     public Date getSessionDate() {
         return SessionDate;
     }

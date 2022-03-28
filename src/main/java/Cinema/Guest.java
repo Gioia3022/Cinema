@@ -4,6 +4,7 @@ public class Guest {
     String name, mail, psw, benef;
     int tel, age;
 
+    //Getter & setters attributs de la table MySql Guest
     public String getName() {
         return name;
     }

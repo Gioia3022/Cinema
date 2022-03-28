@@ -11,6 +11,7 @@ public class Film {
     ArrayList<Film> film;
     ArrayList<String> names;
 
+    //Getter & setters attributs de la table MySql Film
     public String getImage() {
         return image;
     }

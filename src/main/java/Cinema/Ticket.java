@@ -5,6 +5,7 @@ public class Ticket {
     int Price, NbrPlace;
     Date DateAchat;
 
+    //Getter & setters attributs de la table MySql Ticket
     public Date getDateAchat() {
         return DateAchat;
     }
