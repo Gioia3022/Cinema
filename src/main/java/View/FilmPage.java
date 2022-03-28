@@ -28,6 +28,7 @@ public class FilmPage extends JPanel {
         JPanel imageP= new JPanel(gbl);
         JPanel buttons = new JPanel(gbl);
         JPanel info= new JPanel(gbl);
+        JPanel seance= new JPanel(gbl);
 
         //Set layout for the content pane
         setLayout(new GridBagLayout());
@@ -71,6 +72,16 @@ public class FilmPage extends JPanel {
         gbc_3.anchor = GridBagConstraints.SOUTH;
         gbc_3.fill = GridBagConstraints.HORIZONTAL;
 
+        String[] fil= new String[filmPage.getSession().getDateArrayList().size()];
+
+        for(int i = 0; i<fil.length; i++){
+            fil[i]= String.valueOf(filmPage.getSession().getDateArrayList().get(i));
+        }
+
+        JComboBox list= new JComboBox(fil);
+        list.setBounds(50, 50,90,20);
+        list.setFont(f2);
+
         JLabel filmName= new JLabel(this.filmPage.getFilm().getFilmName());
         filmName.setFont(f1);
 
@@ -93,6 +104,9 @@ public class FilmPage extends JPanel {
         JLabel filmDirector= new JLabel("Realisateur: "+this.filmPage.getFilm().getDirector());
         filmDirector.setFont(f3);
 
+        JLabel choixSceance= new JLabel("Choisir un passage: ");
+        filmDirector.setFont(f3);
+
         JButton ticket = new JButton("Get ticket");
         ticket.setBackground(new Color(59,47,47));
         ticket.setForeground(new Color(239,223,187));
@@ -109,6 +123,7 @@ public class FilmPage extends JPanel {
         exit.setFont(f3);
 
         ticket.addActionListener(e0->{
+            this.filmPage.newTicket((String) list.getItemAt(list.getSelectedIndex()));
         });
         close.addActionListener(e2 -> {
             this.filmPage.film();
@@ -121,6 +136,7 @@ public class FilmPage extends JPanel {
         imageP.setBackground(new Color(239, 223, 187));
         info.setBackground(new Color(239, 223, 187));
         title.setBackground(new Color(239, 223, 187));
+        seance.setBackground(new Color(239, 223, 187));
 
         //Add buttons to JPanel
         title.add(filmName, gbc);
@@ -129,6 +145,7 @@ public class FilmPage extends JPanel {
         info.add(filmRelease,gbc);
         info.add(filmDirector,gbc);
         imageP.add(filmImage, gbc_1);
+        info.add(list,gbc);
         buttons.add(ticket,gbc_3);
         buttons.add(close,gbc_3);
         buttons.add(exit, gbc_3);
@@ -136,6 +153,7 @@ public class FilmPage extends JPanel {
         this.add(title,gbc);
         this.add(imageP,gbc_1);
         this.add(info,gbc_1);
+        //this.add(list,gbc_1);
         this.add(buttons,gbc_2);
     }
 }

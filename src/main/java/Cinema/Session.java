@@ -1,28 +1,25 @@
 package Cinema;
 
-import java.time.LocalTime;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Session {
-    private Date SessionDate;
-    LocalTime FilmTime;
-    //ArrayList<Date>
+    ArrayList<String> dateArrayList;
+    String date;
 
     //Getter & setters attributs de la table MySql Session
-    public Date getSessionDate() {
-        return SessionDate;
+    public ArrayList<String> getDateArrayList() {
+        return dateArrayList;
     }
 
-    public void setSessionDate(Date sessionDate) {
-        this.SessionDate = sessionDate;
+    public String getDate() {
+        return date;
     }
 
-    public LocalTime getFilmTime() {
-        return FilmTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public void setFilmTime(LocalTime filmTime) {
-        this.FilmTime = filmTime;
+    public void setDateArrayList(ArrayList<String> dateArrayList) {
+        this.dateArrayList = dateArrayList;
     }
-
 }

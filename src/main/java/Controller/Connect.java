@@ -151,6 +151,7 @@ public class Connect {
     }
     public void SQLSessionsDispo(String nameFilm, Session s) throws SQLException {
         int IDFilm=0;
+        s.setDateArrayList(new ArrayList<>());
 
         // language=<SQL>
         String sql ="Select FilmID from film where FilmName= '"+nameFilm+"';";
@@ -160,20 +161,24 @@ public class Connect {
             IDFilm=rs.getInt("FilmID");
         }
         // language=<SQL>
-        String sql_1 ="Select FilmTime from session where FilmID= "+ IDFilm+";";
+        String sql_1 ="Select SessionDate from session where FilmID= "+ IDFilm+";";
         pstmt = conn.prepareStatement(sql_1);
         rs = stmt.executeQuery(sql_1);
         while (rs != null && rs.next()) {
-            s.setFilmTime(rs.getTime("FilmTime").toLocalTime().minusHours(1));
+            s.setDate(rs.getString("SessionDate"));
+            s.getDateArrayList().add(s.getDate());
+            System.out.println(s.getDate());
+
         }
 
         // language=<SQL>
-        String sql_2 ="Select SessionDate from session where FilmID= "+ IDFilm+";";
+        /*String sql_2 ="Select SessionDate from session where FilmID= "+ IDFilm+";";
         pstmt = conn.prepareStatement(sql_2);
         rs = stmt.executeQuery(sql_2);
         while (rs != null && rs.next()) {
             s.setSessionDate(rs.getDate("SessionDate"));
-        }
+
+        }*/
     }
 
 }

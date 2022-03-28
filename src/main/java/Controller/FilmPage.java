@@ -31,6 +31,10 @@ public class FilmPage {
 
     }
 
+    public void newTicket(String session){
+
+    }
+
     //set visible le film si le booléen est true
     public void setVisible(boolean visible){
         filmPage.setVisible(visible);
