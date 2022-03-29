@@ -85,6 +85,15 @@ public class FilmPage extends JPanel {
         JLabel filmName= new JLabel(this.filmPage.getFilm().getFilmName());
         filmName.setFont(f1);
 
+        String[] nbrTicket = new String[this.filmPage.getUsable_seets()];
+        for(int i = 0; i<nbrTicket.length; i++){
+            nbrTicket[i]= String.valueOf(i+1);
+        }
+
+        JComboBox nT= new JComboBox(nbrTicket);
+        list.setBounds(50, 50,90,20);
+        list.setFont(f2);
+
         Image image = null;
         try {
             URL url= new URL(this.filmPage.getFilm().getImage());
@@ -104,8 +113,10 @@ public class FilmPage extends JPanel {
         JLabel filmDirector= new JLabel("Realisateur: "+this.filmPage.getFilm().getDirector());
         filmDirector.setFont(f3);
 
-        JLabel choixSceance= new JLabel("Choisir un passage: ");
+        JLabel choixSceance= new JLabel("Choisir un jour et horaire passage: ");
         filmDirector.setFont(f3);
+
+        JLabel choixNbrDePlaces= new JLabel("Choisir le nombre de places: ");
 
         JButton ticket = new JButton("Get ticket");
         ticket.setBackground(new Color(59,47,47));
@@ -123,7 +134,7 @@ public class FilmPage extends JPanel {
         exit.setFont(f3);
 
         ticket.addActionListener(e0->{
-            this.filmPage.newTicket((String) list.getItemAt(list.getSelectedIndex()));
+            this.filmPage.newTicket((String) list.getItemAt(list.getSelectedIndex()),(String) nT.getItemAt(nT.getSelectedIndex()));
         });
         close.addActionListener(e2 -> {
             this.filmPage.film();
@@ -145,7 +156,10 @@ public class FilmPage extends JPanel {
         info.add(filmRelease,gbc);
         info.add(filmDirector,gbc);
         imageP.add(filmImage, gbc_1);
+        info.add(choixSceance,gbc);
         info.add(list,gbc);
+        info.add(choixNbrDePlaces,gbc);
+        info.add(nT,gbc);
         buttons.add(ticket,gbc_3);
         buttons.add(close,gbc_3);
         buttons.add(exit, gbc_3);

@@ -35,8 +35,8 @@ public class Guest {
         setLog(new Controller.Log(this.bigController));
     }
     public void anonyme(){
-        g.setName("");
-        setFilm(new Film(this.bigController));
+        g.setName("Anonyme");
+        setFilm(new Film(this.bigController,g));
     }
 
     public void setVisible(boolean visible){

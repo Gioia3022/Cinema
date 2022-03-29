@@ -1,8 +1,8 @@
 package Cinema;
 
 public class Guest {
-    String name, mail, psw, benef;
-    private int tel, age;
+    String name, mail, psw, benef, tel;
+    private int age;
 
     //Getter & setters attributs de la table MySql Guest
     public String getName() {
@@ -37,11 +37,11 @@ public class Guest {
         this.benef = benef;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 

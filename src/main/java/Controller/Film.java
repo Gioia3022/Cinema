@@ -1,15 +1,20 @@
 package Controller;
 
+import Cinema.Guest;
+
 import java.sql.SQLException;
 
 public class Film {
     private BigController bigController;
+    private Guest guest;
     private Menu menu;
+    private Log log;
     private View.Film film_view;
     private Cinema.Film film;
     private FilmPage filmPage;
 
-    public Film(BigController co){
+    public Film(BigController co, Guest g){
+        this.guest=g;
         this.bigController=co;
         this.film= new Cinema.Film();
         try {
@@ -30,7 +35,7 @@ public class Film {
 
     }
     public void filmPage(){
-        setFilmPage(new FilmPage(this.bigController,film));
+        setFilmPage(new FilmPage(this.bigController,film, guest));
     }
 
     public Cinema.Film getFilm() {
@@ -44,7 +49,6 @@ public class Film {
     public void setFilmPage(FilmPage filmPage) {
         this.filmPage = filmPage;
     }
-
 
     public void menu() {
         setMenu(new Menu(this.bigController));

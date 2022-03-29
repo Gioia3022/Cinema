@@ -113,7 +113,7 @@ public class Log extends JPanel {
 
         log_oub.addActionListener(e4->{
             System.out.println(name);
-            this.log_c.mp_oub(name.getText(),email.getText(),psw_oublie.getText(),Integer.parseInt(tel.getText()));
+            this.log_c.mp_oub(name.getText(),email.getText(),psw_oublie.getText(),tel.getText());
             System.out.println(name);
             this.log_c.guest();
             this.log_c.getGuest().setVisible(true);

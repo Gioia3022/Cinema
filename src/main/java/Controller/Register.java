@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 public class Register {
     //attributs
-    //
 
     private BigController bigController;
     private Guest guest;
@@ -24,7 +23,7 @@ public class Register {
     //
 
     //Envoie dans la query les informations nécessaire pour créer un attribut de guest
-    public void register1(String name, String mail, String psw, int number, int age,String benef){
+    public void register1(String name, String mail, String psw, String number, int age, String benef){
         g.setName(name);
         g.setMail(mail);
         g.setPsw(psw);
@@ -50,7 +49,7 @@ public class Register {
     }
 
 
-    public void film(){setFilm(new Film(this.bigController));}
+    public void film(){setFilm(new Film(this.bigController,g));}
 
     public void guest() {
         setGuest(new Guest(this.bigController));

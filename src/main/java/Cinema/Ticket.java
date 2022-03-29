@@ -2,7 +2,8 @@ package Cinema;
 import java.util.*;
 
 public class Ticket {
-    private int Price, NbrPlace;
+    private int NbrPlace;
+    private float Price;
     private Date DateAchat;
 
     //Getter & setters attributs de la table MySql Ticket
@@ -14,11 +15,11 @@ public class Ticket {
         this.DateAchat = dateAchat;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return Price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.Price = price;
     }
 

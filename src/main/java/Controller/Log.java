@@ -59,7 +59,7 @@ public class Log {
     }
 
     //Query mot de passe oublié : appel query Update si email, name et mdp correspondent à un attribut sinon pas d'update
-    public void mp_oub(String name, String email, String psw, int tel){
+    public void mp_oub(String name, String email, String psw, String tel){
         System.out.println(name);
         g.setMail(email);
         g.setPsw(psw);
@@ -77,7 +77,7 @@ public class Log {
         setGuest(new Guest(this.bigController));
     }
 
-    public void film(){setFilm(new Film(this.bigController));}
+    public void film(){setFilm(new Film(this.bigController,g));}
 
     //getters & setter
     //
@@ -106,5 +106,13 @@ public class Log {
 
     public void setMp(boolean mp_oublie) {
         this.mp_oublie = mp_oublie;
+    }
+
+    public Cinema.Guest getG() {
+        return g;
+    }
+
+    public void setG(Cinema.Guest g) {
+        this.g = g;
     }
 }

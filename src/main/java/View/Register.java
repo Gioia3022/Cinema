@@ -4,11 +4,12 @@ package View;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Register extends JPanel{
     private Controller.Register register;
-    String selectedItem;
     JFrame frame;
     public Register(Controller.Register ca, JFrame f) {
         this.register=ca;
@@ -27,25 +28,61 @@ public class Register extends JPanel{
         name.setForeground(new Color(59,47,47));
         name.setFont(f2);
 
+        name.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                name.setText("");
+            }
+        });
+
         JTextField email= new JTextField("enter your email", 30);
         email.setForeground(new Color(59,47,47));
         email.setFont(f2);
 
-        JTextField psw= new JTextField("enter your password", 30);
+        email.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                email.setText("");
+            }
+        });
+
+        JLabel p= new JLabel("Enter your password");
+        JPasswordField psw= new JPasswordField(30);
         psw.setForeground(new Color(59,47,47));
         psw.setFont(f2);
+
+        psw.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                psw.setText("");
+            }
+        });
 
         JTextField number= new JTextField("enter your number", 30);
         number.setForeground(new Color(59,47,47));
         number.setFont(f2);
 
+        number.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                number.setText("");
+            }
+        });
+
         JTextField age= new JTextField("enter your age", 30);
         age.setForeground(new Color(59,47,47));
         age.setFont(f2);
 
+        age.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                age.setText("");
+            }
+        });
+
         JLabel l_b= new JLabel("Select reduction: ");
         l_b.setFont(f2);
-        String[] benef ={"Student", "Elder", "Big Family", "Cinema Card", "Under 14", "Under 5"};
+        String[] benef ={"None", "Under 5", "Under 14","Student", "Big Family", "Elder", "Cinema Card"};
         JComboBox list= new JComboBox(benef);
         list.setBounds(50, 50,90,20);
         list.setFont(f2);
@@ -92,7 +129,7 @@ public class Register extends JPanel{
         //Add actionListener for each button
 
         access.addActionListener(e0->{
-            this.register.register1(name.getText(),email.getText(),psw.getText(),Integer.parseInt(number.getText()),Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
+            this.register.register1(name.getText(),email.getText(), String.valueOf(psw.getPassword()),number.getText(),Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
         });
 
         close.addActionListener(e1 -> {
@@ -112,6 +149,7 @@ public class Register extends JPanel{
         buttons.add(b, gbc);
         buttons.add(name, gbc);
         buttons.add(email, gbc);
+        buttons.add(p,gbc);
         buttons.add(psw, gbc);
         buttons.add(number,gbc);
         buttons.add(age,gbc);
