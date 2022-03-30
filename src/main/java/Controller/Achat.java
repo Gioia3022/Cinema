@@ -2,8 +2,7 @@ package Controller;
 
 import Cinema.Film;
 import Cinema.Guest;
-import Cinema.Session;
-import Cinema.Ticket;
+import Cinema.*;
 
 import java.sql.SQLException;
 
@@ -36,12 +35,13 @@ public class Achat {
             e.printStackTrace();
         }
         achat.mes1();
-        System.exit(0);
+        String mes="Bonjouur,\nVoici votre ticket: \nMail achat: "+guest.getMail()+"\nFilm: "+film.getFilmName()+"\nSeance du: "+session.getDate()+"\nNombre de places: "+ticket.getNbrPlace()+"\nPrice: "+ticket.getPrice();
+        Mail.send("cinemaleshalles5@gmail.com","CinemaH1!",guest.getMail(),"Ticket Cinema",mes);
         }
         else {
             achat.mes3();
-            System.exit(0);
         }
+        System.exit(0);
     }
     public void menu(){
         setMenu(new Controller.Menu(this.bigController));
