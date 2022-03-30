@@ -3,6 +3,8 @@ package View;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Achat extends JPanel{
     private Controller.Achat achat;
@@ -57,8 +59,8 @@ public class Achat extends JPanel{
         carte_bancaire.setHorizontalAlignment(JTextField.CENTER);
 
         JLabel date= new JLabel("Date d'echeance:");
-        JLabel d= new JLabel("format: mm-yy");
-        JTextField date_carte= new JTextField(5);
+        JLabel d= new JLabel("mm-yyyy");
+        JTextField date_carte= new JTextField(7);
         date_carte.setForeground(new Color(59,47,47));
         date_carte.setFont(f2);
         date_carte.setHorizontalAlignment(JTextField.CENTER);
@@ -87,7 +89,7 @@ public class Achat extends JPanel{
         exit.setFont(f3);
 
         achat.addActionListener(e0->{
-            if(carte_bancaire.getText().length()==16 && date_carte.getText().contains("-") && code_secu.getText().length()==3)
+            if(carte_bancaire.getText().length()==16 && isValidDate(date_carte.getText()) && code_secu.getText().length()==3)
             {
                 this.achat.ticket();
             }
@@ -123,6 +125,16 @@ public class Achat extends JPanel{
 
         this.add(info,gbc);
         this.add(buttons,gbc);
+    }
+    public static boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-yyyy");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
     }
 
     public void mes1(){

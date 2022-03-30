@@ -24,7 +24,7 @@ public class Register extends JPanel{
         Label b= new Label("__________________");
         b.setFont(f1);
 
-        JTextField name= new JTextField("enter your name", 30);
+        JTextField name= new JTextField("Enter your name", 30);
         name.setForeground(new Color(59,47,47));
         name.setFont(f2);
 
@@ -35,7 +35,7 @@ public class Register extends JPanel{
             }
         });
 
-        JTextField email= new JTextField("enter your email", 30);
+        JTextField email= new JTextField("Enter your email", 30);
         email.setForeground(new Color(59,47,47));
         email.setFont(f2);
 
@@ -58,7 +58,7 @@ public class Register extends JPanel{
             }
         });
 
-        JTextField number= new JTextField("enter your number", 30);
+        JTextField number= new JTextField("Enter your number", 30);
         number.setForeground(new Color(59,47,47));
         number.setFont(f2);
 
@@ -69,7 +69,7 @@ public class Register extends JPanel{
             }
         });
 
-        JTextField age= new JTextField("enter your age", 30);
+        JTextField age= new JTextField("Enter your age", 30);
         age.setForeground(new Color(59,47,47));
         age.setFont(f2);
 
@@ -129,7 +129,13 @@ public class Register extends JPanel{
         //Add actionListener for each button
 
         access.addActionListener(e0->{
-            this.register.register1(name.getText(),email.getText(), String.valueOf(psw.getPassword()),number.getText(),Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
+            if(email.getText().contains("@")&&email.getText().contains(".")) {
+                this.register.register1(name.getText(), email.getText(), String.valueOf(psw.getPassword()), number.getText(), Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
+            }
+            else {
+                this.register.setVisible(true);
+                mes3();
+            }
         });
 
         close.addActionListener(e1 -> {
@@ -166,5 +172,8 @@ public class Register extends JPanel{
     }
     public void mes2(){
         JOptionPane.showMessageDialog(this, "L'utilisateur existe deja");
+    }
+    public void mes3(){
+        JOptionPane.showMessageDialog(this, "Mail incorect");
     }
 }
