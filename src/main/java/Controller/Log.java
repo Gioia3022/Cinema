@@ -11,12 +11,12 @@ public class Log {
     private Film film;
     private View.Log log;
     private boolean mp_oublie;
-    private Cinema.Guest g;
+    private Model.Guest g;
 
     //Constructeur 1
     public Log(BigController co){
         this.setMp(false);
-        g= new Cinema.Guest();
+        g= new Model.Guest();
         this.bigController=co;
         log= new View.Log(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(log);
@@ -24,7 +24,7 @@ public class Log {
     //Constructeur 2 - Mot de passe oublié -> affichage frame mp oublié pour guest
     public Log(BigController co, boolean mp){
         this.setMp(mp);
-        g= new Cinema.Guest();
+        g= new Model.Guest();
         this.bigController=co;
         log= new View.Log(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(log);
@@ -34,7 +34,6 @@ public class Log {
     public void login(String email, String psw) {
         g.setMail(email);
         g.setPsw(psw);
-        System.out.println(g.getMail() + g.getPsw());
         try {
             this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw());
             if (this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw())) {
@@ -108,11 +107,11 @@ public class Log {
         this.mp_oublie = mp_oublie;
     }
 
-    public Cinema.Guest getG() {
+    public Model.Guest getG() {
         return g;
     }
 
-    public void setG(Cinema.Guest g) {
+    public void setG(Model.Guest g) {
         this.g = g;
     }
 }

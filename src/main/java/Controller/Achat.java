@@ -1,8 +1,8 @@
 package Controller;
 
-import Cinema.Film;
-import Cinema.Guest;
-import Cinema.*;
+import Model.Film;
+import Model.Guest;
+import Model.*;
 
 import java.sql.SQLException;
 
@@ -11,7 +11,7 @@ public class Achat {
     private BigController bigController;
     private View.Achat achat;
     private Menu menu;
-    private Cinema.Film film;
+    private Model.Film film;
     private Session session;
     private Ticket ticket;
     private Guest guest;

@@ -1,9 +1,9 @@
 package Controller;
 
 
-import Cinema.Guest;
-import Cinema.Session;
-import Cinema.Ticket;
+import Model.Guest;
+import Model.Session;
+import Model.Ticket;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -122,7 +122,7 @@ public class Connect {
     }
 
     //Donne toutes la valeur FilmName de la table Film dans la bdd
-    public ArrayList<String> SQLQueryFilmName(Cinema.Film film_model) throws SQLException {
+    public ArrayList<String> SQLQueryFilmName(Model.Film film_model) throws SQLException {
         film_model.setNames(new ArrayList<>());
         // language=<SQL>
         String sql = "Select FilmName from film";
@@ -137,7 +137,7 @@ public class Connect {
     }
 
     // A partir des FilmName, on donne les valeur associé
-    public void SQLQueryInfoFilm(String name, Cinema.Film film_model)throws SQLException{
+    public void SQLQueryInfoFilm(String name, Model.Film film_model)throws SQLException{
         // language=<SQL>
         String sql = "Select * from film where FilmName= '"+ name+ "';";
         pstmt = conn.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class Connect {
         }
     }
 
-    public void SQLFormationTicket(Cinema.Film film,Session session, Ticket ticket, Guest guest) throws SQLException {
+    public void SQLFormationTicket(Model.Film film,Session session, Ticket ticket, Guest guest) throws SQLException {
         int GuestID = 0, FimID=0, SessionID=0;
         // language=<SQL>
         String sql1="SELECT GuestID from guest WHERE GuestMail='"+guest.getMail()+"';";

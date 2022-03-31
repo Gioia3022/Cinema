@@ -1,6 +1,6 @@
 package Controller;
 
-import Cinema.Guest;
+import Model.Guest;
 
 import java.sql.SQLException;
 
@@ -10,13 +10,13 @@ public class Film {
     private Menu menu;
     private Log log;
     private View.Film film_view;
-    private Cinema.Film film;
+    private Model.Film film;
     private FilmPage filmPage;
 
     public Film(BigController co, Guest g){
         this.guest=g;
         this.bigController=co;
-        this.film= new Cinema.Film();
+        this.film= new Model.Film();
         try {
             this.film.setNames(this.bigController.getC().SQLQueryFilmName(this.film));
         } catch (SQLException e) {
@@ -38,7 +38,7 @@ public class Film {
         setFilmPage(new FilmPage(this.bigController,film, guest));
     }
 
-    public Cinema.Film getFilm() {
+    public Model.Film getFilm() {
         return film;
     }
 

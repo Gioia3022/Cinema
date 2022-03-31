@@ -9,11 +9,11 @@ public class Register {
     private Guest guest;
     private Film film;
     private View.Register register;
-    private Cinema.Guest g;
+    private Model.Guest g;
 
     //Constructeur
     public Register(BigController co){
-        g= new Cinema.Guest();
+        g= new Model.Guest();
         this.bigController=co;
         register= new View.Register(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(register);

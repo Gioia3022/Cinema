@@ -10,11 +10,11 @@ public class Guest {
     private View.Guest guest;
     private Controller.Log log;
     private Controller.Register register;
-    private Cinema.Guest g;
+    private Model.Guest g;
 
     //Constructeur
     public Guest(BigController bigController) {
-        g= new Cinema.Guest();
+        g= new Model.Guest();
         this.bigController=bigController;
         guest= new View.Guest(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(guest);

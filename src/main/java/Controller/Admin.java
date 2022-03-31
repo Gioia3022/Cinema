@@ -7,20 +7,20 @@ public class Admin {
     private Menu menu; //Objet menu
     private View.Admin admin; //Objet admin partie affichage
     private boolean mp_oublie;
-    private Cinema.Admin a; //lien modèle admin
+    private Model.Admin a; //lien modèle admin
 
     //constructeur
     public Admin(BigController co){ // Constructeur 1
         this.setMp_oublie(false);
         this.bigController=co; //connexion Query sql
-        a= new Cinema.Admin();
+        a= new Model.Admin();
         admin= new View.Admin(this,this.bigController.getFrame());  //
         this.bigController.getFrame().getContentPane().add(admin);     //Frame de la page admin
     }
     public Admin(BigController co, boolean mp){ // Constructeur 2 dans le cas où mot de passe oublié
         this.setMp_oublie(mp); //Affichage mot de passe oublié
         this.bigController=co;
-        a= new Cinema.Admin();
+        a= new Model.Admin();
         admin= new View.Admin(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(admin);
     }
@@ -35,11 +35,9 @@ public class Admin {
             this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword()); //get Connexion, query mail et pswrd
             if (this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword())) { //si true
                 admin.mes1();
-                System.out.println("Vous etes con!");
                 System.exit(0);
             } else { //si false
                 admin.mes2();
-                System.out.println("pas bon retry");
                 setVisible(true);
             }
         } catch (

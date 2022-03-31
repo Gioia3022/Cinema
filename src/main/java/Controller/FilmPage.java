@@ -1,15 +1,15 @@
 package Controller;
 
-import Cinema.Guest;
-import Cinema.Session;
-import Cinema.Ticket;
+import Model.Guest;
+import Model.Session;
+import Model.Ticket;
 
 import java.sql.SQLException;
 
 public class FilmPage {
     //attributs
     //
-    private Cinema.Film film;
+    private Model.Film film;
     private Guest guest;
     private View.FilmPage filmPage;
     private Controller.Film film_controller;
@@ -23,7 +23,7 @@ public class FilmPage {
     //
 
     //constructeur - Création de l'affichage Film page appelé dans la classe Film
-    public FilmPage(BigController bigController, Cinema.Film f, Guest g) {
+    public FilmPage(BigController bigController, Model.Film f, Guest g) {
         this.film=f;
         this.guest=g;
         session=new Session();
@@ -85,13 +85,13 @@ public class FilmPage {
     }
 
     //getters & setters
-    public Cinema.Session getSession() {
+    public Model.Session getSession() {
         return session;
     }
-    public Cinema.Ticket getTicket() {
+    public Model.Ticket getTicket() {
         return ticket;
     }
-    public Cinema.Film getFilm() {
+    public Model.Film getFilm() {
         return film;
     }
 
