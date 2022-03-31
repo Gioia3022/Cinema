@@ -146,9 +146,7 @@ public class Log extends JPanel {
         });
 
         log_oub.addActionListener(e4->{
-            System.out.println(name);
             this.log_c.mp_oub(name.getText(),email.getText(), String.valueOf(psw_oublie.getPassword()),tel.getText());
-            System.out.println(name);
             this.log_c.guest();
             this.log_c.getGuest().setVisible(true);
             this.log_c.setVisible(false);

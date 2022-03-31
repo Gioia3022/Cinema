@@ -25,8 +25,11 @@ public class Achat extends JPanel{
         JPanel buttons = new JPanel(gbl);
 
         setLayout(new GridBagLayout());
+        if (this.achat.isaBoolean())
+            setBorder(new EmptyBorder(150, 10, 10, 10));
+        else
+            setBorder(new EmptyBorder(0, 10, 10, 10));
 
-        setBorder(new EmptyBorder(150, 10, 10, 10));
 
         //Set color of background
         this.setBackground(new Color(239,223,187));
@@ -72,6 +75,16 @@ public class Achat extends JPanel{
         code_secu.setFont(f2);
         code_secu.setHorizontalAlignment(JTextField.CENTER);
 
+        JLabel ticket= new JLabel("Voici votre ticket:");
+        ticket.setFont(f3);
+        JLabel film= new JLabel("Film:"+this.achat.getFilm().getFilmName());
+        film.setFont(f3);
+        JLabel nSeance= new JLabel("Seance du: "+ this.achat.getSession().getDate());
+        nSeance.setFont(f3);
+        JLabel places= new JLabel("Nombre de places: "+ this.achat.getTicket().getNbrPlace());
+        places.setFont(f3);
+        JLabel price= new JLabel("Price: "+ this.achat.getTicket().getPrice());
+        price.setFont(f3);
 
         JButton achat = new JButton("Achat");
         achat.setBackground(new Color(59,47,47));
@@ -110,22 +123,35 @@ public class Achat extends JPanel{
         buttons.setBackground(new Color(239, 223, 187));
         info.setBackground(new Color(239, 223, 187));
 
-        info.add(a, gbc);
-        info.add(b, gbc);
-        info.add(cB, gbc);
-        info.add(carte_bancaire, gbc);
-        info.add(date, gbc);
-        info.add(d, gbc);
-        info.add(date_carte, gbc);
-        info.add(code, gbc);
-        info.add(code_secu, gbc);
-        info.add(achat, gbc);
-        buttons.add(close, gbc_1);
-        buttons.add(exit, gbc_2);
+        if(this.achat.isaBoolean()) {
+            info.add(a, gbc);
+            info.add(b, gbc);
+            info.add(cB, gbc);
+            info.add(carte_bancaire, gbc);
+            info.add(date, gbc);
+            info.add(d, gbc);
+            info.add(date_carte, gbc);
+            info.add(code, gbc);
+            info.add(code_secu, gbc);
+            info.add(achat, gbc);
+            buttons.add(close, gbc_1);
+            buttons.add(exit, gbc_2);
 
-        this.add(info,gbc);
-        this.add(buttons,gbc);
+            this.add(info, gbc);
+            this.add(buttons, gbc);
+        }
+        else {
+            buttons.add(ticket,gbc);
+            buttons.add(film,gbc);
+            buttons.add(nSeance,gbc);
+            buttons.add(places,gbc);
+            buttons.add(price,gbc);
+            buttons.add(b, gbc);
+            buttons.add(exit, gbc);
+            this.add(buttons, gbc);
+        }
     }
+
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-yyyy");
         dateFormat.setLenient(false);

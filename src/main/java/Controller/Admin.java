@@ -8,6 +8,7 @@ public class Admin {
     private View.Admin admin; //Objet admin partie affichage
     private boolean mp_oublie;
     private Model.Admin a; //lien modèle admin
+    private AdminMenu adminMenu;
 
     //constructeur
     public Admin(BigController co){ // Constructeur 1
@@ -29,13 +30,14 @@ public class Admin {
     public void login(String email, String psw) { //
         a.setMail(email);
         a.setPassword(psw);
-        System.out.println(a.getMail() + a.getPassword());
 //LE SQLQueryAdmin est un boolean qui est true sur la query est respecté (voir connect)
         try {
             this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword()); //get Connexion, query mail et pswrd
             if (this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword())) { //si true
                 admin.mes1();
-                System.exit(0);
+                AM();
+                getAdminMenu().setVisible(true);
+                setVisible(false);
             } else { //si false
                 admin.mes2();
                 setVisible(true);
@@ -52,7 +54,6 @@ public class Admin {
     }
 
     public void mp_oublie(String name, String email, String psw){ //méthode mot de passe oublié
-        System.out.println(name);
         a.setMail(email);
         a.setPassword(psw);
         a.setName(name);
@@ -67,7 +68,7 @@ public class Admin {
     public void menu() {
         setMenu(new Menu(this.bigController));
     } //retour affichage menu (back)
-
+    public void AM(){setAdminMenu(new AdminMenu(this.bigController));}
     //getter setters attribut
     public void setVisible(boolean visible){
         admin.setVisible(visible);
@@ -85,5 +86,13 @@ public class Admin {
 
     public void setMp_oublie(boolean mp_oublie) {
         this.mp_oublie = mp_oublie;
+    }
+
+    public AdminMenu getAdminMenu() {
+        return adminMenu;
+    }
+
+    public void setAdminMenu(AdminMenu adminMenu) {
+        this.adminMenu = adminMenu;
     }
 }

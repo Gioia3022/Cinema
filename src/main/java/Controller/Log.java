@@ -59,7 +59,6 @@ public class Log {
 
     //Query mot de passe oublié : appel query Update si email, name et mdp correspondent à un attribut sinon pas d'update
     public void mp_oub(String name, String email, String psw, String tel){
-        System.out.println(name);
         g.setMail(email);
         g.setPsw(psw);
         g.setName(name);

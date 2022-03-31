@@ -63,7 +63,6 @@ public class FilmPage {
         this.session.setDate(session);
         if(this.guest.getMail()!=null){
         try {
-            System.out.println(this.guest.getMail());
             this.bigController.getC().SQLrecupInfoGuest(this.guest);
             price=this.bigController.getC().SQLQueryPrice();
             remise=this.bigController.getC().SQLQueryBenefice(this.guest.getBenef());

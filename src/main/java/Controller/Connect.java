@@ -25,7 +25,6 @@ public class Connect {
         // language=<SQL>
         rs=stmt.executeQuery("SELECT * FROM admin");
         while (rs.next()){
-            System.out.println(rs.getString("AdminName"));
         }
     }
 //methode close connection avec la bdd
@@ -170,7 +169,6 @@ public class Connect {
         while (rs != null && rs.next()) {
             s.setDate(rs.getString("SessionDate"));
             s.getDateArrayList().add(s.getDate());
-            System.out.println(s.getDate());
 
         }
     }
@@ -261,8 +259,6 @@ public class Connect {
         while (rs.next()) {
             seets=rs.getInt("RoomNbrSeats");
         }
-        System.out.println(seets);
-
         return seets;
     }
 
@@ -281,6 +277,43 @@ public class Connect {
         // language=<SQL>
         String sql= "UPDATE session SET NbrBookedSeets="+seets+" WHERE SessionDate ='"+s.getDate()+"';";
         pstmt = conn.prepareStatement(sql);
+        pstmt.executeUpdate();
+    }
+
+    public void SQLQueryDeleteFilm(String name) throws SQLException {
+        // language=<SQL>
+        int ID=0;
+        String sql="Select FilmID FROM film WHERE FilmName='"+name+"';";
+        pstmt=conn.prepareStatement(sql);
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            ID=rs.getInt("FilmID");
+        }
+        // language=<SQL>
+        String sql1="delete from session where FilmID="+ID+"; ";
+        System.out.println(sql1);
+        pstmt=conn.prepareStatement(sql1);
+        pstmt.executeUpdate(sql1);
+        sql1="delete from ticket where FilmID="+ID+"; ";
+        System.out.println(sql1);
+        pstmt=conn.prepareStatement(sql1);
+        pstmt.executeUpdate(sql1);
+        sql1="delete from film where FilmID="+ID+"; ";
+        System.out.println(sql1);
+        pstmt=conn.prepareStatement(sql1);
+        pstmt.executeUpdate(sql1);
+    }
+
+    public void SQLQueryAddFilm(String name, String gender, int length, Date date, String director, String url) throws SQLException {
+        // language=<SQL>
+        String sql= "INSERT INTO film (FilmName, FilmGenre, FilmLength, FilmRelease, Director,FilmImage) VALUES (?,?,?,?,?,?)";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,name);
+        pstmt.setString(2,gender);
+        pstmt.setInt(3,length);
+        pstmt.setDate(4,date);
+        pstmt.setString(5,director);
+        pstmt.setString(6,url);
         pstmt.executeUpdate();
     }
 
