@@ -32,8 +32,6 @@ public class Connect {
         conn.close();
     }
 
-
-
     //connexion admin : si le mail et le mp n'est pas trouvé sur un même attribut -> check = false -> msg d'erreur
     public boolean SQLQueryAdmin(String user, String pass ) throws SQLException {
         boolean check;
@@ -315,6 +313,74 @@ public class Connect {
         pstmt.setString(5,director);
         pstmt.setString(6,url);
         pstmt.executeUpdate();
+    }
+
+    public void SQLQueryAllSeances(Session session) throws SQLException {
+        session.setDateArrayList(new ArrayList<>());
+        // language=<SQL>
+        String sql= "SELECT SessionDate from session";
+        pstmt=conn.prepareStatement(sql);
+        rs = stmt.executeQuery(sql);
+
+        while (rs != null && rs.next()) {
+            session.setDate(rs.getString("SessionDate"));
+            session.getDateArrayList().add(session.getDate());
+        }
+    }
+
+    public void SQLQueryDeleteSeance(String date) throws SQLException {
+        // language=<SQL>
+        int ID=0;
+        String sql="Select SessionID FROM session WHERE SessionDate='"+date+"';";
+        pstmt=conn.prepareStatement(sql);
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            ID=rs.getInt("SessionID");
+        }
+        sql="delete from ticket where SessionID="+ID+"; ";
+        System.out.println(sql);
+        pstmt=conn.prepareStatement(sql);
+        pstmt.executeUpdate(sql);
+        sql="delete from session where SessionID="+ID+"; ";
+        System.out.println(sql);
+        pstmt=conn.prepareStatement(sql);
+        pstmt.executeUpdate(sql);
+    }
+
+    public void SQLQueryAddSeance(String name, int room, String date) throws SQLException {
+        int ID=0;
+        // language=<SQL>
+        String sql= "SELECT FilmID from film WHERE FilmName='"+name+"';";
+        pstmt=conn.prepareStatement(sql);
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            ID=rs.getInt("FilmID");
+        }
+        sql= "INSERT INTO session (FilmID, RoomID, SessionDate, NbrBookedSeets) VALUES (?,?,?,0)";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1,ID);
+        pstmt.setInt(2,room);
+        pstmt.setString(3,date);
+        pstmt.executeUpdate();
+    }
+
+    public void SQLQueryUpdateSeance(String date) throws SQLException {
+        // language=<SQL>
+        int ID=0;
+        String sql="Select SessionID FROM session WHERE SessionDate='"+date+"';";
+        pstmt=conn.prepareStatement(sql);
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            ID=rs.getInt("SessionID");
+        }
+        sql="UPDATE from ticket where SessionID="+ID+"; ";
+        System.out.println(sql);
+        pstmt=conn.prepareStatement(sql);
+        pstmt.executeUpdate(sql);
+        sql="delete from session where SessionID="+ID+"; ";
+        System.out.println(sql);
+        pstmt=conn.prepareStatement(sql);
+        pstmt.executeUpdate(sql);
     }
 
 }
