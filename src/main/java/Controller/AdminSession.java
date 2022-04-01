@@ -9,7 +9,10 @@ public class AdminSession {
     private View.AdminSession adminSession; //Objet admin partie affichage
     private AdminMenu adminMenu;
     private Session session;
-    public AdminSession(BigController bigController) {this.bigController=bigController; //connexion Query sql
+    private boolean film;
+
+    public AdminSession(BigController bigController) {
+        this.bigController=bigController; //connexion Query sql
         this.session=new Session();
         try {
             this.bigController.getC().SQLQueryAllSeances(this.session);
@@ -26,6 +29,9 @@ public class AdminSession {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        menu();
+        setVisible(false);
+        getAdminMenu().setVisible(true);
     }
 
     public void modifier(String date){
@@ -39,6 +45,9 @@ public class AdminSession {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        menu();
+        setVisible(false);
+        getAdminMenu().setVisible(true);
     }
 
     public void setVisible(boolean visible){

@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Model.Benefice;
 import Model.Guest;
 import Model.Session;
 import Model.Ticket;
@@ -229,6 +230,35 @@ public class Connect {
         return price;
     }
 
+    public void SQLQueryAllBenefice(Benefice benefice) throws SQLException {
+        benefice.setNames(new ArrayList<>());
+        benefice.setDiscounts(new ArrayList<>());
+        // language=<SQL>
+        String sql= "SELECT NomBenef from benefice";
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery(sql);
+        while (rs != null && rs.next()) {
+            benefice.setName(rs.getString("NomBenef"));
+            benefice.getNames().add(benefice.getName());
+        }
+        sql= "SELECT Discount from benefice";
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery(sql);
+        while (rs != null && rs.next()) {
+            benefice.setDiscount(rs.getFloat("Discount"));
+            benefice.getDiscounts().add(benefice.getDiscount());
+        }
+    }
+
+    public void SQLQueryAddBenefice(String Name, float benef) throws SQLException {
+        // language=<SQL>
+        String sql="INSERT INTO benefice (NomBenef, Discount) VALUES (?,?)";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,Name);
+        pstmt.setFloat(2,benef);
+        pstmt.executeUpdate();
+    }
+
     public float SQLQueryBenefice(String name) throws SQLException {
         float discount = 1;
         // language=<SQL>
@@ -239,6 +269,27 @@ public class Connect {
             discount=rs.getFloat("Discount");
         }
         return discount;
+    }
+
+    public void SQLQueryDeleteBenefice(String name) throws SQLException {
+        // language=<SQL>
+        String sql="delete from benefice where NomBenef='"+name+"'; ";
+
+        pstmt=conn.prepareStatement(sql);
+        pstmt.executeUpdate(sql);
+
+        sql= "UPDATE guest SET GuestBenefice=? WHERE GuestBenefice ='"+name+"';";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,"");
+        pstmt.executeUpdate();
+    }
+
+    public void SQLQueryModifBenef(float remise, String name) throws SQLException {
+        // language=<SQL>
+        String sql= "UPDATE benefice SET Discount=? WHERE NomBenef ='"+name+"';";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setFloat(1,remise);
+        pstmt.executeUpdate();
     }
 
     public int SQLQueryRoom(Session session) throws SQLException {
@@ -289,15 +340,12 @@ public class Connect {
         }
         // language=<SQL>
         String sql1="delete from session where FilmID="+ID+"; ";
-        System.out.println(sql1);
         pstmt=conn.prepareStatement(sql1);
         pstmt.executeUpdate(sql1);
         sql1="delete from ticket where FilmID="+ID+"; ";
-        System.out.println(sql1);
         pstmt=conn.prepareStatement(sql1);
         pstmt.executeUpdate(sql1);
         sql1="delete from film where FilmID="+ID+"; ";
-        System.out.println(sql1);
         pstmt=conn.prepareStatement(sql1);
         pstmt.executeUpdate(sql1);
     }
@@ -338,11 +386,9 @@ public class Connect {
             ID=rs.getInt("SessionID");
         }
         sql="delete from ticket where SessionID="+ID+"; ";
-        System.out.println(sql);
         pstmt=conn.prepareStatement(sql);
         pstmt.executeUpdate(sql);
         sql="delete from session where SessionID="+ID+"; ";
-        System.out.println(sql);
         pstmt=conn.prepareStatement(sql);
         pstmt.executeUpdate(sql);
     }
@@ -374,11 +420,9 @@ public class Connect {
             ID=rs.getInt("SessionID");
         }
         sql="UPDATE from ticket where SessionID="+ID+"; ";
-        System.out.println(sql);
         pstmt=conn.prepareStatement(sql);
         pstmt.executeUpdate(sql);
         sql="delete from session where SessionID="+ID+"; ";
-        System.out.println(sql);
         pstmt=conn.prepareStatement(sql);
         pstmt.executeUpdate(sql);
     }
