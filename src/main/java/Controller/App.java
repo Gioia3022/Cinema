@@ -10,7 +10,7 @@ public class App {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        /**QRCODE generator*/
+
 /*
         QRCode qRcode=new QRCode();
         //data that we want to store in the QR code

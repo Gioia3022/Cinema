@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class AdminSession extends JPanel{
     private JFrame frame;
@@ -25,7 +27,7 @@ public class AdminSession extends JPanel{
         //Set layout for the content pane
         setLayout(new GridBagLayout());
 
-        setBorder(new EmptyBorder(100, 10, 10, 10));
+        setBorder(new EmptyBorder(200, 10, 10, 10));
 
         //Set color of background
         this.setBackground(new Color(239, 223, 187));
@@ -42,7 +44,12 @@ public class AdminSession extends JPanel{
         gbc.anchor = GridBagConstraints.NORTHEAST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel delete= new JLabel("Voulez vous supprimer une des seances suivantes?");
+        JLabel c = new JLabel(" ");
+        c.setFont(f1);
+
+        //SUPRESSION
+
+        JLabel delete= new JLabel("Voulez-vous supprimer une des séances suivantes ? ");
         delete.setFont(f3);
 
         String[] fil= new String[this.adminSession.getSession().getDateArrayList().size()];
@@ -54,40 +61,61 @@ public class AdminSession extends JPanel{
         JComboBox list= new JComboBox(fil);
         list.setBounds(50, 50,90,20);
         list.setFont(f2);
-/*
-        JLabel modifier= new JLabel("Voulez vous modifier une des seances suivantes?");
-        delete.setFont(f3);
 
-        JComboBox list1= new JComboBox(fil);
-        list1.setBounds(50, 50,90,20);
-        list1.setFont(f2);
+        //MODIFICATION
 
-        JTextField date = new JTextField("Nouvelle date");
-        date.setForeground(new Color(59, 47, 47));
-        date.setFont(f2);
-        date.addMouseListener(new MouseAdapter(){
+        JLabel modifier= new JLabel("Voulez-vous modifier une des séances des films suivant ? ");
+        modifier.setFont(f3);
+
+        String[] fil1 = new String[this.adminSession.getFilm().getNames().size()];
+
+        for (int i = 0; i < fil.length; i++) {
+            fil1[i] = this.adminSession.getFilm().getNames().get(i);
+        }
+
+        JComboBox film = new JComboBox(fil1);
+        film.setBounds(50, 50, 90, 20);
+        film.setFont(f2);
+
+        //MODIFICATION Partie 2
+        JLabel mod_seance= new JLabel("Voulez-vous modifier une des séances suivantes ? Elles sont associées au film : "+ this.adminSession.getFilm().getFilmName());
+        mod_seance.setFont(f3);
+
+        String[] session = new String[this.adminSession.getSession().getDateArrayList().size()];
+
+        for (int i = 0; i < session.length; i++) {
+            session[i] = String.valueOf(this.adminSession.getSession().getDateArrayList().get(i));
+        }
+
+        JComboBox comboSession = new JComboBox(session);
+        comboSession.setBounds(50, 50, 90, 20);
+        comboSession.setFont(f2);
+
+        JTextField new_session = new JTextField("Nouvelle session : ");
+        new_session.setForeground(new Color(59, 47, 47));
+        new_session.setFont(f2);
+        new_session.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                date.setText("");
+                new_session.setText("");
             }
         });
 
- */
+        JButton modifierSeance= new JButton("Modifier");
+        modifierSeance.setBackground(new Color(59, 47, 47));
+        modifierSeance.setForeground(new Color(239, 223, 187));
+        modifierSeance.setFont(f3);
 
-        JLabel create= new JLabel("Voulez vous ajouter une nouvelle seance?");
+        //AJOUT
+
+        JLabel create= new JLabel("Voulez-vous ajouter une nouvelle séance ? ");
         create.setFont(f3);
 
-        JTextField name = new JTextField("Nom du film");
-        name.setForeground(new Color(59, 47, 47));
-        name.setFont(f2);
-        name.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                name.setText("");
-            }
-        });
+        JComboBox film2 = new JComboBox(fil1);
+        film2.setBounds(50, 50, 90, 20);
+        film2.setFont(f2);
 
-        JTextField room = new JTextField("Numero de la salle");
+        JTextField room = new JTextField("Numéro de la salle");
         room.setForeground(new Color(59, 47, 47));
         room.setFont(f2);
         room.addMouseListener(new MouseAdapter(){
@@ -97,7 +125,7 @@ public class AdminSession extends JPanel{
             }
         });
 
-        JTextField date = new JTextField("Date de la session");
+        JTextField date = new JTextField("Date de la séance");
         date.setForeground(new Color(59, 47, 47));
         date.setFont(f2);
         date.addMouseListener(new MouseAdapter(){
@@ -107,7 +135,7 @@ public class AdminSession extends JPanel{
             }
         });
 
-        JButton addSeance= new JButton("Nouvelle seance");
+        JButton addSeance= new JButton("Nouvelle séance");
         addSeance.setBackground(new Color(59, 47, 47));
         addSeance.setForeground(new Color(239, 223, 187));
         addSeance.setFont(f3);
@@ -126,13 +154,13 @@ public class AdminSession extends JPanel{
         list.addActionListener(e0->{
             adminSession.delete((String) list.getItemAt(list.getSelectedIndex()));
         });
-/*
-        list1.addActionListener(e1->{
-            adminSession.modifier((String) list.getItemAt(list.getSelectedIndex()));
+
+        film.addActionListener(e1->{
+            this.adminSession.m((String) film.getItemAt(film.getSelectedIndex()));
         });
- */
+
         addSeance.addActionListener(e2->{
-            this.adminSession.ajouter(name.getText(), room.getText(), date.getText());
+            this.adminSession.ajouter((String) film2.getItemAt(film2.getSelectedIndex()), room.getText(), date.getText());
         });
 
         close.addActionListener(e3-> {
@@ -143,18 +171,51 @@ public class AdminSession extends JPanel{
 
         exit.addActionListener(e4->System.exit(0));
 
+        modifierSeance.addActionListener(e5->{
+            if(isValidDate(new_session.getText()) )
+                this.adminSession.modifier(new_session.getText(), (String) comboSession.getItemAt(list.getSelectedIndex()));
+            else{
+                this.adminSession.setVisible(true);
+                mes1();
+            }
+        });
+
         buttons.setBackground(new Color(239, 223, 187));
-        buttons.add(delete,gbc);
-        buttons.add(list, gbc);
-        buttons.add(create,gbc);
-        buttons.add(name,gbc);
-        buttons.add(room, gbc);
-        buttons.add(date,gbc);
-        buttons.add(date,gbc);
-        buttons.add(addSeance, gbc);
+        if(!this.adminSession.isModifier()) {
+            buttons.add(delete, gbc);
+            buttons.add(list, gbc);
+            buttons.add(modifier, gbc);
+            buttons.add(film, gbc);
+            buttons.add(create, gbc);
+            buttons.add(film2, gbc);
+            buttons.add(room, gbc);
+            buttons.add(date, gbc);
+            buttons.add(addSeance, gbc);
+        }
+        else {
+            buttons.add(mod_seance, gbc);
+            buttons.add(comboSession, gbc);
+            buttons.add(new_session, gbc);
+            buttons.add(modifierSeance, gbc);
+        }
+        buttons.add(c,gbc);
         buttons.add(close,gbc);
         buttons.add(exit,gbc);
 
         this.add(buttons, gbc);
     }
+    public static boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
+    }
+    public void mes1() {
+        JOptionPane.showMessageDialog(this, "Erreur de saisie de la date");
+    }
+
 }

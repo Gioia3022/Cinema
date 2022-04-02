@@ -9,85 +9,86 @@ import java.awt.event.MouseEvent;
 public class Log extends JPanel {
     private Controller.Log log_c;
     JFrame frame;
+
     public Log(Controller.Log ca, JFrame f) {
-        this.log_c=ca;
-        this.frame=f;
+        this.log_c = ca;
+        this.frame = f;
         //Fonts
         Font f1 = new Font(Font.SERIF, Font.BOLD, 60);
-        Font f2= new Font(Font.SERIF, Font.PLAIN,  20);
+        Font f2 = new Font(Font.SERIF, Font.PLAIN, 20);
         Font f3 = new Font(Font.SERIF, Font.PLAIN, 40);
 
-        Label a= new Label("   GUEST LOGIN");
+        Label a = new Label(" CONNEXION CLIENT");
         a.setFont(f1);
-        Label b= new Label("__________________");
+        Label b = new Label("__________________");
         b.setFont(f1);
 
-        Label d = new Label("Login: Mot de passe oublie");
+        Label d = new Label("Connexion : Mot de passe oublié");
         d.setFont(f3);
 
-        JTextField name = new JTextField("Enter your name", 30);
+        JTextField name = new JTextField("Entrez votre nom", 30);
         name.setForeground(new Color(59, 47, 47));
         name.setFont(f2);
-        name.addMouseListener(new MouseAdapter(){
+        name.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 name.setText("");
             }
         });
 
-        JTextField tel = new JTextField("Enter your phone number", 30);
+        JTextField tel = new JTextField("Entrez votre numéro de téléphone", 30);
         tel.setForeground(new Color(59, 47, 47));
         tel.setFont(f2);
-        tel.addMouseListener(new MouseAdapter(){
+        tel.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 tel.setText("");
             }
         });
 
-        JTextField email= new JTextField("Enter your email", 30);
-        email.setForeground(new Color(59,47,47));
+        JTextField email = new JTextField("Entrez votre email", 30);
+        email.setForeground(new Color(59, 47, 47));
         email.setFont(f2);
-        email.addMouseListener(new MouseAdapter(){
+        email.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 email.setText("");
             }
         });
 
-        JLabel p= new JLabel("Enter your password");
-        JPasswordField psw= new JPasswordField(30);
-        psw.setForeground(new Color(59,47,47));
+        JLabel p = new JLabel("Entrez votre mot de passe");
+        JPasswordField psw = new JPasswordField(30);
+        psw.setForeground(new Color(59, 47, 47));
         psw.setFont(f2);
-        psw.addMouseListener(new MouseAdapter(){
+        psw.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 psw.setText("");
             }
         });
 
-        JLabel p1= new JLabel("Enter your newpassword");
+        JLabel p1 = new JLabel("Entrez votre nouveau mot de passe");
         JPasswordField psw_oublie = new JPasswordField(30);
         psw_oublie.setForeground(new Color(59, 47, 47));
         psw_oublie.setFont(f2);
-        psw.addMouseListener(new MouseAdapter(){
+        psw.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 psw.setText("");
             }
         });
 
-        JButton log = new JButton("Login");
-        log.setBackground(new Color(59,47,47));
-        log.setForeground(new Color(239,223,187));
+        JButton log = new JButton("Connexion");
+        log.setBackground(new Color(59, 47, 47));
+        log.setForeground(new Color(239, 223, 187));
         log.setFont(f3);
 
-        JButton log_oub = new JButton("Login");
+        JButton log_oub = new JButton("Connexion");
         log_oub.setBackground(new Color(59, 47, 47));
         log_oub.setForeground(new Color(239, 223, 187));
         log_oub.setFont(f3);
 
-        JButton mp = new JButton("Mot de passe oublie");
+        JButton mp = new JButton("Mot de passe oublié");
         mp.setBackground(new Color(59, 47, 47));
         mp.setForeground(new Color(239, 223, 187));
         mp.setFont(f2);
@@ -130,7 +131,7 @@ public class Log extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //Add actionListener for each button
-        log.addActionListener(e0->{
+        log.addActionListener(e0 -> {
             this.log_c.login(email.getText(), String.valueOf(psw.getPassword()));
         });
 
@@ -145,8 +146,8 @@ public class Log extends JPanel {
             this.log_c.setVisible(false);
         });
 
-        log_oub.addActionListener(e4->{
-            this.log_c.mp_oub(name.getText(),email.getText(), String.valueOf(psw_oublie.getPassword()),tel.getText());
+        log_oub.addActionListener(e4 -> {
+            this.log_c.mp_oub(name.getText(), email.getText(), String.valueOf(psw_oublie.getPassword()), tel.getText());
             this.log_c.guest();
             this.log_c.getGuest().setVisible(true);
             this.log_c.setVisible(false);
@@ -160,21 +161,21 @@ public class Log extends JPanel {
 
         //Add buttons to JPanel
         if (this.log_c.getMp()) {
-            buttons.add(d,gbc);
+            buttons.add(d, gbc);
         } else {
             buttons.add(a, gbc);
         }
         if (!this.log_c.getMp()) {
             buttons.add(email, gbc);
-            buttons.add(p,gbc);
+            buttons.add(p, gbc);
             buttons.add(psw, gbc);
             buttons.add(log, gbc);
             buttons.add(mp, gbc);
         } else {
-            buttons.add(name,gbc);
-            buttons.add(tel,gbc);
+            buttons.add(name, gbc);
+            buttons.add(tel, gbc);
             buttons.add(email, gbc);
-            buttons.add(p1,gbc);
+            buttons.add(p1, gbc);
             buttons.add(psw_oublie, gbc);
             buttons.add(log_oub, gbc);
         }
@@ -182,11 +183,14 @@ public class Log extends JPanel {
         buttons.add(close, gbc);
         buttons.add(exit, gbc);
 
-        this.add(buttons,gbc);
+        this.add(buttons, gbc);
     }
-    public void mes1(){
-        JOptionPane.showMessageDialog(this, "Login reussi");
+
+    public void mes1() {
+        JOptionPane.showMessageDialog(this, "Connexion réussite");
     }
-    public void mes2(){
-        JOptionPane.showMessageDialog(this, "Erreur de saisie\nMot de passe ou mail incorrect");
-    }}
+
+    public void mes2() {
+        JOptionPane.showMessageDialog(this, "Erreur de saisie\nMot de passe ou email incorrect");
+    }
+}

@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Benefice;
+
 import java.sql.SQLException;
 
 public class Register {
@@ -10,11 +12,18 @@ public class Register {
     private Film film;
     private View.Register register;
     private Model.Guest g;
+    private Benefice benefice;
 
     //Constructeur
     public Register(BigController co){
         g= new Model.Guest();
+        this.benefice=new Benefice();
         this.bigController=co;
+        try {
+            this.bigController.getC().SQLQueryAllBenefice(this.benefice);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         register= new View.Register(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(register);
     }
@@ -75,4 +84,12 @@ public class Register {
     }
 
     public void setFilm(Film film){ this.film=film;}
+
+    public Benefice getBenefice() {
+        return benefice;
+    }
+
+    public void setBenefice(Benefice benefice) {
+        this.benefice = benefice;
+    }
 }

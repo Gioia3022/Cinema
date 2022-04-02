@@ -32,7 +32,6 @@ public class Mail {
             m.setText(msg);
             //envoyer le message
             Transport.send(m);
-            System.out.println("Message envoyé avec succès");
         } catch (MessagingException e) {
             e.printStackTrace();
         }

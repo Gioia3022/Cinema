@@ -3,8 +3,14 @@ package Controller;
 import Model.Film;
 import Model.Guest;
 import Model.*;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Achat {
 
@@ -16,6 +22,8 @@ public class Achat {
     private Ticket ticket;
     private Guest guest;
     private boolean aBoolean;
+    private String path;
+    private QRCode qrCode;
 
     public Achat(BigController big, Ticket ticket, Guest guest, Session session, Film film){
         aBoolean=false;
@@ -23,17 +31,20 @@ public class Achat {
         this.guest=guest;
         this.session=session;
         this.ticket=ticket;
+        this.qrCode=new QRCode();
         this.bigController=big;
+        setPath("C:/JAVA/Java ECE/testqrcode/Quote.png");
         achat= new View.Achat(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(achat);
     }
 
-    public Achat(BigController big, Ticket ticket, Guest guest, Session session, Film film, boolean anonyme){
+    public Achat(BigController big, Ticket ticket, Guest guest, Session session, Film film, boolean anonyme, String path){
         aBoolean=anonyme;
         this.film=film;
         this.guest=guest;
         this.session=session;
         this.ticket=ticket;
+        setPath(path);
         this.bigController=big;
         achat= new View.Achat(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(achat);
@@ -52,9 +63,25 @@ public class Achat {
         }
         else {
             setaBoolean(true);
-            new Achat(this.bigController,ticket,guest,session,film,isaBoolean());
+            setPath("C:/JAVA/Java ECE/testqrcode/"+ticket.getDateAchat()+".png");
+            /**QRCODE generator*/
+            String str = "Film: "+film.getFilmName()+"\nSeance du: "+session.getDate()+"\nNombre de places: "+ticket.getNbrPlace()+"\nPrice: "+ticket.getPrice();
+            String charset = "UTF-8";
+            Map<EncodeHintType, ErrorCorrectionLevel> hashMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+            //generates QR code with Low level(L) error correction capability
+            hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+            try {
+                this.qrCode.generateQRcode(str, getPath(), charset, hashMap, 200, 200);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            setVisible(false);
+            new Achat(this.bigController,ticket,guest,session,film,isaBoolean(),getPath());
             achat.mes3();
         }
+
         System.exit(0);
     }
     public void menu(){
@@ -91,5 +118,13 @@ public class Achat {
 
     public Ticket getTicket() {
         return ticket;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

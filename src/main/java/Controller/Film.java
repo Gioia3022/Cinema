@@ -8,7 +8,6 @@ public class Film {
     private BigController bigController;
     private Guest guest;
     private Menu menu;
-    private Log log;
     private View.Film film_view;
     private Model.Film film;
     private FilmPage filmPage;

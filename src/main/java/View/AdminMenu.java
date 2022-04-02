@@ -8,6 +8,7 @@ public class AdminMenu extends JPanel {
 
     private Controller.AdminMenu adminMenu;
     private JFrame frame;
+
     public AdminMenu(Controller.AdminMenu ca, JFrame f) {
         this.adminMenu = ca;
         this.frame = f;
@@ -40,12 +41,12 @@ public class AdminMenu extends JPanel {
 
         /*ADMIN MENU*/
 
-        Label a = new Label("     ADMIN Menu");
+        Label a = new Label("   Menu d'admin");
         a.setFont(f1);
         Label b = new Label("__________________");
         b.setFont(f1);
 
-        JButton Seance = new JButton("Modification des seances");
+        JButton Seance = new JButton("Modification des séances");
         Seance.setBackground(new Color(59, 47, 47));
         Seance.setForeground(new Color(239, 223, 187));
         Seance.setFont(f3);
@@ -55,12 +56,12 @@ public class AdminMenu extends JPanel {
         Film.setForeground(new Color(239, 223, 187));
         Film.setFont(f3);
 
-        JButton benefices = new JButton("Modification des benefices");
+        JButton benefices = new JButton("Modification des bénéfices");
         benefices.setBackground(new Color(59, 47, 47));
         benefices.setForeground(new Color(239, 223, 187));
         benefices.setFont(f3);
 
-        JButton close = new JButton("Back to the menu");
+        JButton close = new JButton("Back");
         close.setBackground(new Color(59, 47, 47));
         close.setForeground(new Color(239, 223, 187));
         close.setFont(f3);
@@ -71,17 +72,17 @@ public class AdminMenu extends JPanel {
         exit.setFont(f3);
 
 
-        Seance.addActionListener(e0->{
+        Seance.addActionListener(e0 -> {
             this.adminMenu.seance();
             this.adminMenu.setVisible(false);
             this.adminMenu.getAdminSession().setVisible(true);
         });
-        Film.addActionListener(e1->{
+        Film.addActionListener(e1 -> {
             this.adminMenu.film();
             this.adminMenu.setVisible(false);
             this.adminMenu.getAdminFilm().setVisible(true);
         });
-        benefices.addActionListener(e2->{
+        benefices.addActionListener(e2 -> {
             this.adminMenu.benef();
             this.adminMenu.setVisible(false);
             this.adminMenu.getAdminBenefice().setVisible(true);
@@ -91,17 +92,17 @@ public class AdminMenu extends JPanel {
             this.adminMenu.setVisible(false);
             this.adminMenu.getMenu().setVisible(true);
         });
-        exit.addActionListener(e3->System.exit(0));
+        exit.addActionListener(e3 -> System.exit(0));
 
         buttons.setBackground(new Color(239, 223, 187));
-        buttons.add(a,gbc);
+        buttons.add(a, gbc);
         buttons.add(b, gbc);
-        buttons.add(benefices,gbc);
-        buttons.add(Seance,gbc);
+        buttons.add(benefices, gbc);
+        buttons.add(Seance, gbc);
         buttons.add(Film, gbc);
-        buttons.add(close,gbc);
-        buttons.add(exit,gbc);
+        buttons.add(close, gbc);
+        buttons.add(exit, gbc);
 
-        this.add(buttons,gbc);
+        this.add(buttons, gbc);
     }
 }

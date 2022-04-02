@@ -8,45 +8,45 @@ public class Guest extends JPanel {
     private Controller.Guest guest;
     JFrame frame;
 
-    public Guest(Controller.Guest ca, JFrame f){
-        this.guest=ca;
-        this.frame=f;
+    public Guest(Controller.Guest ca, JFrame f) {
+        this.guest = ca;
+        this.frame = f;
         //Fonts
-        Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
-        Font f3= new Font(Font.SERIF, Font.PLAIN,  40);
+        Font f1 = new Font(Font.SERIF, Font.BOLD, 60);
+        Font f3 = new Font(Font.SERIF, Font.PLAIN, 40);
 
-        Label a= new Label("   GUEST LOGIN");
+        Label a = new Label("           CLIENT");
         a.setFont(f1);
-        Label b= new Label("__________________");
+        Label b = new Label("__________________");
         b.setFont(f1);
 
-         JButton login = new JButton("Login");
-         login.setBackground(new Color(59,47,47));
-         login.setForeground(new Color(239,223,187));
-         login.setFont(f3);
+        JButton login = new JButton("Connexion");
+        login.setBackground(new Color(59, 47, 47));
+        login.setForeground(new Color(239, 223, 187));
+        login.setFont(f3);
 
-         JButton register = new JButton("Register");
-         register.setBackground(new Color(59,47,47));
-         register.setForeground(new Color(239,223,187));
-         register.setFont(f3);
+        JButton register = new JButton("Créer un compte");
+        register.setBackground(new Color(59, 47, 47));
+        register.setForeground(new Color(239, 223, 187));
+        register.setFont(f3);
 
-         JButton anonyme= new JButton("Anonyme");
-         anonyme.setBackground(new Color(59,47,47));
-         anonyme.setForeground(new Color(239,223,187));
-         anonyme.setFont(f3);
+        JButton anonyme = new JButton("Anonyme");
+        anonyme.setBackground(new Color(59, 47, 47));
+        anonyme.setForeground(new Color(239, 223, 187));
+        anonyme.setFont(f3);
 
         //button to go back to menu
-        JButton close= new JButton("Back");
-        close.setBackground(new Color(59,47,47));
-        close.setForeground(new Color(239,223,187));
+        JButton close = new JButton("Back");
+        close.setBackground(new Color(59, 47, 47));
+        close.setForeground(new Color(239, 223, 187));
         close.setFont(f3);
 
         JButton exit = new JButton("Exit");
-        exit.setBackground(new Color(59,47,47));
-        exit.setForeground(new Color(239,223,187));
+        exit.setBackground(new Color(59, 47, 47));
+        exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
 
-        GridBagLayout gbl= new GridBagLayout();
+        GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
 
 
@@ -56,7 +56,7 @@ public class Guest extends JPanel {
         setBorder(new EmptyBorder(150, 10, 10, 10));
 
         //Set color of background
-        this.setBackground(new Color(239,223,187));
+        this.setBackground(new Color(239, 223, 187));
 
         //Where the text is to be shown
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -100,7 +100,7 @@ public class Guest extends JPanel {
 
         JPanel buttons = new JPanel(gbl);
 
-        buttons.setBackground(new Color(239,223,187));
+        buttons.setBackground(new Color(239, 223, 187));
 
         //Add buttons to JPanel
         buttons.add(a, gbc);
@@ -108,7 +108,7 @@ public class Guest extends JPanel {
         buttons.add(login, gbc);
         buttons.add(register, gbc);
         buttons.add(anonyme, gbc);
-        buttons.add(close,gbc);
+        buttons.add(close, gbc);
         buttons.add(exit, gbc);
         add(buttons, gbc);
     }

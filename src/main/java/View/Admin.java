@@ -41,67 +41,67 @@ public class Admin extends JPanel {
         gbc.insets = new Insets(5, 0, 5, 0);
 
 
-        Label a = new Label("   ADMIN LOGIN");
+        Label a = new Label("            ADMIN");
         a.setFont(f1);
         Label b = new Label("__________________");
         b.setFont(f1);
 
-        Label d = new Label("Mot de passe oublie");
+        Label d = new Label("Mot de passe oublié");
         d.setFont(f3);
 
-        JTextField name = new JTextField("Enter your name", 30);
+        JTextField name = new JTextField("Entrez votre nom", 30);
         name.setForeground(new Color(59, 47, 47));
         name.setFont(f2);
-        name.addMouseListener(new MouseAdapter(){
+        name.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 name.setText("");
             }
         });
 
-        JTextField email = new JTextField("Enter your email", 30);
+        JTextField email = new JTextField("Entrez votre email", 30);
         email.setForeground(new Color(59, 47, 47));
         email.setFont(f2);
-        email.addMouseListener(new MouseAdapter(){
+        email.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 email.setText("");
             }
         });
 
-        JLabel p= new JLabel("Enter your password");
+        JLabel p = new JLabel("Entrez votre mot de passe");
         JPasswordField psw = new JPasswordField(30);
         psw.setForeground(new Color(59, 47, 47));
         psw.setFont(f2);
-        psw.addMouseListener(new MouseAdapter(){
+        psw.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 psw.setText("");
             }
         });
 
-        JLabel p1= new JLabel("Enter your new password");
+        JLabel p1 = new JLabel("Entrez votre nouveau mot de passe");
         JPasswordField psw_oublie = new JPasswordField(30);
         psw_oublie.setForeground(new Color(59, 47, 47));
         psw_oublie.setFont(f2);
-        psw_oublie.addMouseListener(new MouseAdapter(){
+        psw_oublie.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
                 psw_oublie.setText("");
             }
         });
 
-        JButton log = new JButton("Login");
+        JButton log = new JButton("Connexion");
         log.setBackground(new Color(59, 47, 47));
         log.setForeground(new Color(239, 223, 187));
         log.setFont(f3);
 
-        JButton log_oublie = new JButton("Login");
+        JButton log_oublie = new JButton("Connexion");
         log_oublie.setBackground(new Color(59, 47, 47));
         log_oublie.setForeground(new Color(239, 223, 187));
         log_oublie.setFont(f3);
 
-        JButton mp = new JButton("Admin: Mot de passe oublie");
+        JButton mp = new JButton("Admin : Mot de passe oublié");
         mp.setBackground(new Color(59, 47, 47));
         mp.setForeground(new Color(239, 223, 187));
         mp.setFont(f2);
@@ -139,8 +139,8 @@ public class Admin extends JPanel {
 
         exit.addActionListener(e3 -> System.exit(0));
 
-        log_oublie.addActionListener(e4->{
-            this.admin.mp_oublie(name.getText(),email.getText(), String.valueOf(psw_oublie.getPassword()));
+        log_oublie.addActionListener(e4 -> {
+            this.admin.mp_oublie(name.getText(), email.getText(), String.valueOf(psw_oublie.getPassword()));
             this.admin.menu();
             this.admin.setVisible(false);
             this.admin.getMenu().setVisible(true);
@@ -150,7 +150,7 @@ public class Admin extends JPanel {
 
         //Add buttons to JPanel
         if (this.admin.getMp_oublie()) {
-            buttons.add(d,gbc);
+            buttons.add(d, gbc);
         } else {
             buttons.add(a, gbc);
         }
@@ -158,14 +158,14 @@ public class Admin extends JPanel {
 
         if (!this.admin.getMp_oublie()) {
             buttons.add(email, gbc);
-            buttons.add(p,gbc);
+            buttons.add(p, gbc);
             buttons.add(psw, gbc);
             buttons.add(log, gbc);
             buttons.add(mp, gbc);
         } else {
-            buttons.add(name,gbc);
+            buttons.add(name, gbc);
             buttons.add(email, gbc);
-            buttons.add(p1,gbc);
+            buttons.add(p1, gbc);
             buttons.add(psw_oublie, gbc);
             buttons.add(log_oublie, gbc);
         }

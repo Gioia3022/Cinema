@@ -1,22 +1,27 @@
 package View;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Achat extends JPanel{
+public class Achat extends JPanel {
     private Controller.Achat achat;
     private JFrame frame;
-    public Achat(Controller.Achat ca, JFrame f){
+
+    public Achat(Controller.Achat ca, JFrame f) {
         this.achat = ca;
         this.frame = f;
-        Font f1= new Font(Font.SERIF,  Font.BOLD, 60);
-        Font f2= new Font(Font.SERIF, Font.PLAIN,  20);
-        Font f3= new Font(Font.SERIF, Font.PLAIN,  30);
+        Font f1 = new Font(Font.SERIF, Font.BOLD, 60);
+        Font f2 = new Font(Font.SERIF, Font.PLAIN, 20);
+        Font f3 = new Font(Font.SERIF, Font.PLAIN, 30);
 
-        GridBagLayout gbl= new GridBagLayout();
+        GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagConstraints gbc_1 = new GridBagConstraints();
         GridBagConstraints gbc_2 = new GridBagConstraints();
@@ -32,7 +37,7 @@ public class Achat extends JPanel{
 
 
         //Set color of background
-        this.setBackground(new Color(239,223,187));
+        this.setBackground(new Color(239, 223, 187));
 
         //Where the text is to be shown
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -51,44 +56,53 @@ public class Achat extends JPanel{
         gbc_2.fill = GridBagConstraints.HORIZONTAL;
 
 
-        Label a= new Label("   Achat du ticket");
+        Label a = new Label("  Achat du ticket");
         a.setFont(f1);
-        Label b= new Label("__________________");
+        Label b = new Label("__________________");
         b.setFont(f1);
-        JLabel cB= new JLabel("Numero de carte bancaire:");
-        JTextField carte_bancaire= new JTextField(16);
-        carte_bancaire.setForeground(new Color(59,47,47));
+        JLabel cB = new JLabel("Numéro de carte bancaire :");
+        JTextField carte_bancaire = new JTextField(16);
+        carte_bancaire.setForeground(new Color(59, 47, 47));
         carte_bancaire.setFont(f2);
         carte_bancaire.setHorizontalAlignment(JTextField.CENTER);
 
-        JLabel date= new JLabel("Date d'echeance:");
-        JLabel d= new JLabel("mm-yyyy");
-        JTextField date_carte= new JTextField(7);
-        date_carte.setForeground(new Color(59,47,47));
+        JLabel date = new JLabel("Date d'échéance :");
+        JLabel d = new JLabel("mm-yyyy");
+        JTextField date_carte = new JTextField(7);
+        date_carte.setForeground(new Color(59, 47, 47));
         date_carte.setFont(f2);
         date_carte.setHorizontalAlignment(JTextField.CENTER);
 
 
-        JLabel code= new JLabel("Code de securite:");
-        JTextField code_secu= new JTextField(3);
-        code_secu.setForeground(new Color(59,47,47));
+        JLabel code = new JLabel("Code de sécurité :");
+        JTextField code_secu = new JTextField(3);
+        code_secu.setForeground(new Color(59, 47, 47));
         code_secu.setFont(f2);
         code_secu.setHorizontalAlignment(JTextField.CENTER);
 
-        JLabel ticket= new JLabel("Voici votre ticket:");
+        JLabel ticket = new JLabel("Voici votre ticket :");
         ticket.setFont(f3);
-        JLabel film= new JLabel("Film:"+this.achat.getFilm().getFilmName());
+        JLabel film = new JLabel("Film : " + this.achat.getFilm().getFilmName());
         film.setFont(f3);
-        JLabel nSeance= new JLabel("Seance du: "+ this.achat.getSession().getDate());
+        JLabel nSeance = new JLabel("Séance du : " + this.achat.getSession().getDate());
         nSeance.setFont(f3);
-        JLabel places= new JLabel("Nombre de places: "+ this.achat.getTicket().getNbrPlace());
+        JLabel places = new JLabel("Nombre de places : " + this.achat.getTicket().getNbrPlace());
         places.setFont(f3);
-        JLabel price= new JLabel("Price: "+ this.achat.getTicket().getPrice());
+        JLabel price = new JLabel("Prix : " + this.achat.getTicket().getPrice());
         price.setFont(f3);
 
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(this.achat.getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert img != null;
+        JLabel pic = new JLabel(new ImageIcon(img));
+
         JButton achat = new JButton("Achat");
-        achat.setBackground(new Color(59,47,47));
-        achat.setForeground(new Color(239,223,187));
+        achat.setBackground(new Color(59, 47, 47));
+        achat.setForeground(new Color(239, 223, 187));
         achat.setFont(f3);
 
         JButton close = new JButton("Back");
@@ -101,12 +115,10 @@ public class Achat extends JPanel{
         exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
 
-        achat.addActionListener(e0->{
-            if(carte_bancaire.getText().length()==16 && isValidDate(date_carte.getText()) && code_secu.getText().length()==3)
-            {
+        achat.addActionListener(e0 -> {
+            if (carte_bancaire.getText().length() == 16 && isValidDate(date_carte.getText()) && code_secu.getText().length() == 3) {
                 this.achat.ticket();
-            }
-            else {
+            } else {
                 this.achat.setVisible(true);
                 mes2();
             }
@@ -118,12 +130,12 @@ public class Achat extends JPanel{
             this.achat.getMenu().setVisible(true);
         });
 
-        exit.addActionListener(e4 -> System.exit(0));
+        exit.addActionListener(e2 -> System.exit(0));
 
         buttons.setBackground(new Color(239, 223, 187));
         info.setBackground(new Color(239, 223, 187));
 
-        if(this.achat.isaBoolean()) {
+        if (!this.achat.isaBoolean()) {
             info.add(a, gbc);
             info.add(b, gbc);
             info.add(cB, gbc);
@@ -139,15 +151,14 @@ public class Achat extends JPanel{
 
             this.add(info, gbc);
             this.add(buttons, gbc);
-        }
-        else {
-            buttons.add(ticket,gbc);
-            buttons.add(film,gbc);
-            buttons.add(nSeance,gbc);
-            buttons.add(places,gbc);
-            buttons.add(price,gbc);
+        } else {
+            buttons.add(ticket, gbc);
+            buttons.add(film, gbc);
+            buttons.add(nSeance, gbc);
+            buttons.add(places, gbc);
+            buttons.add(price, gbc);
             buttons.add(b, gbc);
-            buttons.add(exit, gbc);
+            buttons.add(pic,gbc);
             this.add(buttons, gbc);
         }
     }
@@ -163,13 +174,15 @@ public class Achat extends JPanel{
         return true;
     }
 
-    public void mes1(){
+    public void mes1() {
         JOptionPane.showMessageDialog(this, "Payement reussi\n Vous aller recevoir un mail");
     }
-    public void mes2(){
+
+    public void mes2() {
         JOptionPane.showMessageDialog(this, "Erreur de saisie");
     }
-    public void mes3(){
+
+    public void mes3() {
         JOptionPane.showMessageDialog(this, "Payement reussi");
     }
 }

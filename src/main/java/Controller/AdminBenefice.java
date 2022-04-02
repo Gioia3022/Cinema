@@ -11,6 +11,7 @@ public class AdminBenefice {
     private AdminMenu adminMenu;
     private Benefice benefice;
     private int choix;
+
     public AdminBenefice(BigController bigController) {
         this.bigController=bigController; //connexion Query sql
         this.benefice=new Benefice();

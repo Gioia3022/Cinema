@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class Connect {
     Connection conn;
     ResultSet rs;
-    private ResultSetMetaData rsMeta;
     Statement stmt;
     PreparedStatement pstmt = null;
 
@@ -410,21 +409,19 @@ public class Connect {
         pstmt.executeUpdate();
     }
 
-    public void SQLQueryUpdateSeance(String date) throws SQLException {
+    public void SQLQueryUpdateSeance(String new_date, String old_date) throws SQLException {
         // language=<SQL>
         int ID=0;
-        String sql="Select SessionID FROM session WHERE SessionDate='"+date+"';";
+        String sql="Select SessionID FROM session WHERE SessionDate='"+old_date+"';";
         pstmt=conn.prepareStatement(sql);
         rs = stmt.executeQuery(sql);
         while (rs.next()) {
             ID=rs.getInt("SessionID");
         }
-        sql="UPDATE from ticket where SessionID="+ID+"; ";
-        pstmt=conn.prepareStatement(sql);
-        pstmt.executeUpdate(sql);
-        sql="delete from session where SessionID="+ID+"; ";
-        pstmt=conn.prepareStatement(sql);
-        pstmt.executeUpdate(sql);
+        sql= "UPDATE session SET SessionDate=? WHERE SessionID ='"+ID+"';";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,new_date);
+        pstmt.executeUpdate();
     }
 
 }
