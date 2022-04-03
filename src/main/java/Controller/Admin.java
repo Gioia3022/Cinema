@@ -30,7 +30,7 @@ public class Admin {
     public void login(String email, String psw) { //
         a.setMail(email);
         a.setPassword(psw);
-//LE SQLQueryAdmin est un boolean qui est true sur la query est respecté (voir connect)
+    //LE SQLQueryAdmin est un boolean qui est true sur la query est respecté (voir connect)
         try {
             this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword()); //get Connexion, query mail et pswrd
             if (this.bigController.getC().SQLQueryAdmin(a.getMail(), a.getPassword())) { //si true
@@ -69,29 +69,26 @@ public class Admin {
         setMenu(new Menu(this.bigController));
     } //retour affichage menu (back)
     public void AM(){setAdminMenu(new AdminMenu(this.bigController));}
-    //getter setters attribut
+
+    //getter setters attribut de chaque classes qui peuvent être appelées par la classe Admin
     public void setVisible(boolean visible){
         admin.setVisible(visible);
-    } //affichage admin
+    }
     public Menu getMenu() {
         return menu;
     }
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-
     public boolean getMp_oublie() {
         return mp_oublie;
     }
-
     public void setMp_oublie(boolean mp_oublie) {
         this.mp_oublie = mp_oublie;
     }
-
     public AdminMenu getAdminMenu() {
         return adminMenu;
     }
-
     public void setAdminMenu(AdminMenu adminMenu) {
         this.adminMenu = adminMenu;
     }

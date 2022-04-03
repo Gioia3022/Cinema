@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Achat {
-
+    //attributs
     private BigController bigController;
     private View.Achat achat;
     private Menu menu;
@@ -25,21 +25,23 @@ public class Achat {
     private String path;
     private QRCode qrCode;
 
+    //constructeur 1 - si l'utilisateur est connecté, ayant en paramètres Les attributs de l'objet de guest (get en bdd),
+    //de ticket, session et film (en fonction de ce que l'utilisateur a implémenté lors de son utilisation
     public Achat(BigController big, Ticket ticket, Guest guest, Session session, Film film){
-        aBoolean=false;
-        this.film=film;
-        this.guest=guest;
-        this.session=session;
-        this.ticket=ticket;
-        this.qrCode=new QRCode();
+        aBoolean=false; //le bool est faux car l'utilisateur est connecté
+        this.film=film; //on récupère les infos de chaques paramètres
+        this.guest=guest; //
+        this.session=session; //
+        this.ticket=ticket; //
+        this.qrCode=new QRCode(); //Génération d'un QRCode
         this.bigController=big;
         setPath("C:/JAVA/Java ECE/testqrcode/Quote.png");
-        achat= new View.Achat(this,this.bigController.getFrame());
+        achat= new View.Achat(this,this.bigController.getFrame()); //Affichage de la frame Achat dans le package view
         this.bigController.getFrame().getContentPane().add(achat);
     }
-
+    //constructeur 2 - si l'utilisateur est en anonyme
     public Achat(BigController big, Ticket ticket, Guest guest, Session session, Film film, boolean anonyme, String path){
-        aBoolean=anonyme;
+        aBoolean=anonyme; //l'utilisateur est anonyme, anonyme est true
         this.film=film;
         this.guest=guest;
         this.session=session;
@@ -50,21 +52,28 @@ public class Achat {
         this.bigController.getFrame().getContentPane().add(achat);
     }
 
+    //méthodes
+
+    //La méthode ici permet particulièrement l'envoi d'un mail à l'utilisateur avec les infos de l'achat
     public void ticket(){
-        if(this.guest.getMail()!=null){
+        if(this.guest.getMail()!=null){ //Le guest mail est nul -> on ne peut pas appliquer la query
         try {
+            //La formation du ticket ici est le regroupement des infos de certains attributs de chaques classes en paramètres
             this.bigController.getC().SQLFormationTicket(film,session,ticket,guest);
+            //Cela permet ainsi de regrouper les informations et les envoyer dans le mail à l'email de l'utilisateur
         } catch (SQLException e) {
             e.printStackTrace();
         }
         achat.mes1();
+        //Le message ci-dessous sera envoyé par mail
         String mes="Bonjour,\nVoici votre ticket: \nMail achat: "+guest.getMail()+"\nFilm: "+film.getFilmName()+"\nSeance du: "+session.getDate()+"\nNombre de places: "+ticket.getNbrPlace()+"\nPrice: "+ticket.getPrice();
-        Mail.send("cinemaleshalles5@gmail.com","CinemaH1!",guest.getMail(),"Ticket Cinema",mes);
+        //les paramètres ici sont l'email d'envoi, le titre du mail, le mail du l'user, le message.
+        //Mail.send("cinemaleshalles5@gmail.com","CinemaH1!",guest.getMail(),"Ticket Cinema",mes);
         }
-        else {
+        else { //si l'user est anonyme car pas d'email
             setaBoolean(true);
             setPath("C:/JAVA/Java ECE/testqrcode/"+ticket.getDateAchat()+".png");
-            /**QRCODE generator*/
+            /*QRCODE generator*/
             String str = "Film: "+film.getFilmName()+"\nSeance du: "+session.getDate()+"\nNombre de places: "+ticket.getNbrPlace()+"\nPrice: "+ticket.getPrice();
             String charset = "UTF-8";
             Map<EncodeHintType, ErrorCorrectionLevel> hashMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
@@ -88,6 +97,7 @@ public class Achat {
         setMenu(new Controller.Menu(this.bigController));
     }
 
+    //getters & setters
     public void setVisible(boolean visible){
         achat.setVisible(visible);
     }

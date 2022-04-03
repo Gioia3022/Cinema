@@ -5,17 +5,16 @@ import java.sql.SQLException;
 public class Log {
     //attributs
     //
-
     private BigController bigController;
     private Guest guest;
     private Film film;
     private View.Log log;
-    private boolean mp_oublie;
+    private boolean mp_oublie; // Le bool ici permet l'utilisation d'un deuxième constructeur ou l'utilisateur a oublié son mdp
     private Model.Guest g;
 
     //Constructeur 1
     public Log(BigController co){
-        this.setMp(false);
+        this.setMp(false); //le setMp est false car l'utilisateur n'a pas besoin de modifier son mot de passe
         g= new Model.Guest();
         this.bigController=co;
         log= new View.Log(this,this.bigController.getFrame());
@@ -23,24 +22,30 @@ public class Log {
     }
     //Constructeur 2 - Mot de passe oublié -> affichage frame mp oublié pour guest
     public Log(BigController co, boolean mp){
-        this.setMp(mp);
+        this.setMp(mp); //ici mp est true, car l'utilisateur à envoyé l'information qu'il a oublé son mot de passe
         g= new Model.Guest();
         this.bigController=co;
         log= new View.Log(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(log);
     }
 
-    //Verif si les infos sont propres à un attribut de la classe Guest (QUERY)
+    //Verif si les infos appartiennent à un attribut de la classe Guest sur la base de donnée
+    //Logiquement les informations sont envoyés à la classe Connect ou se trouvent toutes les QUERY
     public void login(String email, String psw) {
-        g.setMail(email);
-        g.setPsw(psw);
+        g.setMail(email); //le setMail est rempli par un string inscrit dans la partie affichage du log
+        g.setPsw(psw); //le setPsw est rempli par un string inscrit dans la partie affichage du log
         try {
+            //informations importés depuis l'attribut du Model Mail pour être envoyés à la QUERY
             this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw());
+            //Si l'utilisateur de la base de donnée composé de l'email et du mot de passe est trouvé dans la
+            //base de donnée, le if ci-dessous est true.
             if (this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw())) {
+                //Les méthodes ici instancie l'affichage de la partie Film
                 log.mes1();
                 film();
-                getFilm().setVisible(true);
-                setVisible(false);
+                getFilm().setVisible(true); //La partie Film est maintenant affichée
+                setVisible(false); //La partie connexion n'est plus affichée
+                //si l'utilisateur n'existe pas dans la base de donnée,
             } else {
                 log.mes2();
                 setVisible(true);
@@ -51,7 +56,8 @@ public class Log {
         }
     }
 
-    //appel constructeur 2 pour le mot de passe oublié
+    //Méthodes
+    //Appel de la méthode lorsque l'utilisateur intéragie avec l'affichage et le bouton Mot de passe oublié
     public void oublie(){
         setVisible(false);
         new Log(this.bigController, true);
@@ -65,12 +71,12 @@ public class Log {
         g.setTel(tel);
         try {
             this.bigController.getC().SQLQueryGuestNewMP(g.getName(), g.getMail(), g.getPsw(),g.getTel());
-        } catch (SQLException e) {
+        } catch (SQLException e) { //catch si la query n'est pas bien affecté ou qu'il y a une erreur
             e.printStackTrace();
         }
 
     }
-
+    //Appel des classes lors de l'interaction avec l'affichage de la classe Log
     public void guest() {
         setGuest(new Guest(this.bigController));
     }
@@ -79,7 +85,6 @@ public class Log {
 
     //getters & setter
     //
-
     public void setVisible(boolean visible){
         log.setVisible(visible);
     }

@@ -27,7 +27,7 @@ public class Connect {
         while (rs.next()){
         }
     }
-//methode close connection avec la bdd
+//methode close connection avec la bdd, libérer de la mémoire de stockage
     public void closeCourseDataConnection() throws SQLException {
         conn.close();
     }
