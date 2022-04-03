@@ -103,6 +103,8 @@ public class AdminBenefice extends JPanel {
 
         exit.addActionListener(e4 -> System.exit(0));
 
+        //
+        //INSCRIPTION DES VALEURS SOUHAITES POUR LES ATTRIBUTS DU BENEFICE
         JTextField name = new JTextField("Nom du bénéfice");
         name.setForeground(new Color(59, 47, 47));
         name.setFont(f2);
@@ -127,6 +129,7 @@ public class AdminBenefice extends JPanel {
         ajout.setForeground(new Color(239, 223, 187));
         ajout.setFont(f3);
 
+        //VERIFICATION : EXPRESSION VALIDES
         ajout.addActionListener(e5 -> {
             boolean b1 = discount.getText().matches("-?\\d+");
             if (b1 && Integer.parseInt(discount.getText()) > -1 && Integer.parseInt(discount.getText()) < 101)

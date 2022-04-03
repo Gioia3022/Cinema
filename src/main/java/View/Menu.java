@@ -77,12 +77,13 @@ public class Menu extends JPanel implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //Add actionListener for each button
+        //AFFICHAGE GUEST
         access_as_guest.addActionListener(e1 -> {
             this.menu.guest();
             this.menu.setVisible(false);
             this.menu.getGuest_controller().setVisible(true);
         });
-
+        //AFFICHAGE ADMIN
         access_as_admin.addActionListener(e2 -> {
             this.menu.admin();
             this.menu.setVisible(false);

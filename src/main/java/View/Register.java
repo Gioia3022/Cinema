@@ -26,6 +26,7 @@ public class Register extends JPanel {
         Label b = new Label("________________________________");
         b.setFont(f1);
 
+        //INSCRIPTION DES VALEURS ENTREES DANS LES ATTRIBUTS CORRESPONDANT DANS UN OBJET CREE PAR QUERY
         JTextField name = new JTextField("Entrez votre nom", 30);
         name.setForeground(new Color(59, 47, 47));
         name.setFont(f2);
@@ -132,6 +133,7 @@ public class Register extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //Add actionListener for each button
+        //VERIFICATION VALEUR INSCRITE POUR EMAIL, NUMERO DE TELEPHONE, AGE
         access.addActionListener(e0 -> {
             if (email.getText().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
                 boolean b1 = number.getText().matches("-?\\d+");
@@ -160,7 +162,7 @@ public class Register extends JPanel {
                 mes3();
             }
         });
-
+        //AFFICHAGE PAGE ARRIERE
         close.addActionListener(e1 -> {
             this.register.guest();
             this.register.setVisible(false);

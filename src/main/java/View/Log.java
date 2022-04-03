@@ -25,7 +25,7 @@ public class Log extends JPanel {
 
         Label d = new Label("Connexion : Mot de passe oublié");
         d.setFont(f3);
-
+        //INSCRIPTION DES VALEURS INSCRITES DANS LES ATTRIBUTS DE LOBJET CREE PAR LA QUERY DANS LA TABLE GUEST
         JTextField name = new JTextField("Entrez votre nom", 30);
         name.setForeground(new Color(59, 47, 47));
         name.setFont(f2);
@@ -131,21 +131,25 @@ public class Log extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //Add actionListener for each button
+        //CONNEXION
         log.addActionListener(e0 -> {
             this.log_c.login(email.getText(), String.valueOf(psw.getPassword()));
         });
 
+        //AFFICHAGE PAGE MOT DE PASSE OUBLIE
         mp.addActionListener(e1 -> {
             this.log_c.setMp(true);
             this.log_c.oublie();
         });
 
+        //AFFICHAGE PAGE ARRIERE
         close.addActionListener(e2 -> {
             this.log_c.guest();
             this.log_c.getGuest().setVisible(true);
             this.log_c.setVisible(false);
         });
 
+        //AFFICHAGE PAGE MP OUBLIE
         log_oub.addActionListener(e4 -> {
             this.log_c.mp_oub(name.getText(), email.getText(), String.valueOf(psw_oublie.getPassword()), tel.getText());
             this.log_c.guest();

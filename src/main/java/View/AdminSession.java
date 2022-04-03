@@ -114,7 +114,8 @@ public class AdminSession extends JPanel{
         JComboBox film2 = new JComboBox(fil1);
         film2.setBounds(50, 50, 90, 20);
         film2.setFont(f2);
-
+        //INSCRIPTION VALEURS ATTENDU POUR LES ATTRIBUTS FILM
+        //
         JTextField room = new JTextField("Numéro de la salle");
         room.setForeground(new Color(59, 47, 47));
         room.setFont(f2);

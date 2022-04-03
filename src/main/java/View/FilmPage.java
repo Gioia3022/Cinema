@@ -75,6 +75,7 @@ public class FilmPage extends JPanel {
 
         String[] fil = new String[filmPage.getSession().getDateArrayList().size()];
 
+        //AFFICHAGE DES SESSIONS DANS UN COMBOBOX
         for (int i = 0; i < fil.length; i++) {
             fil[i] = String.valueOf(filmPage.getSession().getDateArrayList().get(i));
         }
@@ -103,6 +104,7 @@ public class FilmPage extends JPanel {
         }
         int newWidth = 440, newHeight = 600;
 
+        //TOUTES LES INFORMATIONS DE LA CLASSE FILMS AFFICHES
         JLabel filmImage = new JLabel(new ImageIcon(image.getScaledInstance(newWidth, newHeight, Image.SCALE_FAST)));
         filmImage.setFont(f3);
         JLabel filmGenre = new JLabel("Genre : " + this.filmPage.getFilm().getFilmGenre());
@@ -135,9 +137,11 @@ public class FilmPage extends JPanel {
         exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
 
+        //CREATION D'UN TICKET AVEC LES INFORMATIONS INSCRITES -> AFFICHAGE DE LA FRAME ACHAT
         ticket.addActionListener(e0 -> {
             this.filmPage.newTicket((String) list.getItemAt(list.getSelectedIndex()), (String) nT.getItemAt(nT.getSelectedIndex()));
         });
+        //RETOUR PAGE D'AVANT
         close.addActionListener(e2 -> {
             this.filmPage.film();
             this.filmPage.setVisible(false);

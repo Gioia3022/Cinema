@@ -80,6 +80,7 @@ public class Achat extends JPanel {
         code_secu.setFont(f2);
         code_secu.setHorizontalAlignment(JTextField.CENTER);
 
+        //Affichage du ticket
         JLabel ticket = new JLabel("Voici votre ticket :");
         ticket.setFont(f3);
         JLabel film = new JLabel("Film : " + this.achat.getFilm().getFilmName());
@@ -91,6 +92,7 @@ public class Achat extends JPanel {
         JLabel price = new JLabel("Prix : " + this.achat.getTicket().getPrice());
         price.setFont(f3);
 
+        //QRCODE
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(this.achat.getPath()));
@@ -99,6 +101,7 @@ public class Achat extends JPanel {
         }
         assert img != null;
         JLabel pic = new JLabel(new ImageIcon(img));
+
 
         JButton achat = new JButton("Achat");
         achat.setBackground(new Color(59, 47, 47));
@@ -115,6 +118,7 @@ public class Achat extends JPanel {
         exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
 
+        //Verification : 16 chiffres pour la carte bancaire sinon message d'erreur
         achat.addActionListener(e0 -> {
             if (carte_bancaire.getText().length() == 16 && isValidDate(date_carte.getText()) && code_secu.getText().length() == 3) {
                 this.achat.ticket();
@@ -124,6 +128,7 @@ public class Achat extends JPanel {
             }
         });
 
+        //LORSQUE LA PAGE SE FERME => RETOUR AU MENU
         close.addActionListener(e1 -> {
             this.achat.menu();
             this.achat.setVisible(false);
@@ -163,6 +168,7 @@ public class Achat extends JPanel {
         }
     }
 
+    //Verification format de la date indiquée
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-yyyy");
         dateFormat.setLenient(false);

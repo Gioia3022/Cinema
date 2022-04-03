@@ -49,6 +49,9 @@ public class Admin extends JPanel {
         Label d = new Label("Mot de passe oublié");
         d.setFont(f3);
 
+        //
+        //TEXTFIELD : ENTRER LES COORDONNEES : SI ON CLIQUE DESSUS, LE TEXTE, L'ATTRIBUT INDIQUE PREND LA VALEUR
+        //
         JTextField name = new JTextField("Entrez votre nom", 30);
         name.setForeground(new Color(59, 47, 47));
         name.setFont(f2);
@@ -124,13 +127,18 @@ public class Admin extends JPanel {
         gbc.anchor = GridBagConstraints.NORTHEAST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
+
         log.addActionListener(e0 -> this.admin.login(email.getText(), String.valueOf(psw.getPassword())));
 
+        //
+        //AFFICHAGE DE LA FRAME MP OUBLIE INCLUSE DANS LA CLASSE VIEW ACHAT
+        //
         mp.addActionListener(e1 -> {
             this.admin.setMp_oublie(true);
             this.admin.oublie();
         });
 
+        //RETOUR AU MENU
         close.addActionListener(e2 -> {
             this.admin.menu();
             this.admin.setVisible(false);
@@ -139,6 +147,7 @@ public class Admin extends JPanel {
 
         exit.addActionListener(e3 -> System.exit(0));
 
+        //FRAME MP OUBLIE
         log_oublie.addActionListener(e4 -> {
             this.admin.mp_oublie(name.getText(), email.getText(), String.valueOf(psw_oublie.getPassword()));
             this.admin.menu();

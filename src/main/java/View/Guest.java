@@ -71,25 +71,26 @@ public class Guest extends JPanel {
 
         //Add actionListener for each button
 
+        //AFFICHAGE DE LA PAGE LOG
         login.addActionListener(e1 -> {
             this.guest.log();
             this.guest.setVisible(false);
             this.guest.getLog().setVisible(true);
         });
-
+        //AFFICHAGE DE LA PAGE REGISTER
         register.addActionListener(e2 -> {
             this.guest.register();
             this.guest.setVisible(false);
             this.guest.getRegister().setVisible(true);
         });
-
+        //AFFICHAGE DE LA PAGE FILM
         anonyme.addActionListener(e3 -> {
             this.guest.anonyme();
             this.guest.setVisible(false);
             this.guest.getFilm().setVisible(true);
         });
 
-
+        //RETOUR EN ARRIERE
         close.addActionListener(e1 -> {
             this.guest.menu();
             this.guest.setVisible(false);

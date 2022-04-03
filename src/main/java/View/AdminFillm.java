@@ -45,7 +45,7 @@ public class AdminFillm extends JPanel {
 
         JLabel c = new JLabel(" ");
         c.setFont(f1);
-
+        //SUPRESSION FILM
         JLabel delete = new JLabel("Voulez-vous supprimer un des films suivants ? ");
         delete.setFont(f3);
 
@@ -59,9 +59,12 @@ public class AdminFillm extends JPanel {
         list.setBounds(50, 50, 90, 20);
         list.setFont(f2);
 
+        //CREATION NOUVEAU FILM
+        //
         JLabel create = new JLabel("Voulez-vous ajouter un nouveau film ? ");
         create.setFont(f3);
-
+        //INSCRIPTION DES ATTRIBUTS ATTENDUS
+        //
         JTextField name = new JTextField("Nom du film", 30);
         name.setForeground(new Color(59, 47, 47));
         name.setFont(f2);
@@ -138,6 +141,7 @@ public class AdminFillm extends JPanel {
         close.setForeground(new Color(239, 223, 187));
         close.setFont(f3);
 
+
         list.addActionListener(e0 -> {
             this.admin.delete((String) list.getItemAt(list.getSelectedIndex()));
         });
@@ -155,7 +159,7 @@ public class AdminFillm extends JPanel {
                 mes2();
             }
         });
-
+        //CLOSE ADMIN RETOUR AU MENU
         close.addActionListener(e2 -> {
             this.admin.menu();
             this.admin.setVisible(false);
@@ -181,6 +185,7 @@ public class AdminFillm extends JPanel {
 
         this.add(buttons, gbc);
     }
+    //VERIFICATION FORMAT DATE
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);

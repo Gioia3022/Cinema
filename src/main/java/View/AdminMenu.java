@@ -71,27 +71,31 @@ public class AdminMenu extends JPanel {
         exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
 
-
+        //AFFICHAGE MODIF SESSION
         Seance.addActionListener(e0 -> {
             this.adminMenu.seance();
             this.adminMenu.setVisible(false);
             this.adminMenu.getAdminSession().setVisible(true);
         });
+        //AFFICHAGE MODIF FILM
         Film.addActionListener(e1 -> {
             this.adminMenu.film();
             this.adminMenu.setVisible(false);
             this.adminMenu.getAdminFilm().setVisible(true);
         });
+        //AFFICHAGE MODIF BENEFICE
         benefices.addActionListener(e2 -> {
             this.adminMenu.benef();
             this.adminMenu.setVisible(false);
             this.adminMenu.getAdminBenefice().setVisible(true);
         });
+        //AFFICHAGE MENU
         close.addActionListener(e3 -> {
             this.adminMenu.menu();
             this.adminMenu.setVisible(false);
             this.adminMenu.getMenu().setVisible(true);
         });
+
         exit.addActionListener(e3 -> System.exit(0));
 
         buttons.setBackground(new Color(239, 223, 187));

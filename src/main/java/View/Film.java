@@ -51,6 +51,7 @@ public class Film extends JPanel {
         JLabel l_b = new JLabel("Choisir un film : ");
         l_b.setFont(f4);
 
+        //AFFICHAGE DES DIFFERENTS FILMS DANS UN COMBO BOX
         String[] fil = new String[film.getFilm().getNames().size()];
 
         for (int i = 0; i < fil.length; i++) {
@@ -76,6 +77,7 @@ public class Film extends JPanel {
         exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
 
+        //FILM INDIQUE DONNERA LES INFORMATIONS DU FILM
         info.addActionListener(e0 -> {
             this.film.get_info((String) list.getItemAt(list.getSelectedIndex()));
             this.film.filmPage();
@@ -83,7 +85,7 @@ public class Film extends JPanel {
             this.film.getFilmPage().setVisible(true);
         });
 
-
+        //RETOUR EN ARRIERE
         close.addActionListener(e1 -> {
             this.film.menu();
             this.film.setVisible(false);
