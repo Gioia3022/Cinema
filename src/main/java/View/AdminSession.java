@@ -11,6 +11,12 @@ import java.text.SimpleDateFormat;
 public class AdminSession extends JPanel{
     private JFrame frame;
     private Controller.AdminSession adminSession;
+
+    /**
+     * Constructeur
+     * @param as
+     * @param f
+     */
     public AdminSession(Controller.AdminSession as, JFrame f) {
         this.frame=f;
         this.adminSession=as;
@@ -161,7 +167,18 @@ public class AdminSession extends JPanel{
         });
 
         addSeance.addActionListener(e2->{
-            this.adminSession.ajouter((String) film2.getItemAt(film2.getSelectedIndex()), room.getText(), date.getText());
+            if(room.getText()!=null && Integer.parseInt(room.getText())>0 && Integer.parseInt(room.getText())<6) {
+                if(isValidDate(new_session.getText()) )
+                    this.adminSession.ajouter((String) film2.getItemAt(film2.getSelectedIndex()), room.getText(), date.getText());
+                else{
+                    this.adminSession.setVisible(true);
+                    mes1();
+                }
+            }
+            else{
+                this.adminSession.setVisible(true);
+                mes2();
+            }
         });
 
         close.addActionListener(e3-> {
@@ -205,6 +222,12 @@ public class AdminSession extends JPanel{
 
         this.add(buttons, gbc);
     }
+
+    /**
+     * Méthode qui vérifie de la validité de la date
+     * @param inDate
+     * @return
+     */
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat.setLenient(false);
@@ -217,6 +240,9 @@ public class AdminSession extends JPanel{
     }
     public void mes1() {
         JOptionPane.showMessageDialog(this, "Erreur de saisie de la date");
+    }
+    public void mes2() {
+        JOptionPane.showMessageDialog(this, "Erreur de saisie de la salle");
     }
 
 }

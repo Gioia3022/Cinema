@@ -3,7 +3,6 @@ package Controller;
 public class Guest {
 
     //attributs
-    //
     private BigController bigController; //Attribut appelant la classe big controler et donc frame et connexion à la bdd
     private Menu menu;
     private Film film;
@@ -12,8 +11,10 @@ public class Guest {
     private Controller.Register register;
     private Model.Guest g;
 
-    //Constructeur
-    //Connexion à la bdd par appel du controler selon le modèle MVC
+    /**
+     * Constructeur de guest
+     * @param bigController
+     */
     public Guest(BigController bigController) {
         g= new Model.Guest();
         this.bigController=bigController;
@@ -34,6 +35,7 @@ public class Guest {
     public void log(){
         setLog(new Controller.Log(this.bigController));
     }
+
     //Cette méthode permet de se connecter et d'accéder à la partie selection du film sans être connecté
     //Ainsi il pourra acheter des tickets et recevra un QRCode implémenté dans la partie programmation
     //La base de donnée sera modifiée même si l'utilisateur n'est pas connecté ainsi

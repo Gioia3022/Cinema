@@ -10,6 +10,11 @@ public class Log extends JPanel {
     private Controller.Log log_c;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public Log(Controller.Log ca, JFrame f) {
         this.log_c = ca;
         this.frame = f;
@@ -151,10 +156,14 @@ public class Log extends JPanel {
 
         //AFFICHAGE PAGE MP OUBLIE
         log_oub.addActionListener(e4 -> {
-            this.log_c.mp_oub(name.getText(), email.getText(), String.valueOf(psw_oublie.getPassword()), tel.getText());
-            this.log_c.guest();
-            this.log_c.getGuest().setVisible(true);
-            this.log_c.setVisible(false);
+            if(psw_oublie.getPassword()!=null) {
+                this.log_c.mp_oub(name.getText(), email.getText(), String.valueOf(psw_oublie.getPassword()), tel.getText());
+                this.log_c.guest();
+                this.log_c.getGuest().setVisible(true);
+                this.log_c.setVisible(false);
+            }
+            this.log_c.setVisible(true);
+            mes3();
         });
 
         exit.addActionListener(e3 -> System.exit(0));
@@ -196,5 +205,9 @@ public class Log extends JPanel {
 
     public void mes2() {
         JOptionPane.showMessageDialog(this, "Erreur de saisie\nMot de passe ou email incorrect");
+    }
+
+    public void mes3() {
+        JOptionPane.showMessageDialog(this, "Erreur de saisie\nNouveau mot de passe vide");
     }
 }

@@ -9,8 +9,10 @@ public class Menu {
     private Controller.Guest guest_controller; //Controller vers frame et c de la classe Guest
     private Admin admin_controller; //Contrôller vers la frame et c de la classe Admin
     private View.Menu menu; //Attribut de type View, donc affichage menu
-
-    //Constructeur
+    /**
+     * Constructeur
+     * @param bigController
+     */
     public Menu(BigController bigController) {
         this.bigController=bigController; //Création connexion à la bdd
         this.menu= new View.Menu(this,this.bigController.getFrame()); //

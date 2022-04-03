@@ -8,7 +8,10 @@ public class AdminMenu {
     private AdminFilm adminFilm;
     private AdminBenefice adminBenefice;
 
-    //constructeur
+    /**
+     * Constructeur
+     * @param co
+     */
     public AdminMenu(BigController co){ // Constructeur 1
         this.bigController=co; //connexion Query sql
         adminMenu= new View.AdminMenu(this,this.bigController.getFrame());  //

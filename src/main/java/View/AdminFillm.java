@@ -14,6 +14,11 @@ public class AdminFillm extends JPanel {
     private Controller.AdminFilm admin;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param adminFilm
+     * @param frame
+     */
     public AdminFillm(AdminFilm adminFilm, JFrame frame) {
         this.admin = adminFilm;
         this.frame = frame;
@@ -147,9 +152,13 @@ public class AdminFillm extends JPanel {
         });
         addFilm.addActionListener(e1 -> {
             boolean b1 = length.getText().matches("-?\\d+");
-            if (b1 && Integer.parseInt(length.getText())<240) {
+            if (b1 && Integer.parseInt(length.getText())<240 && length.getText()!=null) {
                 if(isValidDate(date.getText())) {
-                    this.admin.addFilm(name.getText(), genre.getText(), length.getText(), date.getText(), director.getText(), URL.getText());
+                    if(name.getText()!=null && genre.getText()!= null && director.getText()!=null && URL.getText()!=null)
+                        this.admin.addFilm(name.getText(), genre.getText(), length.getText(), date.getText(), director.getText(), URL.getText());
+                    else {
+                        mes3();
+                    }
                 }
                 else {
                     mes1();
@@ -203,5 +212,9 @@ public class AdminFillm extends JPanel {
 
     public void mes2() {
         JOptionPane.showMessageDialog(this, "Longueur du film incorrecte");
+    }
+
+    public void mes3() {
+        JOptionPane.showMessageDialog(this, "Saisie incorrecte");
     }
 }

@@ -10,7 +10,11 @@ public class Admin extends JPanel {
     private Controller.Admin admin;
     private JFrame frame;
 
-
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public Admin(Controller.Admin ca, JFrame f) {
         this.admin = ca;
         this.frame = f;

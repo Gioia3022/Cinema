@@ -9,6 +9,11 @@ public class AdminMenu extends JPanel {
     private Controller.AdminMenu adminMenu;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public AdminMenu(Controller.AdminMenu ca, JFrame f) {
         this.adminMenu = ca;
         this.frame = f;
@@ -41,7 +46,7 @@ public class AdminMenu extends JPanel {
 
         /*ADMIN MENU*/
 
-        Label a = new Label("   Menu d'admin");
+        Label a = new Label("      Menu d'admin");
         a.setFont(f1);
         Label b = new Label("__________________");
         b.setFont(f1);
@@ -70,6 +75,9 @@ public class AdminMenu extends JPanel {
         exit.setBackground(new Color(59, 47, 47));
         exit.setForeground(new Color(239, 223, 187));
         exit.setFont(f3);
+
+        gbc.anchor = GridBagConstraints.NORTHEAST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //AFFICHAGE MODIF SESSION
         Seance.addActionListener(e0 -> {

@@ -8,6 +8,11 @@ public class Guest extends JPanel {
     private Controller.Guest guest;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public Guest(Controller.Guest ca, JFrame f) {
         this.guest = ca;
         this.frame = f;
@@ -30,7 +35,7 @@ public class Guest extends JPanel {
         register.setForeground(new Color(239, 223, 187));
         register.setFont(f3);
 
-        JButton anonyme = new JButton("Anonyme");
+        JButton anonyme = new JButton("Invité");
         anonyme.setBackground(new Color(59, 47, 47));
         anonyme.setForeground(new Color(239, 223, 187));
         anonyme.setFont(f3);

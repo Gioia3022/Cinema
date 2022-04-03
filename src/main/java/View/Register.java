@@ -13,6 +13,11 @@ public class Register extends JPanel {
     private Controller.Register register;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public Register(Controller.Register ca, JFrame f) {
         this.register = ca;
         this.frame = f;
@@ -135,15 +140,17 @@ public class Register extends JPanel {
         //Add actionListener for each button
         //VERIFICATION VALEUR INSCRITE POUR EMAIL, NUMERO DE TELEPHONE, AGE
         access.addActionListener(e0 -> {
-            if (email.getText().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+            if (email.getText().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$") && email.getText()!=null) {
                 boolean b1 = number.getText().matches("-?\\d+");
                 if (number.getText().length() == 10 && b1) {
                     boolean b2 = age.getText().matches("-?\\d+");
-                    if (b2 && Integer.parseInt(age.getText()) > 0 && Integer.parseInt(age.getText()) < 121) {
+                    if (b2 && Integer.parseInt(age.getText()) > 0 && Integer.parseInt(age.getText()) < 121 && age.getText()!=null) {
                         String benefice = (String) list.getItemAt(list.getSelectedIndex());
                         int age_c = Integer.parseInt(age.getText());
                         if ((Objects.equals(benefice, "Under 5") && age_c <= 5) || (Objects.equals(benefice, "Under 14") && age_c <= 14)|| (Objects.equals(benefice, "Student") && (age_c >14 && age_c<65))|| (Objects.equals(benefice, "Big Family") && age_c >25) || (Objects.equals(benefice, "Elder") && age_c >= 65) || (Objects.equals(benefice, "Cinema Card") && age_c >15 && age_c<65)|| (Objects.equals(benefice, "Employer") && (age_c >15 && age_c<65))) {
+                            if(name.getText()!=null && psw.getPassword()!=null){
                             this.register.register1(name.getText(), email.getText(), String.valueOf(psw.getPassword()), number.getText(), Integer.parseInt(age.getText()), (String) list.getItemAt(list.getSelectedIndex()));
+                        }
                         } else {
                             this.register.setVisible(true);
                             mes6();

@@ -1,7 +1,5 @@
 package Controller;
 
-import java.sql.SQLException;
-
 public class Log {
     //attributs
     //
@@ -12,7 +10,10 @@ public class Log {
     private boolean mp_oublie; // Le bool ici permet l'utilisation d'un deuxième constructeur ou l'utilisateur a oublié son mdp
     private Model.Guest g;
 
-    //Constructeur 1
+    /**
+     * Constructeur 1
+     * @param co
+     */
     public Log(BigController co){
         this.setMp(false); //le setMp est false car l'utilisateur n'a pas besoin de modifier son mot de passe
         g= new Model.Guest();
@@ -20,7 +21,12 @@ public class Log {
         log= new View.Log(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(log);
     }
-    //Constructeur 2 - Mot de passe oublié -> affichage frame mp oublié pour guest
+
+    /**
+     * Constructeur 2 - Mot de passe oublié -> affichage frame mp oublié pour guestù
+     * @param co
+     * @param mp
+     */
     public Log(BigController co, boolean mp){
         this.setMp(mp); //ici mp est true, car l'utilisateur à envoyé l'information qu'il a oublé son mot de passe
         g= new Model.Guest();
@@ -29,30 +35,29 @@ public class Log {
         this.bigController.getFrame().getContentPane().add(log);
     }
 
-    //Verif si les infos appartiennent à un attribut de la classe Guest sur la base de donnée
-    //Logiquement les informations sont envoyés à la classe Connect ou se trouvent toutes les QUERY
+    /**
+     * Verif si les infos appartiennent à un attribut de la classe Guest sur la base de donnée
+     * Logiquement les informations sont envoyés à la classe Connect ou se trouvent toutes les QUERY
+     * @param email
+     * @param psw
+     */
     public void login(String email, String psw) {
         g.setMail(email); //le setMail est rempli par un string inscrit dans la partie affichage du log
         g.setPsw(psw); //le setPsw est rempli par un string inscrit dans la partie affichage du log
-        try {
-            //informations importés depuis l'attribut du Model Mail pour être envoyés à la QUERY
-            this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw());
-            //Si l'utilisateur de la base de donnée composé de l'email et du mot de passe est trouvé dans la
-            //base de donnée, le if ci-dessous est true.
-            if (this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw())) {
-                //Les méthodes ici instancie l'affichage de la partie Film
-                log.mes1();
-                film();
-                getFilm().setVisible(true); //La partie Film est maintenant affichée
-                setVisible(false); //La partie connexion n'est plus affichée
-                //si l'utilisateur n'existe pas dans la base de donnée,
-            } else {
-                log.mes2();
-                setVisible(true);
-            }
-        } catch (
-                SQLException e) {
-            e.printStackTrace();
+        //informations importés depuis l'attribut du Model Mail pour être envoyés à la QUERY
+        this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw());
+        //Si l'utilisateur de la base de donnée composé de l'email et du mot de passe est trouvé dans la
+        //base de donnée, le if ci-dessous est true.
+        if (this.bigController.getC().SQLQueryGuest(g.getMail(), g.getPsw())) {
+            //Les méthodes ici instancie l'affichage de la partie Film
+            log.mes1();
+            film();
+            getFilm().setVisible(true); //La partie Film est maintenant affichée
+            setVisible(false); //La partie connexion n'est plus affichée
+            //si l'utilisateur n'existe pas dans la base de donnée,
+        } else {
+            log.mes2();
+            setVisible(true);
         }
     }
 
@@ -63,17 +68,19 @@ public class Log {
         new Log(this.bigController, true);
     }
 
-    //Query mot de passe oublié : appel query Update si email, name et mdp correspondent à un attribut sinon pas d'update
+    /**
+     * Query mot de passe oublié : appel query Update si email, name et mdp correspondent à un attribut sinon pas d'update
+     * @param name
+     * @param email
+     * @param psw
+     * @param tel
+     */
     public void mp_oub(String name, String email, String psw, String tel){
         g.setMail(email);
         g.setPsw(psw);
         g.setName(name);
         g.setTel(tel);
-        try {
-            this.bigController.getC().SQLQueryGuestNewMP(g.getName(), g.getMail(), g.getPsw(),g.getTel());
-        } catch (SQLException e) { //catch si la query n'est pas bien affecté ou qu'il y a une erreur
-            e.printStackTrace();
-        }
+        this.bigController.getC().SQLQueryGuestNewMP(g.getName(), g.getMail(), g.getPsw(),g.getTel());
 
     }
     //Appel des classes lors de l'interaction avec l'affichage de la classe Log

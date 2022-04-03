@@ -10,6 +10,11 @@ public class AdminBenefice extends JPanel {
     private JFrame frame;
     private Controller.AdminBenefice adminBenefice;
 
+    /**
+     * Constructeur
+     * @param ab
+     * @param f
+     */
     public AdminBenefice(Controller.AdminBenefice ab, JFrame f) {
         this.frame = f;
         this.adminBenefice = ab;
@@ -132,7 +137,7 @@ public class AdminBenefice extends JPanel {
         //VERIFICATION : EXPRESSION VALIDES
         ajout.addActionListener(e5 -> {
             boolean b1 = discount.getText().matches("-?\\d+");
-            if (b1 && Integer.parseInt(discount.getText()) > -1 && Integer.parseInt(discount.getText()) < 101)
+            if (b1 && Integer.parseInt(discount.getText()) > -1 && Integer.parseInt(discount.getText()) < 101 && discount.getText()!=null && name.getText()!=null )
                 this.adminBenefice.ajout(name.getText(), discount.getText());
             else
                 mes1();
@@ -154,7 +159,10 @@ public class AdminBenefice extends JPanel {
         modifier_remise.setFont(f3);
 
         modifier_remise.addActionListener(e6 -> {
-            this.adminBenefice.modif(mod_dis.getText());
+            if(mod_dis.getText()!=null)
+                this.adminBenefice.modif(mod_dis.getText());
+            else
+                mes1();
         });
 
         gbc.anchor = GridBagConstraints.NORTHEAST;

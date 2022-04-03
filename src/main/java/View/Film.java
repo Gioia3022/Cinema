@@ -8,6 +8,11 @@ public class Film extends JPanel {
     private Controller.Film film;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public Film(Controller.Film ca, JFrame f) {
         this.film = ca;
         this.frame = f;

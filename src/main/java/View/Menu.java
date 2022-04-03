@@ -7,11 +7,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class Menu extends JPanel implements ActionListener {
     private Controller.Menu menu;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param menu
+     * @param frame
+     */
     public Menu(Controller.Menu menu, JFrame frame) {
         this.menu = menu;
         this.frame = frame;
@@ -21,12 +25,12 @@ public class Menu extends JPanel implements ActionListener {
         Font f3 = new Font(Font.SERIF, Font.PLAIN, 35);
 
         //Add button to layout
-        JButton access_as_guest = new JButton("Access as Guest");
+        JButton access_as_guest = new JButton("Connexion Client");
         access_as_guest.setBackground(new Color(59, 47, 47));
         access_as_guest.setForeground(new Color(239, 223, 187));
         access_as_guest.setFont(f3);
 
-        JButton access_as_admin = new JButton("Access as Admin");
+        JButton access_as_admin = new JButton("Connexion Admin");
         access_as_admin.setBackground(new Color(59, 47, 47));
         access_as_admin.setForeground(new Color(239, 223, 187));
         access_as_admin.setFont(f3);

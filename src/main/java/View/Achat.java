@@ -14,6 +14,11 @@ public class Achat extends JPanel {
     private Controller.Achat achat;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public Achat(Controller.Achat ca, JFrame f) {
         this.achat = ca;
         this.frame = f;
@@ -58,6 +63,8 @@ public class Achat extends JPanel {
 
         Label a = new Label("  Achat du ticket");
         a.setFont(f1);
+        JLabel prix = new JLabel("Prix du ticket : "+this.achat.getTicket().getPrice());
+        prix.setFont(f3);
         Label b = new Label("__________________");
         b.setFont(f1);
         JLabel cB = new JLabel("Numéro de carte bancaire :");
@@ -142,6 +149,7 @@ public class Achat extends JPanel {
 
         if (!this.achat.isaBoolean()) {
             info.add(a, gbc);
+            info.add(prix,gbc);
             info.add(b, gbc);
             info.add(cB, gbc);
             info.add(carte_bancaire, gbc);

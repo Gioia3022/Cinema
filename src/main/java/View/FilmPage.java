@@ -11,6 +11,11 @@ public class FilmPage extends JPanel {
     private Controller.FilmPage filmPage;
     private JFrame frame;
 
+    /**
+     * Constructeur
+     * @param ca
+     * @param f
+     */
     public FilmPage(Controller.FilmPage ca, JFrame f) {
         this.filmPage = ca;
         this.frame = f;
@@ -93,8 +98,8 @@ public class FilmPage extends JPanel {
         }
 
         JComboBox nT = new JComboBox(nbrTicket);
-        list.setBounds(50, 50, 90, 20);
-        list.setFont(f2);
+        nT.setBounds(50, 50, 90, 20);
+        nT.setFont(f2);
 
         Image image = null;
         try {
@@ -119,8 +124,14 @@ public class FilmPage extends JPanel {
         JLabel choixSceance = new JLabel("Choisir un jour et une séance : ");
         choixSceance.setFont(f3);
 
+        JLabel s = new JLabel("Séance choisie: "+ this.filmPage.getSession().getDate());
+        s.setFont(f2);
+
         JLabel choixNbrDePlaces = new JLabel("Choisir le nombre de places : ");
         choixNbrDePlaces.setFont(f3);
+
+        JLabel PlusdeDispo = new JLabel("Il n'y a plus de places disponibles.");
+        PlusdeDispo.setFont(f3);
 
         JButton ticket = new JButton("Achat");
         ticket.setBackground(new Color(59, 47, 47));
@@ -149,6 +160,10 @@ public class FilmPage extends JPanel {
         });
         exit.addActionListener(e3 -> System.exit(0));
 
+        list.addActionListener(e4->{
+            this.filmPage.validationDeSession((String) list.getItemAt(list.getSelectedIndex()));
+        });
+
         buttons.setBackground(new Color(239, 223, 187));
         imageP.setBackground(new Color(239, 223, 187));
         info.setBackground(new Color(239, 223, 187));
@@ -164,16 +179,24 @@ public class FilmPage extends JPanel {
         imageP.add(filmImage, gbc_1);
         info.add(choixSceance, gbc);
         info.add(list, gbc);
-        info.add(choixNbrDePlaces, gbc);
-        info.add(nT, gbc);
-        buttons.add(ticket, gbc_3);
+        if(this.filmPage.isS()){
+            info.add(s,gbc);
+            if(nbrTicket.length==0){
+                info.add(choixNbrDePlaces, gbc);
+                info.add(PlusdeDispo, gbc);
+            }
+            else {
+                info.add(nT, gbc);
+                buttons.add(ticket, gbc_3);
+            }
+        }
         buttons.add(close, gbc_3);
         buttons.add(exit, gbc_3);
+
 
         this.add(title, gbc);
         this.add(imageP, gbc_1);
         this.add(info, gbc_1);
-        //this.add(list,gbc_1);
         this.add(buttons, gbc_2);
     }
 }

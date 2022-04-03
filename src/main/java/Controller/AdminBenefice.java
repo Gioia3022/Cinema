@@ -2,8 +2,6 @@ package Controller;
 
 import Model.Benefice;
 
-import java.sql.SQLException;
-
 public class AdminBenefice {
 
     private BigController bigController; //instancie la connexion à la base et l'affichage de la Frame
@@ -12,29 +10,30 @@ public class AdminBenefice {
     private Benefice benefice;
     private int choix;
 
+    /**
+     * Constructeur 1 de la page benefice
+     * @param bigController
+     */
     public AdminBenefice(BigController bigController) {
         this.bigController=bigController; //connexion Query sql
         this.benefice=new Benefice();
-        try {
-            this.bigController.getC().SQLQueryAllBenefice(this.benefice);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.bigController.getC().SQLQueryAllBenefice(this.benefice);
         adminBenefice= new View.AdminBenefice(this,this.bigController.getFrame());  //
         this.bigController.getFrame().getContentPane().add(adminBenefice);     //Frame de la page admin
 
     }
-    //constructeur 2 - bénéfice choisi
+
+    /**
+     * Constructeur 2 - action a faire choisi
+     * @param bigController
+     * @param choice
+     */
     public AdminBenefice(BigController bigController, int choice) {
         this.setChoix(choice);
         this.bigController=bigController; //connexion Query sql
         this.benefice=new Benefice();
-        try {
-            this.bigController.getC().SQLQueryAllBenefice(this.benefice);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        adminBenefice= new View.AdminBenefice(this,this.bigController.getFrame());  //
+        this.bigController.getC().SQLQueryAllBenefice(this.benefice);
+        adminBenefice= new View.AdminBenefice(this,this.bigController.getFrame());
         this.bigController.getFrame().getContentPane().add(adminBenefice);     //Frame de la page admin
 
     }
@@ -47,51 +46,52 @@ public class AdminBenefice {
         new AdminBenefice(this.bigController,1);
     }
 
-    //création bénéfice avec comme nom name
+    /**
+     * Choix: modification d'un bénéfice
+     * @param name
+     */
     public void m(String name){
         benefice.setName(name);
         setVisible(false);
         new AdminBenefice(this.bigController,2);
     }
 
-    //delete bénefice
+    /**
+     * Delete bénefice choisie
+     * @param name
+     */
     public void delete(String name){
-        try {
-            this.bigController.getC().SQLQueryDeleteBenefice(name); //delete l'attribut avec son nom
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.bigController.getC().SQLQueryDeleteBenefice(name);
         menu();
         setVisible(false);
         getAdminMenu().setVisible(true);
     }
 
-    //ajout benefice dans la base de donnée
+    /**
+     * Ajout d'un nouveau benefice dans la base de donnée
+     * @param name
+     * @param discount
+     */
     public void ajout(String name, String discount){
         float final_discount=1;
         final_discount=final_discount-(Float.valueOf(discount)/100);
         System.out.println(final_discount);
-        try {
-            //Query implémentant dans la base de donnée le nouveau bénéfice
-            this.bigController.getC().SQLQueryAddBenefice(name,final_discount);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //Query implémentant dans la base de donnée le nouveau bénéfice
+        this.bigController.getC().SQLQueryAddBenefice(name,final_discount);
         menu();
         setVisible(false);
         getAdminMenu().setVisible(true);
     }
 
-    //modification d'un benefice choisi déjà dans la base de donnée
+    /**
+     * Modification d'un benefice choisi déjà dans la base de donnée
+     * @param new_remise
+     */
     public void modif(String new_remise){
         float f=Float.parseFloat(new_remise);
         float final_discount=1;
         final_discount=final_discount-(Float.parseFloat(new_remise)/100);
-        try {
-            this.bigController.getC().SQLQueryModifBenef(final_discount,benefice.getName());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.bigController.getC().SQLQueryModifBenef(final_discount,benefice.getName());
         menu();
         setVisible(false);
         getAdminMenu().setVisible(true);
