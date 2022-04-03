@@ -3,8 +3,8 @@ package Model;
 import java.util.ArrayList;
 
 public class Session {
-    ArrayList<String> dateArrayList;
-    String date;
+    private ArrayList<String> dateArrayList;
+    private String date;
 
     //Getter & setters attributs de la table MySql Session
     public ArrayList<String> getDateArrayList() {

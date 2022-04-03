@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Guest extends JPanel {
     private Controller.Guest guest;
-    JFrame frame;
+    private JFrame frame;
 
     public Guest(Controller.Guest ca, JFrame f) {
         this.guest = ca;

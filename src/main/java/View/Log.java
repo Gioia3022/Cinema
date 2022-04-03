@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 
 public class Log extends JPanel {
     private Controller.Log log_c;
-    JFrame frame;
+    private JFrame frame;
 
     public Log(Controller.Log ca, JFrame f) {
         this.log_c = ca;

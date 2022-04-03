@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JPanel implements ActionListener {
     private Controller.Menu menu;
-    JFrame frame;
+    private JFrame frame;
 
     public Menu(Controller.Menu menu, JFrame frame) {
         this.menu = menu;

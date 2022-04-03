@@ -69,7 +69,7 @@ public class AdminSession extends JPanel{
 
         String[] fil1 = new String[this.adminSession.getFilm().getNames().size()];
 
-        for (int i = 0; i < fil.length; i++) {
+        for (int i = 0; i < fil1.length; i++) {
             fil1[i] = this.adminSession.getFilm().getNames().get(i);
         }
 

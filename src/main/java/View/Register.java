@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Register extends JPanel {
     private Controller.Register register;
-    JFrame frame;
+    private JFrame frame;
 
     public Register(Controller.Register ca, JFrame f) {
         this.register = ca;

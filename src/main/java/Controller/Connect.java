@@ -13,10 +13,10 @@ import java.util.ArrayList;
 // CLASSE PERMETTANT LA CREATION DE TOUTES LES QUERY EVOQUE DANS LES AUTRES CLASSES
 //
 public class Connect {
-    Connection conn;
-    ResultSet rs;
-    Statement stmt;
-    PreparedStatement pstmt = null;
+    private Connection conn;
+    private ResultSet rs;
+    private Statement stmt;
+    private PreparedStatement pstmt = null;
 
 //test connection bdd
     public Connect(Connection c, Statement s) throws SQLException {
