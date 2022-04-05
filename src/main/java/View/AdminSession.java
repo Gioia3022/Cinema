@@ -168,8 +168,9 @@ public class AdminSession extends JPanel{
 
         addSeance.addActionListener(e2->{
             if(room.getText()!=null && Integer.parseInt(room.getText())>0 && Integer.parseInt(room.getText())<6) {
-                if(isValidDate(new_session.getText()) )
+                if(isValidDate(date.getText()) ) {
                     this.adminSession.ajouter((String) film2.getItemAt(film2.getSelectedIndex()), room.getText(), date.getText());
+                }
                 else{
                     this.adminSession.setVisible(true);
                     mes1();
